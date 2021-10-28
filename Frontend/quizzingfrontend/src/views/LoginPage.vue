@@ -3,9 +3,7 @@
     <div class="inputboxes">
       <input type="text" placeholder="Användarnamn" required>
       <input type="text" placeholder="Lösenord" required>
-      <div class="buttoncontainer">
-        <button value="Login">Logga in</button>
-      </div>
+      <Login msg="Förtär avföring"/>
     </div>
 
   </div>
@@ -13,6 +11,13 @@
 </template>
 
 <script>
+import Login from '../components/Login.vue'
+export default {
+  name: "LoginPage",
+  components:{
+    Login
+  }
+}
 
 </script>
 
