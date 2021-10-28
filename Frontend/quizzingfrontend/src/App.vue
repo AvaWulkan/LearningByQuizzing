@@ -2,12 +2,42 @@
   <div id="app">
     <div id="nav">
       <router-link :to="{ name : 'Home' }">Home | </router-link>
-      <router-link :to="{ name : 'LoginPage' }">Login | </router-link>
-      <router-link :to="{ name : 'AdminPage' }">Admin</router-link>
+      <router-link :to="{ name : 'Login' }">Login | </router-link>
+      <router-link :to="{ name : 'Admin' }">Admin</router-link>
     </div>
-    <router-view/>
+        <router-view @authenticated="setAuthenticated"></router-view>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'App',
+  data(){
+    return{
+      authenticated:false,
+      mockAccount:{
+        username: "Ola",
+        password: "javahov123"
+      }
+    }
+  },
+  mounted(){
+    if(!this.authenticated){
+      this.$router.replace({
+        name: "Login"
+      })
+    }
+  },
+  methods:{
+    setAuthenticated(status){
+      this.authenticated = status
+    },
+    logout(){
+      this.authenticated = false
+    }
+}
+}
+</script>
 
 <style>
 
