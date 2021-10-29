@@ -1,39 +1,58 @@
 {
-    "quizes" : [{
-        "quizID":1,
-        "question":"Who are you",
-        "answerNumber":"1",
-        "q1":"Me",
-        "q2":"You",
-        "q3":"Poo",
-        "q4":"Shoe"
+  "quizes": [{
+      "quizID1": [{
+        "question": "Who are you",
+        "answerNumber": "1",
+        "q1": "Me",
+        "q2": "You",
+        "q3": "Poo",
+        "q4": "Shoe"
+      },
+        {
+          "question": "Who are you",
+          "answerNumber": "1",
+          "q1": "Me",
+          "q2": "You",
+          "q3": "Poo",
+          "q4": "Shoe"
+        },
+        {
+          "question": "Who are you",
+          "answerNumber": "1",
+          "q1": "Me",
+          "q2": "You",
+          "q3": "Poo",
+          "q4": "Shoe"
+        }
+      ]
     },
     {
-        "quizID":2,
-        "question":"Who are you",
-        "answer":"Me",
-        "q1":"Me",
-        "q2":"You",
-        "q3":"Poo",
-        "q4":"Shoe"
-    },
-    {
-        "quizID":3,
-        "question":"Who are you",
-        "answer":"Me",
-        "q1":"Me",
-        "q2":"You",
-        "q3":"Poo",
-        "q4":"Shoe"
-    },
-    {
-        "quizID":4,
-        "question":"Who are you",
-        "answer":"Me",
-        "q1":"Me",
-        "q2":"You",
-        "q3":"Poo",
-        "q4":"Shoe"
+      "quizID2": [
+        {
+          "question": "Who are you",
+          "answerNumber": "1",
+          "q1": "Me",
+          "q2": "You",
+          "q3": "Poo",
+          "q4": "Shoe"
+        },
+        {
+          "question": "Who are you",
+          "answerNumber": "1",
+          "q1": "Me",
+          "q2": "You",
+          "q3": "Poo",
+          "q4": "Shoe"
+        },
+        {
+          "question": "Who are you",
+          "answerNumber": "1",
+          "q1": "Me",
+          "q2": "You",
+          "q3": "Poo",
+          "q4": "Shoe"
+        }
+      ]
     }
-]
+  ]
 }
