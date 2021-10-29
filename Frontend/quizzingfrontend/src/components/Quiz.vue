@@ -1,7 +1,11 @@
 <template>
 <div>
-<div v-for="quiz in quizes.slice(0,1)" :key="quiz.id">
-<p>{{quiz}}</p>
+<div v-for="quiz in quizes" :key="quiz.id">
+<div v-for="quiz2 in quiz" :key="quiz2.id">
+    <div v-for="quiz3 in quiz2" :key="quiz3.id">
+<p>{{quiz3.question}} {{quiz3.q1}} {{quiz3.q2}} {{quiz3.q3}} {{quiz3.q4}}</p>
+</div>
+</div>
 </div>
 
 <!--  <div v-for="quiz in quizes.slice(1,2)" :key="quiz.id" class="quiz">
