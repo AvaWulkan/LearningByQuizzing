@@ -8,6 +8,14 @@
 </div>
 </div>
 
+<!-- Eller detta, lite tydligare!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+<div v-for="quiz in quizes.slice(0,1)" :key="quiz.id">
+<div v-for="quiz2 in quiz" :key="quiz2.id">
+<button type="button">{{quiz2[0].q1}}</button>
+</div>
+</div> -->
+
 <!--  <div v-for="quiz in quizes.slice(1,2)" :key="quiz.id" class="quiz">
   <h1>{{ quiz.question }}</h1>
   <button type="button" @click="quizEval">{{quiz.q1}}</button>
