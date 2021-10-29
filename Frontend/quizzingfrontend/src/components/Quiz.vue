@@ -9,11 +9,11 @@
 </div>
 
 <!--  <div v-for="quiz in quizes.slice(1,2)" :key="quiz.id" class="quiz">
-&lt;!&ndash;  <h1>{{ quiz.question }}</h1>
+  <h1>{{ quiz.question }}</h1>
   <button type="button" @click="quizEval">{{quiz.q1}}</button>
   <button type="button" @click="quizEval">{{quiz.q2}}</button>
   <button type="button" @click="quizEval">{{quiz.q3}}</button>
-  <button type="button" @click="quizEval">{{quiz.q4}}</button>&ndash;&gt;
+  <button type="button" @click="quizEval">{{quiz.q4}}</button>
 
   </div>-->
   </div>
