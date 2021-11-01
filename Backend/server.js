@@ -111,6 +111,7 @@ app.get("/api/quiz:quizId/question:questionId", (req, res, next) => {
 });
 
 
+/*
 
 app.get("/api/bok/:id", (req, res, next) => {
     let sql = "select * from bok where bokId = ?"
@@ -192,4 +193,4 @@ app.delete("/api/bok/:id", (req, res, next) => {
 // Root path
 app.get("/", (req, res, next) => {
     res.json({"message":"Ok"})
-});
+});*/
