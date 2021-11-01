@@ -57,6 +57,22 @@ app.get("/api/quiz/:id", (req, res, next) => {
     });
 });
 
+app.get("/api/quiz:quizId/question:questionId", (req, res, next) => {
+    let sql = "select * from Questions where Quizes_idQuizes = ? and idQuestions = ?"
+    let params = [req.params.quizId, req.params.questionId]
+    db.all(sql, params, (err, rows) => {
+        if (err) {
+            res.status(400).json({"error":err.message});
+            return;
+        }
+        res.json({
+            "message":"success",
+            "bok":rows
+        })
+    });
+});
+
+
 
 app.get("/api/bok/:id", (req, res, next) => {
     let sql = "select * from bok where bokId = ?"
