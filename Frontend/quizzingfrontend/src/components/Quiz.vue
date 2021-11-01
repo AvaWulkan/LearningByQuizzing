@@ -1,50 +1,56 @@
 <template>
-<div>
-<div v-for="quiz in quizes" :key="quiz.id">
-<div v-for="quiz2 in quiz" :key="quiz2.id">
-    <div v-for="quiz3 in quiz2" :key="quiz3.id">
-<p>{{quiz3.question}} {{quiz3.q1}} {{quiz3.q2}} {{quiz3.q3}} {{quiz3.q4}}</p>
-</div>
-</div>
-</div>
 
-<!-- Eller detta, lite tydligare!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  <div>
+<!--        <div v-for="quiz in quizes" v-bind:key="quiz.quizId">{{quiz}}</div>-->
 
-<div v-for="quiz in quizes.slice(0,1)" :key="quiz.id">
-<div v-for="quiz2 in quiz" :key="quiz2.id">
-<button type="button">{{quiz2[0].q1}}</button>
-</div>
-</div> -->
+    <form action="submit" @submit.prevent>
+      <input type="text" v-model="test">
+      <input type="submit" v-on:submit="idFirstQuestion(test)" value="ok">
+    </form>
 
-<!--  <div v-for="quiz in quizes.slice(1,2)" :key="quiz.id" class="quiz">
-  <h1>{{ quiz.question }}</h1>
-  <button type="button" @click="quizEval">{{quiz.q1}}</button>
-  <button type="button" @click="quizEval">{{quiz.q2}}</button>
-  <button type="button" @click="quizEval">{{quiz.q3}}</button>
-  <button type="button" @click="quizEval">{{quiz.q4}}</button>
+    <input type="text" v-on:keydown="numberOfQuestions">
 
-  </div>-->
+    <div>{{ number_Of_Questions }} {{ id_First_Question }}</div>
   </div>
+
+
 </template>
 
 <script>
-export default{
+export default {
   data() {
     return {
-      quizes: []
+      quizes: [],
+      questions: [],
+      number_Of_Questions: 0,
+      id_First_Question: 0,
+      test: null
     }
   },
-  mounted(){
-    fetch('http://localhost:3000/quizes')
-    .then(res => res.json())
-    .then(data => this.quizes = data)
+  mounted() {
+    fetch('http://localhost:3000/api/quiz/')
+        .then(res => res.json())
+        .then(data => this.quizes = data)
   },
   methods: {
-    quizEval(){
-      }
+    numberOfQuestions(id) {
+      fetch('http://localhost:3000/api/quiz/numberofquestions/' + id)
+          .then(res => res.json())
+          .then(data => this.number_Of_Questions = data)
+    },
+    idFirstQuestion(id) {
+      fetch('http://localhost:3000/api/quiz/id_firstquestion/' + id)
+          .then(res => res.json())
+          .then(data => this.id_First_Question = data)
+    },
+    questionsInQuiz() {
+      fetch('http://localhost:3000/api/quiz:quizId/question:questionId')
+          .then(res => res.json())
+          .then(data => this.questions = data)
     }
-    }
-  
+  }
+}
+
 </script>
 
 <style>
