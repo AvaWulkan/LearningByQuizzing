@@ -3,14 +3,24 @@
   <div>
 <!--        <div v-for="quiz in quizes" v-bind:key="quiz.quizId">{{quiz}}</div>-->
 
-    <form action="submit" @submit.prevent>
       <input type="text" v-model="test">
-      <input type="submit" v-on:submit="idFirstQuestion(test)" value="ok">
-    </form>
+      <button type="submit" v-on:click="idFirstQuestion(); numberOfQuestions(); questionsInQuiz();"></button>
+
+
 
     <input type="text" v-on:keydown="numberOfQuestions">
 
-    <div>{{ number_Of_Questions }} {{ id_First_Question }}</div>
+    <div>{{id_First_Question}} {{number_Of_Questions}} {{quizes.quiz[0].nameQuiz}}</div>
+
+    <div v-for="question in questions" v-bind:key="question.questionsId">
+      {{question[0].question}}
+      <ul>
+        <li>{{question[0].a1}}</li>
+        <li>{{question[0].a2}}</li>
+        <li>{{question[0].a3}}</li>
+        <li>{{question[0].correctAnswer}}</li>
+      </ul>
+    </div>
   </div>
 
 
@@ -24,7 +34,9 @@ export default {
       questions: [],
       number_Of_Questions: 0,
       id_First_Question: 0,
-      test: null
+      test: 0,
+      quizId: 0,
+      questionId: 0
     }
   },
   mounted() {
@@ -33,21 +45,22 @@ export default {
         .then(data => this.quizes = data)
   },
   methods: {
-    numberOfQuestions(id) {
-      fetch('http://localhost:3000/api/quiz/numberofquestions/' + id)
+    numberOfQuestions() {
+      fetch('http://localhost:3000/api/quiz/numberofquestions/' + this.test)
           .then(res => res.json())
           .then(data => this.number_Of_Questions = data)
     },
-    idFirstQuestion(id) {
-      fetch('http://localhost:3000/api/quiz/id_firstquestion/' + id)
+    idFirstQuestion() {
+      fetch('http://localhost:3000/api/quiz/id_firstquestion/' + this.test)
           .then(res => res.json())
           .then(data => this.id_First_Question = data)
     },
     questionsInQuiz() {
-      fetch('http://localhost:3000/api/quiz:quizId/question:questionId')
+      fetch('http://localhost:3000/api/quiz' + this.test + '/question' + this.test)
           .then(res => res.json())
           .then(data => this.questions = data)
     }
+
   }
 }
 

@@ -70,8 +70,7 @@ app.get("/api/quiz/numberofquestions/:id", (req, res, next) => {
             return;
         }
         res.json({
-            "message":"success",
-            "Number of question":numberOfQuestions
+            "Number of questions":numberOfQuestions
         })
     });
 });
@@ -89,7 +88,6 @@ app.get("/api/quiz/id_firstquestion/:id", (req, res, next) => {
             return;
         }
         res.json({
-            "message":"success",
             "Id first question":idFirstQuestion
         })
     });
