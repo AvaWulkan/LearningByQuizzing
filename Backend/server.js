@@ -37,7 +37,7 @@ app.get("/api/quiz/", (req, res, next) => {
         }
         res.json({
             "message":"success",
-            "bok":rows
+            "quiz":rows
         })
     });
 });
@@ -52,7 +52,45 @@ app.get("/api/quiz/:id", (req, res, next) => {
         }
         res.json({
             "message":"success",
-            "bok":rows
+            "questions":rows
+        })
+    });
+});
+
+app.get("/api/quiz/numberofquestions/:id", (req, res, next) => {
+    let sql = "select idQuestions from Questions where Quizes_idQuizes = ?"
+    let params = [req.params.id]
+    let numberOfQuestions = 0
+    let questions = []
+    db.all(sql, params, (err, rows) => {
+        questions = rows
+        for(let q in questions){numberOfQuestions += 1}
+        if (err) {
+            res.status(400).json({"error":err.message});
+            return;
+        }
+        res.json({
+            "message":"success",
+            "Number of question":numberOfQuestions
+        })
+    });
+});
+
+app.get("/api/quiz/id_firstquestion/:id", (req, res, next) => {
+    let sql = "select idQuestions from Questions where Quizes_idQuizes = ?"
+    let params = [req.params.id]
+    let idFirstQuestion = 0
+    let questions = []
+    db.all(sql, params, (err, rows) => {
+        questions = rows
+        idFirstQuestion = rows[0]
+        if (err) {
+            res.status(400).json({"error":err.message});
+            return;
+        }
+        res.json({
+            "message":"success",
+            "Id first question":idFirstQuestion
         })
     });
 });
@@ -67,7 +105,7 @@ app.get("/api/quiz:quizId/question:questionId", (req, res, next) => {
         }
         res.json({
             "message":"success",
-            "bok":rows
+            "question":rows
         })
     });
 });
