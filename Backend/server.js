@@ -27,9 +27,24 @@ app.listen(HTTP_PORT, () => {
     console.log("Server running on port %PORT%".replace("%PORT%",HTTP_PORT))
 });
 
-app.get("/api/quiz", (req, res, next) => {
+app.get("/api/quiz/", (req, res, next) => {
     let sql = "select * from Quizes"
     let params = []
+    db.all(sql, params, (err, rows) => {
+        if (err) {
+            res.status(400).json({"error":err.message});
+            return;
+        }
+        res.json({
+            "message":"success",
+            "bok":rows
+        })
+    });
+});
+
+app.get("/api/quiz/:id", (req, res, next) => {
+    let sql = "select * from Questions where Quizes_idQuizes = ?"
+    let params = [req.params.id]
     db.all(sql, params, (err, rows) => {
         if (err) {
             res.status(400).json({"error":err.message});
