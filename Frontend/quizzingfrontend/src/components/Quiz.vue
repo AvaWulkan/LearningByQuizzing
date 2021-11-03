@@ -21,12 +21,15 @@
         <li><button @click="clickAnswer(question[0].a3, question[0].correctAnswer)">{{question[0].a3}}</button></li>
         <li><button @click="clickAnswer(question[0].correctAnswer, question[0].correctAnswer)">{{question[0].correctAnswer}}</button></li>
       </ul>
-      <button v-if="questionAnswered && questionIndex < 3" type ="submit" @click="nextQuestion()">Next question</button>
-      <button v-if="questionAnswered && questionIndex == 3" type ="submit">Finish quiz</button>
+
     </div>
     <div>
       <p v-if="clickedAnswerMessage.length > 1">{{clickedAnswerMessage}}</p>
+       <button v-if="questionAnswered && questionIndex < 3" type ="submit" @click="nextQuestion()">Next question</button>
+       <button v-if="questionAnswered && questionIndex == 3" type ="submit" @click=" nextQuestion(); finishQuiz();">Finish quiz</button>
+       <p>{{totalPoints}}</p>
     </div>
+     
 
       <p>{{studentAnswers}}</p>
       <p>{{correctAnswers}}</p>
@@ -53,7 +56,9 @@ export default {
       studentAnswers: [],
       correctAnswer: "",
       correctAnswers: [],
-      questionIndex: 1
+      questionIndex: 1,
+      totalPoints: 0,
+  
     }
   },
   mounted() {
@@ -103,6 +108,15 @@ export default {
         this.lastAnswer = selected
         this.correctAnswer = correct
     },
+
+    finishQuiz() {
+      for (let i = 0; i < this.studentAnswers.length; i++) {
+        if(this.studentAnswers[i] === this.correctAnswers[i]){
+          this.totalPoints++
+        }
+        
+      }
+    }
 
 
 
