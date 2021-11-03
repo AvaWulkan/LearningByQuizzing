@@ -4,7 +4,7 @@
 <!--        <div v-for="quiz in quizes" v-bind:key="quiz.quizId">{{quiz}}</div>-->
 
       <input type="text" v-model="quizIndex">
-      <button type="submit" v-on:click="idFirstQuestion(); numberOfQuestions(); questionsInQuiz();">Start quiz</button>
+      <button type="submit" v-on:mousedown="idFirstQuestion(); numberOfQuestions(); questionsInQuiz();" v-on:mouseup="randomMethod(number_Of_Questions)">Start quiz</button>
 
     <div>{{quizes.quiz[0].nameQuiz}}</div>
 
@@ -25,8 +25,9 @@
     </div>
     <div>
       <p v-if="clickedAnswerMessage.length > 1">{{clickedAnswerMessage}}</p>
-       <button v-if="questionAnswered && questionIndex < 3" type ="submit" @click="nextQuestion()">Next question</button>
+       <button v-if="questionAnswered && questionIndex < 3" type ="submit" @click="nextQuestion();">Next question</button>
        <button v-if="questionAnswered && questionIndex == 3" type ="submit" @click=" nextQuestion(); finishQuiz();">Finish quiz</button>
+       <p>{{number_Of_Questions}}</p>
        <p>{{totalPoints}}</p>
     </div>
      
@@ -116,11 +117,17 @@ export default {
         }
         
       }
-    }
+    },
+    randomMethod(x){
+      var parsedobj = JSON.parse(JSON.stringify(x))
+      parsedobj = Object.values(parsedobj)
+      this.number_Of_Questions = parsedobj[0]
+    },
+    
 
 
 
-  }
+  },
 }
 
 </script>
