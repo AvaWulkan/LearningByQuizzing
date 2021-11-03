@@ -25,8 +25,8 @@
     </div>
     <div>
       <p v-if="clickedAnswerMessage.length > 1">{{clickedAnswerMessage}}</p>
-       <button v-if="questionAnswered && questionIndex < 3" type ="submit" @click="nextQuestion();">Next question</button>
-       <button v-if="questionAnswered && questionIndex == 3" type ="submit" @click=" nextQuestion(); finishQuiz();">Finish quiz</button>
+       <button v-if="questionAnswered && questionIndex < this.number_Of_Questions" type ="submit" @click="nextQuestion();">Next question</button>
+       <button v-if="questionAnswered && questionIndex == this.number_Of_Questions" type ="submit" @click=" nextQuestion(); finishQuiz();">Finish quiz</button>
        <p>{{number_Of_Questions}}</p>
        <p>{{totalPoints}}</p>
     </div>
