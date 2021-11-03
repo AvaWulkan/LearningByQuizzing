@@ -11,21 +11,27 @@
     <div v-for="question in questions" v-bind:key="question.questionsId">
       <h2>{{question[0].question}}</h2>
       <ul>
+        <!-- <li v-for="element in question[0]" :key="element"> -->
+          <!-- <button @click="clickAnswer(element, question[0].correctAnswer)">
+            {{element[2]}}
+            </button></li> -->
+
         <li><button @click="clickAnswer(question[0].a1, question[0].correctAnswer);">{{question[0].a1}}</button></li>
         <li><button @click="clickAnswer(question[0].a2, question[0].correctAnswer)">{{question[0].a2}}</button></li>
         <li><button @click="clickAnswer(question[0].a3, question[0].correctAnswer)">{{question[0].a3}}</button></li>
         <li><button @click="clickAnswer(question[0].correctAnswer, question[0].correctAnswer)">{{question[0].correctAnswer}}</button></li>
       </ul>
+      <button v-if="questionAnswered && questionIndex < 3" type ="submit" @click="nextQuestion()">Next question</button>
+      <button v-if="questionAnswered && questionIndex == 3" type ="submit">Finish quiz</button>
     </div>
     <div>
       <p v-if="clickedAnswerMessage.length > 1">{{clickedAnswerMessage}}</p>
     </div>
-      <button v-if="questionAnswered" type ="submit" @click="nextQuestion()">Next question</button>
+
       <p>{{studentAnswers}}</p>
       <p>{{correctAnswers}}</p>
-      <p>{{questions}}</p>
+    
   </div>
-
 
 </template>
 
