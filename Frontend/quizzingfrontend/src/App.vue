@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link :to="{ name : 'Home' }">Home | </router-link>
       <router-link :to="{ name : 'Login' }">Login | </router-link>
-      <router-link :to="{ name : 'Admin' }">Admin</router-link>
+      <router-link :to="{ name : 'Admin' }">Admin | </router-link>
       <router-link :to="{ name : 'Quiz'}">Quiz</router-link>
     </div>
         <router-view @authenticated="setAuthenticated"></router-view>
