@@ -6,10 +6,6 @@
       <input type="text" v-model="quizIndex">
       <button type="submit" v-on:click="idFirstQuestion(); numberOfQuestions(); questionsInQuiz();">Start quiz</button>
 
-
-
-    <input type="text" v-on:keydown="numberOfQuestions">
-
     <div>{{quizes.quiz[0].nameQuiz}}</div>
 
     <div v-for="question in questions" v-bind:key="question.questionsId">
@@ -27,6 +23,7 @@
       <button v-if="questionAnswered" type ="submit" @click="nextQuestion()">Next question</button>
       <p>{{studentAnswers}}</p>
       <p>{{correctAnswers}}</p>
+      <p>{{questions}}</p>
   </div>
 
 

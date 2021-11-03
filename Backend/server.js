@@ -36,7 +36,6 @@ app.get("/api/quiz/", (req, res, next) => {
             return;
         }
         res.json({
-            "message":"success",
             "quiz":rows
         })
     });
@@ -51,7 +50,6 @@ app.get("/api/quiz/:id", (req, res, next) => {
             return;
         }
         res.json({
-            "message":"success",
             "questions":rows
         })
     });
@@ -102,7 +100,6 @@ app.get("/api/quiz:quizId/question:questionId", (req, res, next) => {
             return;
         }
         res.json({
-            "message":"success",
             "question":rows
         })
     });
@@ -120,7 +117,6 @@ app.get("/api/bok/:id", (req, res, next) => {
             return;
         }
         res.json({
-            "message":"success",
             "bok":row
         })
     });
