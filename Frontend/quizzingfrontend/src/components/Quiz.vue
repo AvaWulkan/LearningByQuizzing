@@ -25,7 +25,6 @@
        <button v-if="questionAnswered && questionIndex == this.number_Of_Questions" type ="submit" @click=" nextQuestion(); finishQuiz();">Finish quiz</button>
        <p>{{number_Of_Questions}}</p>
        <p>{{totalPoints}}</p>
-       <p>{{answerList}}</p>
     </div>
      
 
@@ -40,7 +39,6 @@
 export default {
   data() {
     return {
-      answerList: [],
       quizes: [],
       questions: [],
       number_Of_Questions: 0,
@@ -122,11 +120,6 @@ export default {
       var parsedobj = JSON.parse(JSON.stringify(x))
       parsedobj = Object.values(parsedobj)
       this.number_Of_Questions = parsedobj[0]
-    },
-    getAnswers(a1, a2, a3, correctAnswer){
-       const tempList = [a1, a2, a3, correctAnswer];
-       this.answerList = tempList
-      console.log(tempList)
     },
     randomize(){
       var ul = document.querySelector('ul');
