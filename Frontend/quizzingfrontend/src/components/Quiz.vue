@@ -1,18 +1,16 @@
 <template>
 
   <div>
-<!--        <div v-for="quiz in quizes" v-bind:key="quiz.quizId">{{quiz}}</div>-->
 
       <input type="text" v-model="quizIndex">
-      <button type="submit" v-on:mousedown="idFirstQuestion(); numberOfQuestions(); questionsInQuiz();" v-on:mouseup="randomMethod(number_Of_Questions); shuffleList()">Start quiz</button>
+      <button type="submit" v-on:mousedown="idFirstQuestion(); numberOfQuestions(); questionsInQuiz();" v-on:mouseup="randomMethod(number_Of_Questions);">Start quiz</button>
 
     <div>{{quizes.quiz[0].nameQuiz}}</div>
 
     <div v-for="question in questions" v-bind:key="question.questionsId">
       <h2>{{question[0].question}}</h2>
       <ul>
-
-        <li><button @click="clickAnswer(question[0].a1, question[0].correctAnswer);">{{question[0].a1}}</button></li>
+        <li><button @click="clickAnswer(question[0].a1, question[0].correctAnswer)">{{question[0].a1}}</button></li>
         <li><button @click="clickAnswer(question[0].a2, question[0].correctAnswer)">{{question[0].a2}}</button></li>
         <li><button @click="clickAnswer(question[0].a3, question[0].correctAnswer)">{{question[0].a3}}</button></li>
         <li><button @click="clickAnswer(question[0].correctAnswer, question[0].correctAnswer)">{{question[0].correctAnswer}}</button></li>
@@ -27,9 +25,8 @@
        <p>{{totalPoints}}</p>
     </div>
      
-
-      <p>{{studentAnswers}}</p>
-      <p>{{correctAnswers}}</p>
+      <p>Visar studentens svar {{studentAnswers}}</p>
+      <p>Visar korrekta svar {{correctAnswers}}</p>
     
   </div>
 
@@ -123,16 +120,11 @@ export default {
     },
     randomize(){
       var ul = document.querySelector('ul');
-for (var i = ul.children.length; i >= 0; i--) {
+      for (var i = ul.children.length; i >= 0; i--) {
     ul.appendChild(ul.children[Math.random() * i | 0]);
-}
-
+      }
     }
-
-
-
-
-  },
+  }
 }
 
 </script>
