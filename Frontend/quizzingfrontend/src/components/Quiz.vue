@@ -2,32 +2,33 @@
 
   <div>
 
-      <input type="text" v-model="quizIndex">
-      <button type="submit" v-on:mousedown="idFirstQuestion(); numberOfQuestions(); questionsInQuiz();" v-on:mouseup="randomMethod(number_Of_Questions);">Start quiz</button>
+    <input type="text" v-model="quizIndex">
+    <button type="submit" v-on:mousedown="idFirstQuestion(); numberOfQuestions(); questionsInQuiz();"
+            v-on:mouseup="changeNumberOfQuestionToInt(number_Of_Questions);">Start quiz</button>
 
-    <div>{{quizes.quiz[0].nameQuiz}}</div>
+    <div>{{ quizes.quiz[0].nameQuiz }}</div>
 
     <div v-for="question in questions" v-bind:key="question.questionsId">
-      <h2>{{question[0].question}}</h2>
+      <h2>{{ question[0].question }}</h2>
       <ul>
-        <li><button @click="clickAnswer(question[0].a1, question[0].correctAnswer)">{{question[0].a1}}</button></li>
-        <li><button @click="clickAnswer(question[0].a2, question[0].correctAnswer)">{{question[0].a2}}</button></li>
-        <li><button @click="clickAnswer(question[0].a3, question[0].correctAnswer)">{{question[0].a3}}</button></li>
-        <li><button @click="clickAnswer(question[0].correctAnswer, question[0].correctAnswer)">{{question[0].correctAnswer}}</button></li>
-      </ul> 
-
+        <li><button @click="clickAnswer(question[0].a1, question[0].correctAnswer)">{{ question[0].a1 }}</button></li>
+        <li><button @click="clickAnswer(question[0].a2, question[0].correctAnswer)">{{ question[0].a2 }}</button></li>
+        <li><button @click="clickAnswer(question[0].a3, question[0].correctAnswer)">{{ question[0].a3 }}</button></li>
+        <li><button @click="clickAnswer(question[0].correctAnswer, question[0].correctAnswer)">{{ question[0].correctAnswer }}</button>
+        </li>
+      </ul>
     </div>
     <div>
-      <p v-if="clickedAnswerMessage.length > 1">{{clickedAnswerMessage}}</p>
-       <button v-if="questionAnswered && questionIndex < this.number_Of_Questions" type ="submit" @click="nextQuestion();">Next question</button>
-       <button v-if="questionAnswered && questionIndex == this.number_Of_Questions" type ="submit" @click=" nextQuestion(); finishQuiz();">Finish quiz</button>
-       <p>{{number_Of_Questions}}</p>
-       <p>{{totalPoints}}</p>
+      <p v-if="clickedAnswerMessage.length > 1">{{ clickedAnswerMessage }}</p>
+      <button v-if="questionAnswered && questionIndex < this.number_Of_Questions" type="submit" @click="nextQuestion();">Next question</button>
+      <button v-if="questionAnswered && questionIndex == this.number_Of_Questions" type="submit" @click=" nextQuestion(); finishQuiz();">Finish quiz</button>
+      <p>{{ number_Of_Questions }}</p>
+      <p>{{ totalPoints }}</p>
     </div>
-     
-      <p>Visar studentens svar {{studentAnswers}}</p>
-      <p>Visar korrekta svar {{correctAnswers}}</p>
-    
+
+    <p>Visar studentens svar {{ studentAnswers }}</p>
+    <p>Visar korrekta svar {{ correctAnswers }}</p>
+
   </div>
 
 </template>
@@ -52,7 +53,6 @@ export default {
       correctAnswers: [],
       questionIndex: 1,
       totalPoints: 0,
-  
     }
   },
   mounted() {
@@ -76,52 +76,44 @@ export default {
           .then(res => res.json())
           .then(data => this.questions = data)
     },
-    
-     nextQuestion() {
-       this.questionAnswered = false
-       this.questionIndex++
-
+    nextQuestion() {
+      this.questionAnswered = false
+      this.questionIndex++
       fetch('http://localhost:3000/api/quiz' + this.quizIndex + '/question' + this.questionIndex)
           .then(res => res.json())
           .then(data => this.questions = data)
-          this.clickedAnswerMessage = ""
-          this.studentAnswers.push(this.lastAnswer)
-          this.correctAnswers.push(this.correctAnswer)
-
-          this.randomize()
-
+      this.clickedAnswerMessage = ""
+      this.studentAnswers.push(this.lastAnswer)
+      this.correctAnswers.push(this.correctAnswer)
+      this.randomize()
     },
-
     clickAnswer(selected, correct) {
-        this.questionAnswered = true
-        if(selected === correct){
-          this.correctBool = true
-          this.clickedAnswerMessage = "You got basic math right, you rock!"
-        } else {
+      this.questionAnswered = true
+      if (selected === correct) {
+        this.correctBool = true
+        this.clickedAnswerMessage = "You got basic math right, you rock!"
+      } else {
         this.clickedAnswerMessage = "Fucking idiot, you got basic math wrong!"
-        }
-
-        this.lastAnswer = selected
-        this.correctAnswer = correct
+      }
+      this.lastAnswer = selected
+      this.correctAnswer = correct
     },
-
     finishQuiz() {
       for (let i = 0; i < this.studentAnswers.length; i++) {
-        if(this.studentAnswers[i] === this.correctAnswers[i]){
+        if (this.studentAnswers[i] === this.correctAnswers[i]) {
           this.totalPoints++
         }
-        
       }
     },
-    randomMethod(x){
+    changeNumberOfQuestionToInt(x) {
       var parsedobj = JSON.parse(JSON.stringify(x))
       parsedobj = Object.values(parsedobj)
       this.number_Of_Questions = parsedobj[0]
     },
-    randomize(){
+    randomize() {
       var ul = document.querySelector('ul');
       for (var i = ul.children.length; i >= 0; i--) {
-    ul.appendChild(ul.children[Math.random() * i | 0]);
+        ul.appendChild(ul.children[Math.random() * i | 0]);
       }
     }
   }
