@@ -91,10 +91,11 @@ app.get("/api/quiz/id_firstquestion/:id", (req, res, next) => {
     });
 });
 
-app.get("/api/quiz:quizId/question:questionId", (req, res, next) => {
-    let sql = "select * from Questions where Quizes_idQuizes = ? and idQuestions = ?"
-    let params = [req.params.quizId, req.params.questionId]
-    db.all(sql, params, (err, rows) => {
+app.get("/api/quiz:quizId/questions", (req, res, next) => {
+    let params = [req.params.quizId]
+    let sql = "SELECT * from " + params
+
+    db.all(sql, (err, rows) => {
         if (err) {
             res.status(400).json({"error":err.message});
             return;
