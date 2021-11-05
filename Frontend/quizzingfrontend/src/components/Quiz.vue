@@ -1,6 +1,7 @@
 <template>
 
   <div>
+
     <div>
       
       <ul>
@@ -8,21 +9,20 @@
       </ul>
     </div>
 
-    <div v-for="question in questionsInQuiz.questions" v-bind:key="question">
-      <h2>{{ question}}</h2>
+    <div v-for="question in questionsInQuiz" v-bind:key="question">
+      <h2>{{ question[index].question}}</h2>
       <ul>
-        <li><button @click="clickAnswer(question.a1, question.correctAnswer)">{{ question.a1 }}</button></li>
-        <li><button @click="clickAnswer(question.a2, question.correctAnswer)">{{ question.a2 }}</button></li>
-        <li><button @click="clickAnswer(question.a3, question.correctAnswer)">{{ question.a3 }}</button></li>
-        <li><button @click="clickAnswer(question.correctAnswer, question.correctAnswer)">{{ question.correctAnswer }}</button>
+        <li><button @click="clickAnswer(question[index].a1, question[index].correctAnswer)">{{ question[index].a1 }}</button></li>
+        <li><button @click="clickAnswer(question[index].a2, question[index].correctAnswer)">{{ question[index].a2 }}</button></li>
+        <li><button @click="clickAnswer(question[index].a3, question[index].correctAnswer)">{{ question[index].a3 }}</button></li>
+        <li><button @click="clickAnswer(question[index].correctAnswer, question[index].correctAnswer)">{{ question[index].correctAnswer }}</button>
         </li>
       </ul>
     </div>
     <div>
       <p v-if="clickedAnswerMessage.length > 1">{{ clickedAnswerMessage }}</p>
-      <button v-if="questionAnswered && questionIndex < this.number_Of_Questions" type="submit" @click="nextQuestion();">Next question</button>
-      <button v-if="questionAnswered && questionIndex == this.number_Of_Questions" type="submit" @click=" nextQuestion(); finishQuiz();">Finish quiz</button>
-      <p>{{ number_Of_Questions }}</p>
+      <button v-if="questionAnswered && index < questionsInQuiz[0].length" type="submit" @click="nextQuestion();">Next question</button>
+      <button v-if="questionAnswered && index == questionsInQuiz[0].length" type="submit" @click=" nextQuestion(); finishQuiz();">Finish quiz</button>
       <p>{{ totalPoints }}</p>
     </div>
 
@@ -34,10 +34,11 @@
 </template>
 
 <script>
-// import axios from 'axios';
+ import axios from 'axios';
 export default {
   data() {
     return {
+      index: 0,
       quizes: [],
       questionsInQuiz: [],
       questionAnswered: false,
@@ -52,21 +53,19 @@ export default {
   },
   // Hejhej
   mounted() {
-    // axios.get('http://localhost:3000/api/quiz/').then(response => (this.quizes = response.data));
+     axios.get('http://localhost:3000/api/quiz/').then(response => (this.quizes = response.data));
 fetch('http://localhost:3000/api/quiz/')
         .then(res => res.json())
         .then(data => this.quizes = data)
   },
   methods: {
     selectedQuiz(quiz) {
-      fetch('/api/quiz'+ quiz + '/questions')
-      .then(res => res.json())
-      .then(data => this.questionsInQuiz = data)
-      // axios.get('http://localhost:3000/api/quiz'+ quiz +'/questions').then(response => (this.questionsInQuiz = response.data));
+
+       axios.get('http://localhost:3000/api/quiz'+ quiz +'/questions').then(response => (this.questionsInQuiz = response.data));
     },
-/*    nextQuestion() {
+   nextQuestion() {
       this.questionAnswered = false
-      this.questionIndex++
+      this.index++
       fetch('http://localhost:3000/api/quiz' + this.quizIndex + '/question' + this.questionIndex)
           .then(res => res.json())
           .then(data => this.questions = data)
@@ -74,7 +73,7 @@ fetch('http://localhost:3000/api/quiz/')
       this.studentAnswers.push(this.lastAnswer)
       this.correctAnswers.push(this.correctAnswer)
       this.randomize()
-    },*/
+    },
     clickAnswer(selected, correct) {
       this.questionAnswered = true
       if (selected === correct) {
