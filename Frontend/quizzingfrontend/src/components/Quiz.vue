@@ -1,6 +1,7 @@
 <template>
 
   <div>
+<p>{{questionsInQuiz.length}}</p>
 
     <div>
       
@@ -10,6 +11,7 @@
     </div>
 
     <div v-for="question in questionsInQuiz" v-bind:key="question">
+      <p>{{question.length}}</p>
       <h2>{{ question[index].question}}</h2>
       <ul>
         <li><button @click="clickAnswer(question[index].a1, question[index].correctAnswer)">{{ question[index].a1 }}</button></li>
@@ -18,13 +20,14 @@
         <li><button @click="clickAnswer(question[index].correctAnswer, question[index].correctAnswer)">{{ question[index].correctAnswer }}</button>
         </li>
       </ul>
-    </div>
-    <div>
+          <div>
       <p v-if="clickedAnswerMessage.length > 1">{{ clickedAnswerMessage }}</p>
-      <button v-if="questionAnswered && index < questionsInQuiz[0].length" type="submit" @click="nextQuestion();">Next question</button>
-      <button v-if="questionAnswered && index == questionsInQuiz[0].length" type="submit" @click=" nextQuestion(); finishQuiz();">Finish quiz</button>
+      <button v-if="questionAnswered && index < question.length-1" type="submit" @click="nextQuestion();">Next question</button>
+      <button v-if="questionAnswered && index == question.length-1" type="submit" @click=" nextQuestion(); finishQuiz();">Finish quiz</button>
       <p>{{ totalPoints }}</p>
     </div>
+    </div>
+
 
     <p>Visar studentens svar {{ studentAnswers }}</p>
     <p>Visar korrekta svar {{ correctAnswers }}</p>
@@ -49,21 +52,21 @@ export default {
       correctAnswer: "",
       correctAnswers: [],
       totalPoints: 0,
+      numberOfQuestionsInQuiz: 0
     }
   },
   // Hejhej
   mounted() {
-     axios.get('http://localhost:3000/api/quiz/').then(response => (this.quizes = response.data));
+
 fetch('http://localhost:3000/api/quiz/')
         .then(res => res.json())
         .then(data => this.quizes = data)
   },
   methods: {
     selectedQuiz(quiz) {
-
        axios.get('http://localhost:3000/api/quiz'+ quiz +'/questions').then(response => (this.questionsInQuiz = response.data));
     },
-   nextQuestion() {
+  nextQuestion() {
       this.questionAnswered = false
       this.index++
       fetch('http://localhost:3000/api/quiz' + this.quizIndex + '/question' + this.questionIndex)
@@ -73,7 +76,7 @@ fetch('http://localhost:3000/api/quiz/')
       this.studentAnswers.push(this.lastAnswer)
       this.correctAnswers.push(this.correctAnswer)
       this.randomize()
-    },
+    }, 
     clickAnswer(selected, correct) {
       this.questionAnswered = true
       if (selected === correct) {
