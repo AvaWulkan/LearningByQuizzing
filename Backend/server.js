@@ -28,7 +28,7 @@ app.listen(HTTP_PORT, () => {
 });
 
 app.get("/api/quiz/", (req, res, next) => {
-    let sql = "select * from Quizes"
+    let sql = "select nameQuiz from Quizes"
     let params = []
     db.all(sql, params, (err, rows) => {
         if (err) {
@@ -91,8 +91,8 @@ app.get("/api/quiz/id_firstquestion/:id", (req, res, next) => {
     });
 });
 
-app.get("/api/quiz:quizId/questions", (req, res, next) => {
-    let params = [req.params.quizId]
+app.get("/api/quiz:quizName/questions", (req, res, next) => {
+    let params = [req.params.quizName]
     let sql = "SELECT * from " + params
 
     db.all(sql, (err, rows) => {
@@ -120,9 +120,41 @@ app.get("/api/quiz:quizId/question:questionId/answers", (req, res, next) => {
     });
 });
 
+app.get("/api/questions", (req, res, next) => {
+    let sql = "select * from Questions"
+    let params = []
+    db.all(sql, params, (err, rows) => {
+        if (err) {
+            res.status(400).json({"error":err.message});
+            return;
+        }
+        res.json({
+            "message":"success",
+            "quiz":rows
+        })
+    });
+});
+
+app.get("/api/quiz/questions/:quiz-id", (req, res, next) => {
+    let sql = "select * from Questions where id = ?"
+    let param = [req.params.id];
+    db.get(sql, param, (err, row) => {
+        if (err) {
+            res.status(400).json({"error":err.message});
+            return;
+        }
+        res.json({
+            "message":"success",
+            "question":row
+        })
+    });
+})
 
 /*
 
+
+
+// -------------------------------------------------------------------------------------------------------------------------------
 app.get("/api/bok/:id", (req, res, next) => {
     let sql = "select * from bok where bokId = ?"
     let params = [req.params.id]

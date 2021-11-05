@@ -2,9 +2,12 @@
 
   <div>
 
-    <input type="text" v-model="quizIndex">
-    <button type="submit" v-on:mousedown="idFirstQuestion(); numberOfQuestions(); questionsInQuiz();"
-            v-on:mouseup="changeNumberOfQuestionToInt(number_Of_Questions);">Start quiz</button>
+    <div>
+      <ul>
+        <li v-for="quiz in quizes" v-bind:key="quiz"><button @click="selectedQuiz(quiz[0].nameQuiz)">{{quiz[0].nameQuiz}}</button></li>
+
+      </ul>
+    </div>
 
     <div>{{ quizes.quiz[0].nameQuiz }}</div>
 
@@ -38,12 +41,7 @@ export default {
   data() {
     return {
       quizes: [],
-      questions: [],
-      number_Of_Questions: 0,
-      id_First_Question: 0,
-      quizIndex: 0,
-      quizId: 0,
-      questionId: 0,
+      questionsInQuiz: [],
       questionAnswered: false,
       correctBool: false,
       clickedAnswerMessage: "",
@@ -51,7 +49,6 @@ export default {
       studentAnswers: [],
       correctAnswer: "",
       correctAnswers: [],
-      questionIndex: 1,
       totalPoints: 0,
     }
   },
@@ -62,22 +59,13 @@ export default {
         .then(data => this.quizes = data)
   },
   methods: {
-    numberOfQuestions() {
-      fetch('http://localhost:3000/api/quiz/numberofquestions/' + this.quizIndex)
-          .then(res => res.json())
-          .then(data => this.number_Of_Questions = data)
+
+    selectedQuiz(quiz) {
+      fetch('/api/quiz'+ quiz + '/questions')
+      .then(res => res.json())
+      .then(data => this.questionsInQuiz = data)
     },
-    idFirstQuestion() {
-      fetch('http://localhost:3000/api/quiz/id_firstquestion/' + this.quizIndex)
-          .then(res => res.json())
-          .then(data => this.id_First_Question = data)
-    },
-    questionsInQuiz() {
-      fetch('http://localhost:3000/api/quiz' + this.quizIndex + '/question' + this.questionIndex)
-          .then(res => res.json())
-          .then(data => this.questions = data)
-    },
-    nextQuestion() {
+/*    nextQuestion() {
       this.questionAnswered = false
       this.questionIndex++
       fetch('http://localhost:3000/api/quiz' + this.quizIndex + '/question' + this.questionIndex)
@@ -87,7 +75,7 @@ export default {
       this.studentAnswers.push(this.lastAnswer)
       this.correctAnswers.push(this.correctAnswer)
       this.randomize()
-    },
+    },*/
     clickAnswer(selected, correct) {
       this.questionAnswered = true
       if (selected === correct) {
@@ -106,11 +94,13 @@ export default {
         }
       }
     },
-    changeNumberOfQuestionToInt(x) {
+
+/*    changeNumberOfQuestionToInt(x) {
       var parsedobj = JSON.parse(JSON.stringify(x))
       parsedobj = Object.values(parsedobj)
       this.number_Of_Questions = parsedobj[0]
-    },
+    },*/
+
     randomize() {
       var ul = document.querySelector('ul');
       for (var i = ul.children.length; i >= 0; i--) {
