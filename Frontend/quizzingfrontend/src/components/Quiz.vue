@@ -1,9 +1,7 @@
 <template>
 
   <div>
-
     <div>
-      
       <ul>
         <li v-for="quiz in quizes.quiz" v-bind:key="quiz"><button @click="selectedQuiz(quiz.nameQuiz)">{{quiz.nameQuiz}}</button></li>
       </ul>
@@ -26,7 +24,6 @@
       <p>Poäng {{ totalPoints }}</p>
     </div>
     </div>
-
 
     <p>Visar studentens svar {{ studentAnswers }}</p>
     <p>Visar korrekta svar {{ correctAnswers }}</p>
@@ -55,7 +52,7 @@ export default {
       finishedQuiz: true
     }
   },
-  // Hejhej
+
   mounted() {
 
 fetch('http://localhost:3000/api/quiz/')
@@ -98,12 +95,6 @@ fetch('http://localhost:3000/api/quiz/')
       }
     },
 
-/*    changeNumberOfQuestionToInt(x) {
-      var parsedobj = JSON.parse(JSON.stringify(x))
-      parsedobj = Object.values(parsedobj)
-      this.number_Of_Questions = parsedobj[0]
-    },*/
-
     randomize() {
       var ul = document.querySelector('.answers');
       for (var i = ul.children.length; i >= 0; i--) {
@@ -118,6 +109,3 @@ fetch('http://localhost:3000/api/quiz/')
 <style>
 
 </style>
-
-
-if questionarray === studentanswerarray = finish
