@@ -55,6 +55,7 @@ export default {
       totalPoints: 0,
     }
   },
+  // Hejhej
   mounted() {
     fetch('http://localhost:3000/api/quiz/')
         .then(res => res.json())
