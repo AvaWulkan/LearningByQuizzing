@@ -3,13 +3,13 @@
   <div>
 
     <div>
+      <p>{{quizes[0]}}</p>
+      <button v-on:click="parseJson">Omvandla...</button>
       <ul>
-        <li v-for="quiz in quizes" v-bind:key="quiz"><button @click="selectedQuiz(quiz[0].nameQuiz)">{{quiz[0].nameQuiz}}</button></li>
+        <li v-for="quiz in quizes" v-bind:key="quiz"><button @click="selectedQuiz(quiz.nameQuiz)">{{quiz.nameQuiz}}</button></li>
 
       </ul>
     </div>
-
-    <div>{{ quizes.quiz[0].nameQuiz }}</div>
 
     <div v-for="question in questions" v-bind:key="question.questionsId">
       <h2>{{ question[0].question }}</h2>
@@ -55,10 +55,18 @@ export default {
   // Hejhej
   mounted() {
     fetch('http://localhost:3000/api/quiz/')
-        .then(res => res.json())
-        .then(data => this.quizes = data)
+        .then((response) => {console.log(response); response.json()
+            .then((data) => {console.log(data)
+            }); });
+
+
   },
   methods: {
+
+    parseJson() {
+      console.log(this.quizes)
+
+    },
 
     selectedQuiz(quiz) {
       fetch('/api/quiz'+ quiz + '/questions')
