@@ -1,7 +1,6 @@
 <template>
 
   <div>
-<p>{{questionsInQuiz.length}}</p>
 
     <div>
       
@@ -11,9 +10,9 @@
     </div>
 
     <div v-for="question in questionsInQuiz" v-bind:key="question">
-      <p>{{question.length}}</p>
+      <p>Antal frågor {{question.length}}</p>
       <h2>{{ question[index].question}}</h2>
-      <ul>
+      <ul class="answers">
         <li><button @click="clickAnswer(question[index].a1, question[index].correctAnswer)">{{ question[index].a1 }}</button></li>
         <li><button @click="clickAnswer(question[index].a2, question[index].correctAnswer)">{{ question[index].a2 }}</button></li>
         <li><button @click="clickAnswer(question[index].a3, question[index].correctAnswer)">{{ question[index].a3 }}</button></li>
@@ -23,8 +22,8 @@
           <div>
       <p v-if="clickedAnswerMessage.length > 1">{{ clickedAnswerMessage }}</p>
       <button v-if="questionAnswered && index < question.length-1" type="submit" @click="nextQuestion();">Next question</button>
-      <button v-if="questionAnswered && index == question.length-1" type="submit" @click=" nextQuestion(); finishQuiz();">Finish quiz</button>
-      <p>{{ totalPoints }}</p>
+      <button v-if="finishedQuiz && questionAnswered && index == question.length-1" type="submit" @click="finishQuiz();">Finish quiz</button>
+      <p>Poäng {{ totalPoints }}</p>
     </div>
     </div>
 
@@ -52,7 +51,8 @@ export default {
       correctAnswer: "",
       correctAnswers: [],
       totalPoints: 0,
-      numberOfQuestionsInQuiz: 0
+      numberOfQuestionsInQuiz: 0,
+      finishedQuiz: true
     }
   },
   // Hejhej
@@ -69,9 +69,6 @@ fetch('http://localhost:3000/api/quiz/')
   nextQuestion() {
       this.questionAnswered = false
       this.index++
-      fetch('http://localhost:3000/api/quiz' + this.quizIndex + '/question' + this.questionIndex)
-          .then(res => res.json())
-          .then(data => this.questions = data)
       this.clickedAnswerMessage = ""
       this.studentAnswers.push(this.lastAnswer)
       this.correctAnswers.push(this.correctAnswer)
@@ -89,6 +86,11 @@ fetch('http://localhost:3000/api/quiz/')
       this.correctAnswer = correct
     },
     finishQuiz() {
+      this.finishedQuiz = false
+      this.questionAnswered = false
+      this.clickedAnswerMessage = ""
+      this.studentAnswers.push(this.lastAnswer)
+      this.correctAnswers.push(this.correctAnswer)
       for (let i = 0; i < this.studentAnswers.length; i++) {
         if (this.studentAnswers[i] === this.correctAnswers[i]) {
           this.totalPoints++
@@ -103,7 +105,7 @@ fetch('http://localhost:3000/api/quiz/')
     },*/
 
     randomize() {
-      var ul = document.querySelector('ul');
+      var ul = document.querySelector('.answers');
       for (var i = ul.children.length; i >= 0; i--) {
         ul.appendChild(ul.children[Math.random() * i | 0]);
       }
@@ -116,3 +118,6 @@ fetch('http://localhost:3000/api/quiz/')
 <style>
 
 </style>
+
+
+if questionarray === studentanswerarray = finish
