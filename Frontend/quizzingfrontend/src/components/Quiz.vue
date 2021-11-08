@@ -97,10 +97,10 @@ fetch('http://localhost:3000/api/quiz/')
       if (selected === correct) {
         this.answerBool = true
         this.correctBool = true
-        this.clickedAnswerMessage = "You got basic math right, you rock!"
+        this.clickedAnswerMessage = "Rätt, fan vad duktig du var då!"
       } else {
         this.answerBool = false
-        this.clickedAnswerMessage = "Fucking idiot, you got basic math wrong!"
+        this.clickedAnswerMessage = "Fucking idiot!"
       }
       this.lastAnswer = selected
       this.correctAnswer = correct
@@ -184,7 +184,7 @@ h1{
 
 button:hover {
   transition: all 0.1s ease-in;
-  transform: scale(0.95);
+  transform: scale(0.98);
   box-shadow: 5px 7px rgba(160,160,160, 0.6);
   cursor:pointer;
 }
