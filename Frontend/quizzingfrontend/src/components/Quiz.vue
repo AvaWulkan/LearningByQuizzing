@@ -1,16 +1,17 @@
 <template>
-
+<body>
   <div>
     <div v-if="finishedQuiz">
-    <div v-if="listOfQuizes">
+    <div id="listOfQuizes" v-if="listOfQuizes">
+      <h1>Quizmeny</h1>
       <ul>
         <li v-for="quiz in quizes.quiz" v-bind:key="quiz"><button @click="selectedQuiz(quiz.nameQuiz)">{{quiz.nameQuiz}}</button></li>
       </ul>
     </div>
 
-    <div v-for="question in questionsInQuiz" v-bind:key="question">
+    <div id="questions" v-for="question in questionsInQuiz" v-bind:key="question">
       <!-- <p>Antal frågor {{question.length}}</p> -->
-      <h2>{{ question[index].question}}</h2>
+      <h1>{{ question[index].question}}</h1>
       <ul class="answers">
         <li><button @click="clickAnswer(question[index].a1, question[index].correctAnswer)">{{ question[index].a1 }}</button></li>
         <li><button @click="clickAnswer(question[index].a2, question[index].correctAnswer)">{{ question[index].a2 }}</button></li>
@@ -18,7 +19,7 @@
         <li><button @click="clickAnswer(question[index].correctAnswer, question[index].correctAnswer)">{{ question[index].correctAnswer }}</button>
         </li>
       </ul>
-          <div>
+      <div id="submitDiv">
       <p v-if="clickedAnswerMessage.length > 1">{{ clickedAnswerMessage }}</p>
       <button v-if="questionAnswered && index < question.length-1" type="submit" @click="nextQuestion();">Next question</button>
       <button v-if="questionAnswered && index == question.length-1" type="submit" @click="finishQuiz();">Finish quiz</button>
@@ -32,7 +33,7 @@
     <QuizStatistics/>    
     </div>
   </div>
-
+</body>
 </template>
 
 <script>
@@ -118,5 +119,52 @@ fetch('http://localhost:3000/api/quiz/')
 
 <style scoped>
 
+body{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#submitDiv button{
+  width: 415px;
+  padding: 10px
+}
+
+h1 {
+  text-align: center;
+}
+
+#listOfQuizes button{
+  width: 200px;
+  padding: 10px;
+  margin: 5px;
+  background-color: rgb(199, 214, 240);
+  font-size: 20px
+}
+
+#questions ul{
+  flex-direction: column;
+  columns: 2;
+  margin: 0px;
+
+}
+
+.answers button{
+  width: 200px;
+  padding: 50px;
+  margin-bottom: 15px;
+  background-color: rgb(194, 208, 245)
+
+}
+
+/* att lägga till i App.vue */
+ul {
+  list-style-type: none;
+}
+
+button{
+  font-size: 20px;
+  border-radius: 10px;
+}
 
 </style>
