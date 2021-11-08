@@ -23,7 +23,7 @@
       <p v-if="clickedAnswerMessage.length > 1">{{ clickedAnswerMessage }}</p>
       <button v-if="questionAnswered && index < question.length-1" type="submit" @click="nextQuestion();">Next question</button>
       <button v-if="questionAnswered && index == question.length-1" type="submit" @click="finishQuiz();">
-        <img height="20px" src="../assets/flagflipped.png" alt="">Finish quiz<img height="20px" src="../assets/flag.png" alt=""></button>
+        <img class="flags" src="../assets/flagflipped.png" alt="">Finish quiz<img class="flags" src="../assets/flag.png" alt=""></button>
       <!-- <p>Poäng {{ totalPoints }}</p> -->
     </div>
     </div>
@@ -182,14 +182,16 @@ h1{
 
 }
 
-/* att lägga till i App.vue */
-ul {
-  list-style-type: none;
+button:hover {
+  transition: all 0.1s ease-in;
+  transform: scale(0.95);
+  box-shadow: 5px 7px rgba(160,160,160, 0.6);
+  cursor:pointer;
 }
 
-button{
-  font-size: 20px;
-  border-radius: 10px;
+.flags {
+  padding: 0 30px 0 30px;
+  height: 20px;
 }
 
 </style>

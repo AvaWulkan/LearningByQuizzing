@@ -1,6 +1,5 @@
 <template>
 <div>
-<h1>Quizes</h1>
 <Quiz/>
 </div>
 </template>

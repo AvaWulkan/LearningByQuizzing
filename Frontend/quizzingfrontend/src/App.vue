@@ -74,4 +74,13 @@ ul{
   color: darkgray;
 }
 
+ul {
+  list-style-type: none;
+}
+
+button{
+  font-size: 20px;
+  border-radius: 10px;
+}
+
 </style>
