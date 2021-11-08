@@ -20,7 +20,7 @@
         </li>
       </ul>
       <div id="submitDiv">
-      <p v-if="clickedAnswerMessage.length > 1">{{ clickedAnswerMessage }}</p>
+      <h2 v-if="clickedAnswerMessage.length > 1">{{ clickedAnswerMessage }}</h2>
       <button v-if="questionAnswered && index < question.length-1" type="submit" @click="nextQuestion();">Next question</button>
       <button v-if="questionAnswered && index == question.length-1" type="submit" @click="finishQuiz();">
         <img class="flags" src="../assets/flagflipped.png" alt="">Finish quiz<img class="flags" src="../assets/flag.png" alt=""></button>
@@ -192,6 +192,9 @@ button:hover {
 .flags {
   padding: 0 30px 0 30px;
   height: 20px;
+}
+h2 {
+  text-align: center;
 }
 
 </style>
