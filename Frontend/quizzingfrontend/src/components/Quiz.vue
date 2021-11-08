@@ -4,14 +4,14 @@
     <div v-if="finishedQuiz">
     <div id="listOfQuizes" v-if="listOfQuizes">
       <h1>Quizmeny</h1>
-      <ul>
+      <ul id="quizList">
         <li v-for="quiz in quizes.quiz" v-bind:key="quiz"><button @click="selectedQuiz(quiz.nameQuiz)">{{quiz.nameQuiz}}</button></li>
       </ul>
     </div>
 
     <div id="questions" v-for="question in questionsInQuiz" v-bind:key="question">
       <!-- <p>Antal frågor {{question.length}}</p> -->
-      <h1>{{ question[index].question}}</h1>
+      <h1 id="questionh1">{{ question[index].question}}</h1>
       <ul class="answers">
         <li><button @click="clickAnswer(question[index].a1, question[index].correctAnswer)">{{ question[index].a1 }}</button></li>
         <li><button @click="clickAnswer(question[index].a2, question[index].correctAnswer)">{{ question[index].a2 }}</button></li>
@@ -22,7 +22,8 @@
       <div id="submitDiv">
       <p v-if="clickedAnswerMessage.length > 1">{{ clickedAnswerMessage }}</p>
       <button v-if="questionAnswered && index < question.length-1" type="submit" @click="nextQuestion();">Next question</button>
-      <button v-if="questionAnswered && index == question.length-1" type="submit" @click="finishQuiz();">Finish quiz</button>
+      <button v-if="questionAnswered && index == question.length-1" type="submit" @click="finishQuiz();">
+        <img height="20px" src="../assets/flagflipped.png" alt="">Finish quiz<img height="20px" src="../assets/flag.png" alt=""></button>
       <!-- <p>Poäng {{ totalPoints }}</p> -->
     </div>
     </div>
@@ -127,6 +128,10 @@ fetch('http://localhost:3000/api/quiz/')
 
 <style scoped>
 
+#quizList button{
+  text-align: center;
+}
+
 body{
   display: flex;
   flex-direction: row;
@@ -134,12 +139,16 @@ body{
 }
 
 #submitDiv button{
-  width: 415px;
-  padding: 10px
+  width: 450px;
+  padding: 10px;
 }
 
-h1 {
+h1{
   text-align: center;
+}
+
+#questionh1 {
+  width: 450px
 }
 
 #listOfQuizes button{
@@ -147,18 +156,20 @@ h1 {
   padding: 10px;
   margin: 5px;
   background-color: rgb(199, 214, 240);
-  font-size: 20px
+  font-size: 20px;
+
 }
 
 #questions ul{
   flex-direction: column;
+  flex: 0;
   columns: 2;
   margin: 0px;
 
 }
 
 .answers button{
-  width: 200px;
+  width: 217px;
   padding: 50px;
   margin-bottom: 15px;
   background-color: rgb(194, 208, 245)
