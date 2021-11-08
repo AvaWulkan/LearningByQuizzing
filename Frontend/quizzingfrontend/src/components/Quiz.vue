@@ -2,7 +2,7 @@
 
   <div>
     <div v-if="finishedQuiz">
-    <div>
+    <div v-if="listOfQuizes">
       <ul>
         <li v-for="quiz in quizes.quiz" v-bind:key="quiz"><button @click="selectedQuiz(quiz.nameQuiz)">{{quiz.nameQuiz}}</button></li>
       </ul>
@@ -44,6 +44,7 @@ export default {
   },
   data() {
     return {
+      listOfQuizes: true,
       index: 0,
       quizes: [],
       questionsInQuiz: [],
@@ -69,6 +70,7 @@ fetch('http://localhost:3000/api/quiz/')
   methods: {
     selectedQuiz(quiz) {
        axios.get('http://localhost:3000/api/quiz'+ quiz +'/questions').then(response => (this.questionsInQuiz = response.data));
+       this.listOfQuizes = false
     },
   nextQuestion() {
       this.questionAnswered = false
@@ -114,6 +116,7 @@ fetch('http://localhost:3000/api/quiz/')
 
 </script>
 
-<style>
+<style scoped>
+
 
 </style>

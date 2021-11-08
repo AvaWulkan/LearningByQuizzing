@@ -54,12 +54,12 @@ ul{
   padding: 0;
 }
 
-nav {
+#nav {
   width: 100%;
   text-align: center;
 }
 
-nav li {
+#nav li {
   font-weight: normal;
   display: inline-block;
   justify-content: center;
@@ -69,7 +69,7 @@ nav li {
   padding: 20px;
 }
 
-nav li:hover {
+#nav li:hover {
   cursor: pointer;
   color: darkgray;
 }

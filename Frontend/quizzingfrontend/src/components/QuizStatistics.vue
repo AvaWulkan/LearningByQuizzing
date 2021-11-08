@@ -1,6 +1,7 @@
 <template>
 <div>
-  <h1>Du fick {{ $parent.totalPoints}} / {{$parent.correctAnswers.length}} poäng</h1>
+<h1>Du fick {{ $parent.totalPoints}} / {{$parent.correctAnswers.length}} poäng</h1>
+<h1>({{($parent.totalPoints/$parent.correctAnswers.length*100).toFixed(0)}}% Rätt)</h1>
   <div v-for="answer in $parent.studentAnswers" v-bind:key="answer">
     <p>Ditt svar: {{answer}}</p>
   </div>
@@ -19,6 +20,6 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 
 </style>
