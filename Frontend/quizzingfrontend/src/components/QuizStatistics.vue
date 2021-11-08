@@ -1,5 +1,8 @@
 <template>
-  
+<div>
+  <h1>Du fick {{ $parent.totalPoints}} poäng</h1>
+
+</div>
 </template>
 
 <script>

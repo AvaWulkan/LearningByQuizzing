@@ -1,6 +1,7 @@
 <template>
 
   <div>
+    <div v-if="finishedQuiz">
     <div>
       <ul>
         <li v-for="quiz in quizes.quiz" v-bind:key="quiz"><button @click="selectedQuiz(quiz.nameQuiz)">{{quiz.nameQuiz}}</button></li>
@@ -8,7 +9,7 @@
     </div>
 
     <div v-for="question in questionsInQuiz" v-bind:key="question">
-      <p>Antal frågor {{question.length}}</p>
+      <!-- <p>Antal frågor {{question.length}}</p> -->
       <h2>{{ question[index].question}}</h2>
       <ul class="answers">
         <li><button @click="clickAnswer(question[index].a1, question[index].correctAnswer)">{{ question[index].a1 }}</button></li>
@@ -20,21 +21,27 @@
           <div>
       <p v-if="clickedAnswerMessage.length > 1">{{ clickedAnswerMessage }}</p>
       <button v-if="questionAnswered && index < question.length-1" type="submit" @click="nextQuestion();">Next question</button>
-      <button v-if="finishedQuiz && questionAnswered && index == question.length-1" type="submit" @click="finishQuiz();">Finish quiz</button>
-      <p>Poäng {{ totalPoints }}</p>
+      <button v-if="questionAnswered && index == question.length-1" type="submit" @click="finishQuiz();">Finish quiz</button>
+      <!-- <p>Poäng {{ totalPoints }}</p> -->
     </div>
     </div>
-
-    <p>Visar studentens svar {{ studentAnswers }}</p>
-    <p>Visar korrekta svar {{ correctAnswers }}</p>
-
+    <!-- <p>Visar studentens svar {{ studentAnswers }}</p> -->
+    <!-- <p>Visar korrekta svar {{ correctAnswers }}</p> -->
+    </div>
+    <div v-if="!finishedQuiz">
+    <QuizStatistics/>    
+    </div>
   </div>
 
 </template>
 
 <script>
- import axios from 'axios';
+import QuizStatistics from './QuizStatistics.vue'
+import axios from 'axios'
 export default {
+  components: {
+    QuizStatistics
+  },
   data() {
     return {
       index: 0,
@@ -93,6 +100,7 @@ fetch('http://localhost:3000/api/quiz/')
           this.totalPoints++
         }
       }
+
     },
 
     randomize() {
