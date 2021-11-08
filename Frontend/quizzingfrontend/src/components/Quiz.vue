@@ -11,6 +11,7 @@
 
     <div id="questions" v-for="question in questionsInQuiz" v-bind:key="question">
       <!-- <p>Antal frågor {{question.length}}</p> -->
+      <h2>Fråga {{question[index].idQuestions}} av {{question.length}}</h2>
       <h1 id="questionh1">{{ question[index].question}}</h1>
       <ul class="answers">
         <li><button @click="clickAnswer(question[index].a1, question[index].correctAnswer)">{{ question[index].a1 }}</button></li>
@@ -58,11 +59,8 @@ export default {
       correctAnswer: "",
       correctAnswers: [],
       totalPoints: 0,
-      numberOfQuestionsInQuiz: 0,
       finishedQuiz: true,
       nameList: [],
-      answerColor: [],
-      answerBool: false
     }
   },
 
@@ -73,7 +71,6 @@ fetch('http://localhost:3000/api/quiz/')
         .then(data => this.quizes = data)
   },
   methods: {
-
     populateList() {
       for (let i = 0; i <= this.index; i++) {
         this.nameList.push(this.questionsInQuiz.question[i].question)
@@ -89,7 +86,6 @@ fetch('http://localhost:3000/api/quiz/')
       this.clickedAnswerMessage = ""
       this.studentAnswers.push(this.lastAnswer)
       this.correctAnswers.push(this.correctAnswer)
-      this.answerColor.push(this.answerBool)
       this.randomize()
     }, 
     clickAnswer(selected, correct) {
@@ -111,7 +107,6 @@ fetch('http://localhost:3000/api/quiz/')
       this.clickedAnswerMessage = ""
       this.studentAnswers.push(this.lastAnswer)
       this.correctAnswers.push(this.correctAnswer)
-      this.answerColor.push(this.answerBool)
       for (let i = 0; i < this.studentAnswers.length; i++) {
         if (this.studentAnswers[i] === this.correctAnswers[i]) {
           this.totalPoints++
@@ -154,7 +149,13 @@ h1{
 }
 
 #questionh1 {
-  width: 450px
+  width: 450px;
+  background-color: rgb(192, 221, 238);
+  border-radius: 10px;
+  border: 2px solid grey;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 50px;
 }
 
 #listOfQuizes button{
