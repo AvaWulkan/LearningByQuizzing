@@ -60,7 +60,9 @@ export default {
       totalPoints: 0,
       numberOfQuestionsInQuiz: 0,
       finishedQuiz: true,
-      nameList: []
+      nameList: [],
+      answerColor: [],
+      answerBool: false
     }
   },
 
@@ -87,14 +89,17 @@ fetch('http://localhost:3000/api/quiz/')
       this.clickedAnswerMessage = ""
       this.studentAnswers.push(this.lastAnswer)
       this.correctAnswers.push(this.correctAnswer)
+      this.answerColor.push(this.answerBool)
       this.randomize()
     }, 
     clickAnswer(selected, correct) {
       this.questionAnswered = true
       if (selected === correct) {
+        this.answerBool = true
         this.correctBool = true
         this.clickedAnswerMessage = "You got basic math right, you rock!"
       } else {
+        this.answerBool = false
         this.clickedAnswerMessage = "Fucking idiot, you got basic math wrong!"
       }
       this.lastAnswer = selected
@@ -106,6 +111,7 @@ fetch('http://localhost:3000/api/quiz/')
       this.clickedAnswerMessage = ""
       this.studentAnswers.push(this.lastAnswer)
       this.correctAnswers.push(this.correctAnswer)
+      this.answerColor.push(this.answerBool)
       for (let i = 0; i < this.studentAnswers.length; i++) {
         if (this.studentAnswers[i] === this.correctAnswers[i]) {
           this.totalPoints++
