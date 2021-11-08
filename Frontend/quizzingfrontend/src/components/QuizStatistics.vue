@@ -7,17 +7,21 @@
 </div>
   <div class="stats-container">
     <!-- göra om divtagen -->
+    <div class="questions" v-for="question in $parent.nameList" v-bind:key="question">
+      <p>Fråga: {{ question }}</p>
     </div>
+
   <div class="student-answers" v-for="answer in $parent.studentAnswers" v-bind:key="answer">
     <p>Ditt svar: {{answer}}</p>
   </div>
   <div class="correct-answers" v-for="answer in $parent.correctAnswers" v-bind:key="answer">
     <p>Rätt svar: {{answer}}</p>
   </div>
+    </div>
   </div>
 <!--  <p>{{$parent.studentAnswers}}</p>
   <p>{{$parent.correctAnswers}}</p>-->
-</div>
+
 </template>
 
 <script>
@@ -58,8 +62,8 @@ export default {
 }
 
 .stats-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  flex-direction: column;
+  columns: 3;
   border: 2px solid black;
   border-radius: 16px;
   padding: 20px;
