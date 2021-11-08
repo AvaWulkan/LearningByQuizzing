@@ -1,44 +1,29 @@
 <template>
 <div class="stats-wrapper">
   <h1>Resultat</h1>
-<div class="points">
+<div class="points border">
 <h1>Du fick {{ $parent.totalPoints}} / {{$parent.correctAnswers.length}} poäng</h1>
 <h1>({{($parent.totalPoints/$parent.correctAnswers.length*100).toFixed(0)}}% Rätt)</h1>
 </div>
-  <div class="stats-container">
-    <!-- göra om divtagen -->
-    <div class="questions" v-for="question in $parent.nameList" v-bind:key="question">
+  <div class="stats-container border">
+    
+    <div class="questions border shadow" v-for="question in $parent.nameList" v-bind:key="question">
       <p>Fråga: {{ question }}</p>
     </div>
 
-  <div class="student-answers" v-for="answer in $parent.studentAnswers" v-bind:key="answer">
+  <div class="student-answers border shadow" v-for="answer in $parent.studentAnswers" v-bind:key="answer">
     <p>Ditt svar: {{answer}}</p>
   </div>
-  <div class="correct-answers" v-for="answer in $parent.correctAnswers" v-bind:key="answer">
+  <div class="correct-answers border shadow" v-for="answer in $parent.correctAnswers" v-bind:key="answer">
     <p>Rätt svar: {{answer}}</p>
   </div>
     </div>
   </div>
-<!--  <p>{{$parent.studentAnswers}}</p>
-  <p>{{$parent.correctAnswers}}</p>-->
 
 </template>
 
 <script>
 export default {
-
-  data() {
-
-    return {
-
-      index: 0
-    }
-  },
-
-  mounted() {
-
-
-  }
 
 }
 
@@ -46,47 +31,59 @@ export default {
 
 <style scoped>
 
-.stats-wrapper {
 
+h1 {
+  text-align: center;
+}
+p {
+  text-align: center;
+}
+.stats-wrapper {
   display: flex;
-  /*justify-content: center; */
   align-items: center;
   flex-direction: column;
-
 }
 .points {
-  border: 2px solid black;
-  border-radius: 16px;
   padding: 20px;
-
+  background-color: rgb(194, 208, 245)
 }
-
 .stats-container {
   flex-direction: column;
   columns: 3;
-  border: 2px solid black;
-  border-radius: 16px;
   padding: 20px;
   margin-top: 20px;
 }
-
 .questions {
-  border: 2px solid black;
-  border-radius: 16px;
+  background-color: #DDF0AF;
   padding: 20px;
+  margin-bottom: 20px;
 }
-
 .student-answers {
-  border: 2px solid black;
-  border-radius: 16px;
+  background-color: #F0B8AF;
   padding: 20px;
-  margin: 0 20px 0 20px;
+  margin: 0 20px 20px 20px;
+}
+.correct-answers {
+  background-color: #99F5B3;
+  
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
-.correct-answers {
+/* Utilities */
+
+.border {
   border: 2px solid black;
   border-radius: 16px;
-  padding: 20px;
 }
+
+.shadow {
+  box-shadow: 5px 10px rgba(160,160,160, 0.6);
+}
+
+
+
+
+
 
 </style>
