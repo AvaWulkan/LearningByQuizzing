@@ -58,7 +58,8 @@ export default {
       correctAnswers: [],
       totalPoints: 0,
       numberOfQuestionsInQuiz: 0,
-      finishedQuiz: true
+      finishedQuiz: true,
+      nameList: []
     }
   },
 
@@ -69,6 +70,12 @@ fetch('http://localhost:3000/api/quiz/')
         .then(data => this.quizes = data)
   },
   methods: {
+
+    populateList() {
+      for (let i = 0; i <= this.index; i++) {
+        this.nameList.push(this.questionsInQuiz.question[i].question)
+      }
+    },
     selectedQuiz(quiz) {
        axios.get('http://localhost:3000/api/quiz'+ quiz +'/questions').then(response => (this.questionsInQuiz = response.data));
        this.listOfQuizes = false
@@ -103,6 +110,7 @@ fetch('http://localhost:3000/api/quiz/')
           this.totalPoints++
         }
       }
+      this.populateList()
 
     },
 
