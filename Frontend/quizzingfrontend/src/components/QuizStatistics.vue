@@ -7,8 +7,8 @@
   <div v-for="answer in $parent.correctAnswers" v-bind:key="answer">
     <p>Rätt svar: {{answer}}</p>
   </div>
-  <p>{{$parent.studentAnswers}}</p>
-  <p>{{$parent.correctAnswers}}</p>
+<!--  <p>{{$parent.studentAnswers}}</p>
+  <p>{{$parent.correctAnswers}}</p>-->
 </div>
 </template>
 
