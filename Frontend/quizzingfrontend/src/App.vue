@@ -6,7 +6,7 @@
       <router-link :to="{ name : 'Admin' }">Admin | </router-link>
       <router-link :to="{ name : 'Quiz' }">Quiz</router-link>
     </div>
-        <router-view @authenticated="setAuthenticated"></router-view>
+      <router-view @authenticated="setAuthenticated"></router-view>
   </div>
 </template>
 
@@ -36,29 +36,25 @@ export default {
     logout(){
       this.authenticated = false
     }
-}
+  }
 }
 </script>
 
 <style>
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
 ul{
   margin: 0;
   padding: 0;
 }
-
 #nav {
   width: 100%;
   text-align: center;
 }
-
 #nav li {
   font-weight: normal;
   display: inline-block;
@@ -68,19 +64,15 @@ ul{
   font-size: 20px;
   padding: 20px;
 }
-
 #nav li:hover {
   cursor: pointer;
   color: darkgray;
 }
-
 ul {
   list-style-type: none;
 }
-
 button{
   font-size: 20px;
   border-radius: 10px;
 }
-
 </style>

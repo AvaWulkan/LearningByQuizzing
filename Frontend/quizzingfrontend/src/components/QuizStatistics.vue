@@ -6,32 +6,26 @@
 <h1>({{($parent.totalPoints/$parent.correctAnswers.length*100).toFixed(0)}}% Rätt)</h1>
 </div>
   <div class="stats-container border">
-    
     <div class="questions border shadow" v-for="question in $parent.nameList" v-bind:key="question">
       <p>Fråga: {{ question }}</p>
     </div>
-
-  <div class="student-answers border shadow" v-for="answer in $parent.studentAnswers" v-bind:key="answer">
-    <p>Ditt svar: {{answer}}</p>
-  </div>
-  <div class="correct-answers border shadow" v-for="answer in $parent.correctAnswers" v-bind:key="answer">
-    <p>Rätt svar: {{answer}}</p>
-  </div>
+    <div class="student-answers border shadow" v-for="answer in $parent.studentAnswers" v-bind:key="answer">
+      <p>Ditt svar: {{answer}}</p>
+    </div>
+    <div class="correct-answers border shadow" v-for="answer in $parent.correctAnswers" v-bind:key="answer">
+      <p>Rätt svar: {{answer}}</p>
     </div>
   </div>
-
+</div>
 </template>
 
 <script>
 export default {
 
 }
-
 </script>
 
 <style scoped>
-
-
 h1 {
   text-align: center;
 }
@@ -45,13 +39,15 @@ p {
 }
 .points {
   padding: 20px;
-  background-color: rgb(194, 208, 245)
+  background-color: rgb(194, 208, 245);
+  width: 100%;
 }
 .stats-container {
   flex-direction: column;
   columns: 3;
   padding: 20px;
   margin-top: 20px;
+  width: 100%;
 }
 .questions {
   background-color: #DDF0AF;
@@ -65,25 +61,16 @@ p {
 }
 .correct-answers {
   background-color: #99F5B3;
-  
   padding: 20px;
   margin-bottom: 20px;
 }
 
 /* Utilities */
-
 .border {
   border: 2px solid black;
   border-radius: 16px;
 }
-
 .shadow {
   box-shadow: 5px 10px rgba(160,160,160, 0.6);
 }
-
-
-
-
-
-
 </style>
