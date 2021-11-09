@@ -150,6 +150,21 @@ app.get("/api/quiz/questions/:quiz-id", (req, res, next) => {
     });
 })
 
+app.post("/api/createname/:newQuizTitle", (req, res, next) => {
+    let errors=[]
+    let sql ='INSERT INTO Quizes (nameQuiz) VALUES (?)'
+    let params = [req.params.newQuizTitle]
+    db.run(sql, params, function (err, result) {
+        if (err){
+            res.status(400).json({"error": err.message})
+            return;
+        }
+        res.json({
+            msg:"success"
+        })
+    });
+});
+
 /*
 
 
@@ -170,31 +185,7 @@ app.get("/api/bok/:id", (req, res, next) => {
 });
 
 
-app.post("/api/bok/", (req, res, next) => {
-    let errors=[]
-    if (!req.body.bokIsbn){
-        errors.push("Inget ISBN");
-    }
-    let data = {
-        bokTitel: req.body.bokTitel,
-        bokForfattare: req.body.bokForfattare,
-        bokIsbn: req.body.bokIsbn,
-        bokPris: req.body.bokPris
-    }
-    let sql ='INSERT INTO bok (bokTitel, bokForfattare, bokIsbn, bokPris) VALUES (?,?,?,?)'
-    let params =[data.bokTitel, data.bokForfattare, data.bokIsbn, data.bokPris]
-    db.run(sql, params, function (err, result) {
-        if (err){
-            res.status(400).json({"error": err.message})
-            return;
-        }
-        res.json({
-            "message": "success",
-            "bok": data,
-            "id" : this.lastID
-        })
-    });
-});
+
 
 app.put("/api/bok/:id", (req, res, next) => {
     let data = {

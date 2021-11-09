@@ -1,47 +1,55 @@
 <template>
 <div class="create-container">
-    <h1>Create a new quiz</h1>
-    <input type="text" v-model="newQuizName" placeholder="Quiz Title">
-    <button @click="checkUniqueQuizName">Add questions</button>
-    <p v-if="errorMessage!= null"> {{ errorMessage }} </p>
-    <p>Visa nytt namn{{newQuizName}}</p>
-    <p>{{ existingQuizNames }}</p>
 
-    <p>{{ existingQuizNames.quiz[0].nameQuiz }}</p>
-
+    <div v-if="!quizNameAdded" class="addQuizName">
+        <h1>Skapa ett nytt quiz</h1>
+        <input type="text" v-model="newQuizName" placeholder="Skriv in titel">
+        <button @click="checkUniqueQuizName">Lägg till frågor</button>
+        <p v-if="errorMessage != null"> {{ errorMessage }} </p>
+    </div>
+    <div v-if="quizNameAdded">
+        <AddQuizQuestions/>
+    </div>
 </div>
 
 </template>
 
 <script>
+import AddQuizQuestions from '../components/AddQuizQuestions.vue'
 export default {
-data(){
-    return {
-        existingQuizNames: [],
-        newQuizName: null,
-        errorMessage: null,
-    }
-},
-
- mounted() {
-    fetch('http://localhost:3000/api/quiz/')
-        .then(res => res.json())
-        .then(data => this.existingQuizNames = data)
-  },
-
-  methods: {
-      checkUniqueQuizName() {
-   
-        for(let i = 0; i < this.existingQuizNames.quiz.length; i++) {
-            if(this.existingQuizNames.quiz[i].nameQuiz.toLowerCase === this.newQuizName.toLowerCase) {
-                this.errorMessage = this.newQuizName + " Already exists"
-                console.log(this.errorMessage)
-            }
-
+    components: {
+        AddQuizQuestions
+    },
+    data(){
+        return {
+            quizNameAdded: false,
+            existingQuizNames: [],
+            newQuizName: null,
+            errorMessage: null,
         }
+    },
 
-      }
-  }
+    mounted() {
+        fetch('http://localhost:3000/api/quiz/')
+            .then(res => res.json())
+            .then(data => this.existingQuizNames = data)
+    },
+
+    methods: {
+        checkUniqueQuizName() {
+            this.errorMessage = null
+            for(let i = 0; i < this.existingQuizNames.quiz.length; i++) {
+                if(this.existingQuizNames.quiz[i].nameQuiz.toLowerCase() === this.newQuizName.toLowerCase()) {
+                    this.errorMessage = this.newQuizName + " finns redan, välj ett annat namn"
+                } else if (this.newQuizName === null) {
+                    this.errorMessage = "Du måste skriva in ett namn"
+                }
+            }
+            if(this.errorMessage === null && this.newQuizName != null) {
+                this.quizNameAdded = true
+            }
+        }
+    }
 }
 </script>
 
