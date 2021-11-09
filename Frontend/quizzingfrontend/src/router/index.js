@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 import LoginPage from '../views/LoginPage.vue'
 import AdminPage from '../views/AdminPage.vue'
 import QuizPage from '../views/QuizPage.vue'
+import CreateQuizPage from '../views/CreateQuizPage.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -32,6 +34,11 @@ const routes = [
     path: '/quiz',
     name: 'Quiz',
     component: QuizPage
+  },
+  {
+    path: '/createquiz',
+    name: 'CreateQuiz',
+    component: CreateQuizPage
   }
 ]
 
