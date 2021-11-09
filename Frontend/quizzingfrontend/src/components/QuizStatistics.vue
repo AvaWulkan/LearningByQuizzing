@@ -1,10 +1,10 @@
 <template>
 <div class="stats-wrapper">
   <h1>Resultat</h1>
-<div class="points border">
-<h1>Du fick {{ $parent.totalPoints}} / {{$parent.correctAnswers.length}} poäng</h1>
-<h1>({{($parent.totalPoints/$parent.correctAnswers.length*100).toFixed(0)}}% Rätt)</h1>
-</div>
+  <div class="points border">
+    <h1>Du fick {{ $parent.totalPoints}} / {{$parent.correctAnswers.length}} poäng</h1>
+    <h1>({{($parent.totalPoints/$parent.correctAnswers.length*100).toFixed(0)}}% Rätt)</h1>
+  </div>
   <div class="stats-container border">
     <div class="questions border shadow" v-for="question in $parent.nameList" v-bind:key="question">
       <p>Fråga: {{ question }}</p>
