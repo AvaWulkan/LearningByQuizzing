@@ -165,6 +165,21 @@ app.post("/api/createname/:newQuizTitle", (req, res, next) => {
     });
 });
 
+app.post("/api/createtable/:newQuizTitle", (req, res, next) => {
+    let errors=[]
+    let params = [req.params.newQuizTitle]
+    let sql =`CREATE TABLE ` +params+ ` (idQuizes INTEGER PRIMARY KEY NOT NULL, question VARCHAR(45), correctAnswer VARCHAR(45), a1 VARCHAR(45), a2 VARCHAR(45), a3 VARCHAR(45))`
+    db.run(sql, function (err, result) {
+        if (err){
+            res.status(400).json({"error": err.message})
+            return;
+        }
+        res.json({
+            msg:"success"
+        })
+    });
+});
+
 /*
 
 

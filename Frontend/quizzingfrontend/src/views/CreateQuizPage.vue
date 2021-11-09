@@ -16,6 +16,7 @@
 
 <script>
 import AddQuizQuestions from '../components/AddQuizQuestions.vue'
+import axios from 'axios'
 export default {
     components: {
         AddQuizQuestions
@@ -47,6 +48,8 @@ export default {
             }
             if(this.errorMessage === null && this.newQuizName != null) {
                 this.quizNameAdded = true
+                axios.post('http://localhost:3000/api/createname/' + this.newQuizName)
+                axios.post('http://localhost:3000/api/createtable/' + this.newQuizName)
             }
         }
     }
