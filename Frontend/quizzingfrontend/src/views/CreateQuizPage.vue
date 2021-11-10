@@ -7,6 +7,13 @@
         <button @click="checkUniqueQuizName">Lägg till frågor</button>
         <p v-if="errorMessage != null"> {{ errorMessage }} </p>
     </div>
+    <div v-if="existingQuizNames != null">
+        <ul v-for="element in existingQuizNames.quiz" v-bind:key="element">
+            <li>
+                 {{ element.nameQuiz }}
+            </li>
+        </ul>
+    </div>
     <div v-if="quizNameAdded">
         <AddQuizQuestions/>
     </div>

@@ -1,7 +1,7 @@
 <template>
 <body>
   <div>
-    <div v-if="finishedQuiz">
+    <div v-if="!finishedQuiz">
       <div id="listOfQuizes" v-if="listOfQuizes">
         <h1>Quizmeny</h1>
         <ul id="quizList">
@@ -29,7 +29,7 @@
       <!-- <p>Visar studentens svar {{ studentAnswers }}</p> -->
       <!-- <p>Visar korrekta svar {{ correctAnswers }}</p> -->
     </div>
-    <div v-if="!finishedQuiz">
+    <div v-if="finishedQuiz">
     <QuizStatistics/>    
     </div>
   </div>
@@ -57,7 +57,7 @@ export default {
       correctAnswer: "",
       correctAnswers: [],
       totalPoints: 0,
-      finishedQuiz: true,
+      finishedQuiz: false,
       nameList: [],
     }
   },
@@ -98,7 +98,7 @@ export default {
       this.correctAnswer = correct
     },
     finishQuiz() {
-      this.finishedQuiz = false
+      this.finishedQuiz = true
       this.questionAnswered = false
       this.clickedAnswerMessage = ""
       this.studentAnswers.push(this.lastAnswer)
