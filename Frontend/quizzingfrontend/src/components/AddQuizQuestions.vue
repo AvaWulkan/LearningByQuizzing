@@ -6,7 +6,7 @@
     <input name="a1" v-model="newA1" type="text" placeholder="Svarsalternativ 2">
     <input name="a2" v-model="newA2" type="text" placeholder="Svarsalternativ 3">
     <input name="a3" v-model="newA3" type="text" placeholder="Svarsalternativ 4">
-    <button @click="addQuestion()">Lägg till fråga</button>
+    <button @click="addQuestion($parent.newQuizName)">Lägg till fråga</button>
     <p>{{ newQuestion }}</p>
     <p>{{ newCorrectAnswer }}</p>
     <p>{{ newA1 }}</p>
@@ -29,8 +29,8 @@ export default {
         }
     },
     methods: {
-        addQuestion() {
-            let stringurl = 'http://localhost:3000/api/createquestion/hooh/'+ this.newQuestion+ '/' +this.newCorrectAnswer+ '/' +this.newA1+ '/'+this.newA2+ '/'+this.newA3 
+        addQuestion(quizName) {
+            let stringurl = 'http://localhost:3000/api/createquestion/'+quizName+'/'+ this.newQuestion+ '/' +this.newCorrectAnswer+ '/' +this.newA1+ '/'+this.newA2+ '/'+this.newA3 
           console.log(stringurl)
           axios.post(stringurl)
         // axios.post('http://localhost:3000/api/createquestion/hooh/bla/aaaa/bbbbbb/ccccc/dddddddd')
