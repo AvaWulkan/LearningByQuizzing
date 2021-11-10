@@ -180,6 +180,31 @@ app.post("/api/createtable/:newQuizTitle", (req, res, next) => {
     });
 });
 
+app.post("/api/createquestion/:newQuizTitle/:newQuestion/:newCorrectAnswer/:newA1/:newA2/:newA3", (req, res, next) => {
+    let errors=[]
+    let params = [req.params.newQuizTitle]
+    let question = [req.params.newQuestion]
+    let correctAnswer = [req.params.newCorrectAnswer]
+    let a1 = [req.params.newA1]     
+    let a2 = [req.params.newA2]     
+    let a3 = [req.params.newA3]     
+    let sql =`INSERT INTO ` +params+ ` (question, correctAnswer, a1 , a2 , a3) 
+    VALUES ("` +question+ `", "` +correctAnswer+ `", "` +a1+ `", "` +a2+ `", "` +a3+ `" )`
+
+    // let sql =`INSERT INTO  +params+ (question, correctAnswer, a1 , a2 , a3) 
+    // VALUES (  ,   ,   ,   ,   )`
+
+    db.run(sql, function (err, result) {
+        if (err){
+            res.status(400).json({"error": err.message})
+            return;
+        }
+        res.json({
+            msg:"success"
+        })
+    });
+});
+
 /*
 
 
