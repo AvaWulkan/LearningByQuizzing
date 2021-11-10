@@ -14,7 +14,8 @@
         <p>{{ newA2 }}</p>
         <p>{{ newA3 }}</p>
         <p v-if="errorBool">{{ errorMsg }}</p>
-    </div>  
+    </div>
+      
     <div class="preview" v-for="index in listOfIndex" :key="index">
         <ul>
           <li> <h1>{{listOfNewQuestion[index]}}</h1> </li>
@@ -55,7 +56,8 @@ export default {
             errorMsg: "",
             errorBool: false,
             index: -1,
-            listOfIndex: []
+            listOfIndex: [],
+            questionNumber: 0
         }
     },
     methods: {

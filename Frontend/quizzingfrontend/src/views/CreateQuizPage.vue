@@ -7,7 +7,8 @@
         <button @click="checkUniqueQuizName">Lägg till frågor</button>
         <p v-if="errorMessage != null"> {{ errorMessage }} </p>
     </div>
-    <div v-if="existingQuizNames != null">
+    <button @click="toggleQuizNames">{{toggle}}</button>
+    <div v-if="existingQuizNames != null && showExistingQuizes">
         <ul v-for="element in existingQuizNames.quiz" v-bind:key="element">
             <li>
                  {{ element.nameQuiz }}
@@ -34,6 +35,8 @@ export default {
             existingQuizNames: [],
             newQuizName: null,
             errorMessage: null,
+            showExistingQuizes: false,
+            toggle: "Visa befintliga quiz"
         }
     },
 
@@ -57,6 +60,16 @@ export default {
                 this.quizNameAdded = true
                 axios.post('http://localhost:3000/api/createname/' + this.newQuizName)
                 axios.post('http://localhost:3000/api/createtable/' + this.newQuizName)
+            }
+        },
+
+        toggleQuizNames(){
+            if(this.showExistingQuizes){
+                this.showExistingQuizes = false
+                this.toggle = "Visa befintliga quiz"
+            } else {
+                this.showExistingQuizes = true
+                this.toggle = "Dölj befintliga quiz"
             }
         }
     }
