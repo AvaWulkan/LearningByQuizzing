@@ -1,5 +1,5 @@
 <template>
-<div>
+<body>
     <div>
         <h1>{{ $parent.newQuizName }}</h1>
         <input name="question" v-model="newQuestion" type="text" placeholder="Skriv fråga">
@@ -15,11 +15,26 @@
         <p>{{ newA3 }}</p>
         <p v-if="errorBool">{{ errorMsg }}</p>
     </div>  
-    <div>
-        
+    <div class="preview" v-for="index in listOfIndex" :key="index">
+        <ul>
+          <li> <h1>{{listOfNewQuestion[index]}}</h1> </li>
+        </ul>
+        <div class="svarsalternativ">
+          <ul>
+            <li class="svar"> {{listOfNewCorrectAnswer[index]}} </li>
+          </ul>
+          <ul>
+            <li class="svar"> {{listOfNewA1[index]}} </li>
+          </ul>
+          <ul>
+            <li class="svar"> {{listOfNewA2[index]}} </li>
+          </ul>
+          <ul>
+            <li class="svar"> {{listOfNewA3[index]}} </li>
+          </ul>
+        </div>
     </div>
-
-</div>
+</body>
 </template>
 
 <script>
@@ -38,7 +53,9 @@ export default {
             listOfNewA2: [],
             listOfNewA3: [],
             errorMsg: "",
-            errorBool: false
+            errorBool: false,
+            index: -1,
+            listOfIndex: []
         }
     },
     methods: {
@@ -49,6 +66,8 @@ export default {
                 let stringurl = 'http://localhost:3000/api/createquestion/'+quizName+'/'+ this.newQuestion+ '/' +this.newCorrectAnswer+ '/' +this.newA1+ '/'+this.newA2+ '/'+this.newA3 
                 this.resetData()
                 axios.post(stringurl)
+                this.index++
+                this.listOfIndex.push(this.index)
             } else {
                 this.errorMsg = "Du måste fylla i alla fält!"
                 this.errorBool = true
@@ -73,6 +92,47 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+.preview{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  border: 2px solid grey;
+  margin-bottom: 20px;
+}
+li h1{
+  text-align: center;
+  width: 450px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  background-color: rgb(192, 221, 238);
+  border-radius: 10px;
+  border: 2px solid grey;
 
+  margin-top: 30px;
+}
+.svarsalternativ{
+  flex: 0;
+  columns: 2;
+  margin: 0px;
+  padding: 0;
+}
+.svar{
+  width: 217px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-bottom: 15px;
+  background-color: rgb(194, 208, 245);
+  font-size: 20px;
+  border-radius: 10px;
+  border: black 2px solid;
+  text-align: center;
+}
+li:hover {
+  transition: all 0.1s ease-in;
+  transform: scale(0.98);
+  box-shadow: 5px 7px rgba(160,160,160, 0.6);
+  cursor:pointer;
+}
 </style>
