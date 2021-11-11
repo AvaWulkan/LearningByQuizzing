@@ -25,8 +25,9 @@ export default {
       if (this.input.username != "" && this.input.password != ""){
         if (this.input.username == this.$parent.mockAccount.username &&
         this.input.password == this.$parent.mockAccount.password){
-          this.$emit("authenticated", true)
-          this.$router.replace({name: "Admin"})
+          this.$store.commit('setLoggedInStudent')
+          this.$store.commit('setLoggedIn')
+          this.$router.replace({name: "Home"})
         }
       }
     }

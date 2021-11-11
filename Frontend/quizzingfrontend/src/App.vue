@@ -2,11 +2,11 @@
   <div id="app">
     <div id="nav">
       <router-link :to="{ name : 'Home' }">Home | </router-link>
-      <router-link v-if="!$store.state.loggedIn" :to="{ name : 'Login' }">Login | </router-link>
-      <router-link v-else :to="{ name : 'Login' }">Log out |</router-link>
-      <router-link :to="{ name : 'Admin' }">Admin | </router-link>
-      <router-link :to="{ name : 'Quiz' }">Quiz | </router-link>
-      <router-link :to="{ name : 'CreateQuiz' }">Create Quiz</router-link>
+      <router-link v-if="$store.state.loggedInAdmin" :to="{ name : 'Admin' }">Admin | </router-link>
+      <router-link v-if="$store.state.loggedInStudent" :to="{ name : 'Quiz' }">Quiz | </router-link>
+      <router-link v-if="$store.state.loggedInTeacher" :to="{ name : 'CreateQuiz' }">Create Quiz | </router-link>
+      <router-link v-if="!$store.state.loggedIn" :to="{ name : 'Login' }">Login </router-link>
+      <router-link v-else :to="{ name : 'Login' }">Log out </router-link>
     </div>
       <router-view></router-view>
   </div>

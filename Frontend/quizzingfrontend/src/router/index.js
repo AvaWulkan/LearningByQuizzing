@@ -31,7 +31,7 @@ const routes = [
     name: 'Admin',
     component: AdminPage,
     beforeEnter: (to, from, next) => {
-      if(store.state.loggedIn == false) {
+      if(store.state.loggedInAdmin == false) {
           next(false);
       } else {
           next();
@@ -41,12 +41,26 @@ const routes = [
   {
     path: '/quiz',
     name: 'Quiz',
-    component: QuizPage
+    component: QuizPage,
+    beforeEnter: (to, from, next) => {
+      if(store.state.loggedInStudent == false) {
+          next(false);
+      } else {
+          next();
+      }
+  }
   },
   {
     path: '/createquiz',
     name: 'CreateQuiz',
-    component: CreateQuizPage
+    component: CreateQuizPage,
+    beforeEnter: (to, from, next) => {
+      if(store.state.loggedInTeacher == false) {
+          next(false);
+      } else {
+          next();
+      }
+  }
   }
 ]
 

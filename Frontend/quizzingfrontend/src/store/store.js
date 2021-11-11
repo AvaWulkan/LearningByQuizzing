@@ -4,7 +4,10 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 const state = {
   count: 0,
-  loggedIn: false
+  loggedIn: false,
+  loggedInAdmin: false,
+  loggedInTeacher: false,
+  loggedInStudent: false,
 }
 const mutations = {
   increment (state) {
@@ -13,11 +16,17 @@ const mutations = {
   decrement (state) {
     state.count--
   },
-  setLoggedInTrue (state){
-  state.loggedIn = true
+  setLoggedIn (state){
+    state.loggedIn = true
   },
-  setLoggedInFalse (state){
-    state.loggedIn = false
+  setLoggedInStudent (state){
+  state.loggedInStudent = true
+  },
+  setLoggedInTeacher (state){
+    state.loggedInTeacher = true
+  },
+  setLoggedInAdmin (state){
+    state.loggedInAdmin = true
   }
 }
 export default new Vuex.Store({

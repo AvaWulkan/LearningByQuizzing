@@ -4,10 +4,12 @@
 <p>bajs</p>
 <p>{{$store.state.count}}</p>
 <p>{{$store.state.loggedIn}}</p>
+<p>{{$store.state.loggedInAdmin}}</p>
 <button @click="increment">xxxxx</button>
 <button @click="decrement">xxxxx</button>
-<button @click="setLoggedInTrue">True</button>
-<button @click="setLoggedInFalse">False</button>
+<button @click="setLoggedInStudent">True</button>
+<button @click="setLoggedInTeacher">False</button>
+<button @click="setLoggedInAdmin">TEST ME</button>
 
   </div>
 </template>
@@ -23,11 +25,14 @@ export default{
     this.$store.commit('decrement')
     console.log(this.$store.state.count)
 },
-setLoggedInTrue(){
-  this.$store.commit('setLoggedInTrue')
+setLoggedInStudent(){
+  this.$store.commit('setLoggedInStudent')
 },
-setLoggedInFalse(){
-  this.$store.commit('setLoggedInFalse')
+setLoggedInTeacher(){
+  this.$store.commit('setLoggedInTeacher')
+},
+setLoggedInAdmin(){
+  this.$store.commit('setLoggedInAdmin')
 }
 }
 }
