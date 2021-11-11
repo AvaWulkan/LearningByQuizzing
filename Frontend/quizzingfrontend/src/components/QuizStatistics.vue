@@ -2,7 +2,8 @@
 <div class="stats-wrapper">
   <h1>Resultat</h1>
   <div class="points border">
-    <h1>Du fick {{ $parent.totalPoints}} / {{$parent.correctAnswers.length}} poäng</h1>
+    <h1 v-if="$parent.totalPoints/$parent.correctAnswers.length*100 === 100">Du fick alla rätt! Bra jobbat!</h1>
+    <h1 v-else>Du fick {{ $parent.totalPoints}} / {{$parent.correctAnswers.length}} poäng</h1>
     <h1>({{($parent.totalPoints/$parent.correctAnswers.length*100).toFixed(0)}}% Rätt)</h1>
   </div>
   <div class="stats-container border">
