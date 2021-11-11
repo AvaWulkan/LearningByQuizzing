@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from '../store/store'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import LoginPage from '../views/LoginPage.vue'
@@ -28,7 +29,14 @@ const routes = [
   {
     path: '/admin',
     name: 'Admin',
-    component: AdminPage
+    component: AdminPage,
+    beforeEnter: (to, from, next) => {
+      if(store.state.loggedIn == false) {
+          next(false);
+      } else {
+          next();
+      }
+  }
   },
   {
     path: '/quiz',

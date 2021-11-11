@@ -2,7 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link :to="{ name : 'Home' }">Home | </router-link>
-      <router-link :to="{ name : 'Login' }">Login | </router-link>
+      <router-link v-if="!$store.state.loggedIn" :to="{ name : 'Login' }">Login | </router-link>
+      <router-link v-else :to="{ name : 'Login' }">Log out |</router-link>
       <router-link :to="{ name : 'Admin' }">Admin | </router-link>
       <router-link :to="{ name : 'Quiz' }">Quiz | </router-link>
       <router-link :to="{ name : 'CreateQuiz' }">Create Quiz</router-link>
@@ -16,9 +17,28 @@ export default {
   name: 'App',
   data(){
     return{
-      
+      authenticated:false,
+      mockAccount:{
+        username: "Ola",
+        password: "javahov123"
+      }
     }
   },
+  mounted(){
+    if(!this.authenticated){
+      this.$router.replace({
+        name: "Login"
+      })
+    }
+  },
+  methods:{
+    setAuthenticated(status){
+      this.authenticated = status
+    },
+    logout(){
+      this.authenticated = false
+    }
+  }
 }
 </script>
 
@@ -37,7 +57,7 @@ ul{
   width: 100%;
   text-align: center;
 }
-#nav router-link {
+#nav li {
   font-weight: normal;
   display: inline-block;
   justify-content: center;
@@ -46,7 +66,7 @@ ul{
   font-size: 20px;
   padding: 20px;
 }
-#nav router-link:hover {
+#nav li:hover {
   cursor: pointer;
   color: darkgray;
 }
