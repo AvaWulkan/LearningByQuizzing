@@ -6,9 +6,8 @@
       <router-link :to="{ name : 'Admin' }">Admin | </router-link>
       <router-link :to="{ name : 'Quiz' }">Quiz | </router-link>
       <router-link :to="{ name : 'CreateQuiz' }">Create Quiz</router-link>
-      
     </div>
-      <router-view @authenticated="setAuthenticated"></router-view>
+      <router-view></router-view>
   </div>
 </template>
 
@@ -17,28 +16,9 @@ export default {
   name: 'App',
   data(){
     return{
-      authenticated:false,
-      mockAccount:{
-        username: "Ola",
-        password: "javahov123"
-      }
+      
     }
   },
-  mounted(){
-    if(!this.authenticated){
-      this.$router.replace({
-        name: "Login"
-      })
-    }
-  },
-  methods:{
-    setAuthenticated(status){
-      this.authenticated = status
-    },
-    logout(){
-      this.authenticated = false
-    }
-  }
 }
 </script>
 
@@ -57,7 +37,7 @@ ul{
   width: 100%;
   text-align: center;
 }
-#nav li {
+#nav router-link {
   font-weight: normal;
   display: inline-block;
   justify-content: center;
@@ -66,7 +46,7 @@ ul{
   font-size: 20px;
   padding: 20px;
 }
-#nav li:hover {
+#nav router-link:hover {
   cursor: pointer;
   color: darkgray;
 }

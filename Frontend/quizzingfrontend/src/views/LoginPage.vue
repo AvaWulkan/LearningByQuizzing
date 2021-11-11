@@ -5,7 +5,6 @@
         <input type="password" name="password" v-model="input.password" placeholder="Lösenord">
         <button type="button" v-on:click="login()">Login</button>
     </div>
-
   </div>
 
 </template>
