@@ -8,8 +8,8 @@
         <p v-if="errorMessage != null"> {{ errorMessage }} </p>
         <button v-if="quizExists" @click="chooseExistingQuiz">Lägg till frågor i befintligt quiz</button>
     </div>
-    <button @click="toggleQuizNames">{{toggle}}</button>
-    <div v-if="existingQuizNames != null && showExistingQuizes">
+    <button v-if="!quizNameAdded" @click="toggleQuizNames">{{toggle}}</button>
+    <div v-if="existingQuizNames != null && showExistingQuizes && !quizNameAdded">
         <ul v-for="element in existingQuizNames.quiz" v-bind:key="element">
             <li>
                  {{ element.nameQuiz }}
