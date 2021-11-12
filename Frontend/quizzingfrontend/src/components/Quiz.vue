@@ -26,7 +26,8 @@
       </div>
     </div>
     <div v-if="finishedQuiz">
-    <QuizStatistics/>    
+      <QuizStatistics/>
+      <button @click="oneMoreQuiz">Gör ett till quiz</button>
     </div>
   </div>
 </body>
@@ -111,6 +112,21 @@ export default {
       for (var i = ul.children.length; i >= 0; i--) {
         ul.appendChild(ul.children[Math.random() * i | 0]);
       }
+    },
+    oneMoreQuiz(){
+      this.listOfQuizes = true
+      this.index = 0
+      this.questionsInQuiz = []
+      this.questionAnswered = false
+      this.correctBool = false
+      this.clickedAnswerMessage = ""
+      this.lastAnswer = ""
+      this.studentAnswers = []
+      this.correctAnswer = ""
+      this.correctAnswers = []
+      this.totalPoints = 0
+      this.finishedQuiz = false
+      this.nameList = []
     }
   }
 }
