@@ -23,15 +23,15 @@ export default{
     decrement() {
     this.$store.commit('decrement')
     console.log(this.$store.state.count)
-},
-setLoggedInStudent(){
-  this.$store.commit('setLoggedInStudent')
-},
-setLoggedInTeacher(){
-  this.$store.commit('setLoggedInTeacher')
-},
-setLoggedInAdmin(){
-  this.$store.commit('setLoggedInAdmin')
+  },
+  setLoggedInStudent(){
+    this.$store.commit('setLoggedInStudent')
+  },
+  setLoggedInTeacher(){
+    this.$store.commit('setLoggedInTeacher')
+  },
+  setLoggedInAdmin(){
+    this.$store.commit('setLoggedInAdmin')
 }
 }
 }

@@ -6,6 +6,7 @@
         <input type="text" v-model="newQuizName" placeholder="Skriv in titel">
         <button @click="checkUniqueQuizName">Lägg till frågor</button>
         <p v-if="errorMessage != null"> {{ errorMessage }} </p>
+        <button v-if="quizExists" @click="chooseExistingQuiz">Lägg till frågor i befintligt quiz</button>
     </div>
     <button @click="toggleQuizNames">{{toggle}}</button>
     <div v-if="existingQuizNames != null && showExistingQuizes">
@@ -36,7 +37,10 @@ export default {
             newQuizName: null,
             errorMessage: null,
             showExistingQuizes: false,
-            toggle: "Visa befintliga quiz"
+            toggle: "Visa befintliga quiz",
+            quizExists: false,
+            existingQuizName: null,
+            needOldQuestions: false
         }
     },
 
@@ -52,6 +56,8 @@ export default {
             for(let i = 0; i < this.existingQuizNames.quiz.length; i++) {
                 if(this.existingQuizNames.quiz[i].nameQuiz.toLowerCase() === this.newQuizName.toLowerCase()) {
                     this.errorMessage = this.newQuizName + " finns redan, välj ett annat namn"
+                    this.quizExists = true
+                    this.existingQuizName = this.existingQuizNames.quiz[i].nameQuiz.toLowerCase()
                 } else if (this.newQuizName === null) {
                     this.errorMessage = "Du måste skriva in ett namn"
                 }
@@ -71,6 +77,11 @@ export default {
                 this.showExistingQuizes = true
                 this.toggle = "Dölj befintliga quiz"
             }
+        },
+        chooseExistingQuiz(){
+            this.newQuizName = this.existingQuizName
+            this.quizNameAdded = true
+            this.needOldQuestions = true
         }
     }
 }

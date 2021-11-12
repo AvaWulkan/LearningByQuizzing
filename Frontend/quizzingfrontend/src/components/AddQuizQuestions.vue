@@ -1,13 +1,13 @@
 <template>
 <body>
     <div>
-        <h1>{{ $parent.newQuizName }}</h1>
+        <h1 >{{ $parent.newQuizName }}</h1>
         <input name="question" v-model="newQuestion" type="text" placeholder="Skriv fråga">
         <input name="correctAnswer" v-model="newCorrectAnswer" type="text" placeholder="Korrekt svar / Alternativ 1">
         <input name="a1" v-model="newA1" type="text" placeholder="Svarsalternativ 2">
         <input name="a2" v-model="newA2" type="text" placeholder="Svarsalternativ 3">
         <input name="a3" v-model="newA3" type="text" placeholder="Svarsalternativ 4">
-        <button @click="addQuestion($parent.newQuizName)">Lägg till fråga</button>
+        <button @click="addQuestion()">Lägg till fråga</button>
         <p>{{ newQuestion }}</p>
         <p>{{ newCorrectAnswer }}</p>
         <p>{{ newA1 }}</p>
@@ -43,6 +43,7 @@ import axios from 'axios'
 export default {
     data(){
         return {
+            quizName: "",
             newQuestion: "",
             newCorrectAnswer: "",
             newA1: "",
@@ -57,15 +58,31 @@ export default {
             errorBool: false,
             index: -1,
             listOfIndex: [],
-            questionNumber: 0
+            questionNumber: 0,
+            oldQuestionsInQuiz: []
+        }
+    },
+    mounted() {
+        if(this.$parent.needOldQuestions){
+          axios.get('http://localhost:3000/api/quiz'+ this.$parent.newQuizName +'/questions').then(response => (this.oldQuestionsInQuiz = response.data));
+
+          /*Preview funkar inte än*/
+            for (let i = 0; i <= this.oldQuestionsInQuiz.question.length; i++) {
+              this.listOfNewQuestion.push(this.oldQuestionsInQuiz.questions[i].question)
+              this.listOfNewCorrectAnswer.push(this.oldQuestionsInQuiz.questions[i].correctAnswer)
+              this.listOfNewA1.push(this.oldQuestionsInQuiz.questions[i].a1)
+              this.listOfNewA2.push(this.oldQuestionsInQuiz.questions[i].a2)
+              this.listOfNewA3.push(this.oldQuestionsInQuiz.questions[i].a3)
+              /*this.nameList.push(this.questionsInQuiz.question[i].question)*/
+            }
         }
     },
     methods: {
-        addQuestion(quizName) {
+        addQuestion() {
             this.errorMsg = null
             this.errorBool = false
             if (this.newQuestion != "" && this.newCorrectAnswer != "" && this.newA1 != "" && this.newA2 != "" && this.newA3 != ""){
-                let stringurl = 'http://localhost:3000/api/createquestion/'+quizName+'/'+ this.newQuestion+ '/' +this.newCorrectAnswer+ '/' +this.newA1+ '/'+this.newA2+ '/'+this.newA3 
+                let stringurl = 'http://localhost:3000/api/createquestion/'+this.$parent.newQuizName+'/'+ this.newQuestion+ '/' +this.newCorrectAnswer+ '/' +this.newA1+ '/'+this.newA2+ '/'+this.newA3
                 this.resetData()
                 axios.post(stringurl)
                 this.index++
