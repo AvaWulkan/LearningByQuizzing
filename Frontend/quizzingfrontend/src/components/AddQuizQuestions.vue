@@ -1,6 +1,8 @@
 <template>
 <body>
     <div>
+
+        <button @click="findOldQuestions">Visa befintliga frågor</button>
         <h1 >{{ $parent.newQuizName }}</h1>
         <input name="question" v-model="newQuestion" type="text" placeholder="Skriv fråga">
         <input name="correctAnswer" v-model="newCorrectAnswer" type="text" placeholder="Korrekt svar / Alternativ 1">
@@ -65,18 +67,9 @@ export default {
     mounted() {
         if(this.$parent.needOldQuestions){
           axios.get('http://localhost:3000/api/quiz'+ this.$parent.newQuizName +'/questions').then(response => (this.oldQuestionsInQuiz = response.data));
-
-          /*Preview funkar inte än*/
-            for (let i = 0; i <= this.oldQuestionsInQuiz.question.length; i++) {
-              this.listOfNewQuestion.push(this.oldQuestionsInQuiz.questions[i].question)
-              this.listOfNewCorrectAnswer.push(this.oldQuestionsInQuiz.questions[i].correctAnswer)
-              this.listOfNewA1.push(this.oldQuestionsInQuiz.questions[i].a1)
-              this.listOfNewA2.push(this.oldQuestionsInQuiz.questions[i].a2)
-              this.listOfNewA3.push(this.oldQuestionsInQuiz.questions[i].a3)
-              /*this.nameList.push(this.questionsInQuiz.question[i].question)*/
-            }
         }
     },
+
     methods: {
         addQuestion() {
             this.errorMsg = null
@@ -104,6 +97,18 @@ export default {
             this.newA1 = "",
             this.newA2 = "",
             this.newA3 = ""
+        },
+
+        findOldQuestions() {
+            for (let i = 0; i <= this.oldQuestionsInQuiz.question.length; i++) {
+              this.listOfNewQuestion.push(this.oldQuestionsInQuiz.question[i].question)
+              this.listOfNewCorrectAnswer.push(this.oldQuestionsInQuiz.question[i].correctAnswer)
+              this.listOfNewA1.push(this.oldQuestionsInQuiz.question[i].a1)
+              this.listOfNewA2.push(this.oldQuestionsInQuiz.question[i].a2)
+              this.listOfNewA3.push(this.oldQuestionsInQuiz.question[i].a3)
+              this.index++
+              this.listOfIndex.push(this.index)
+            }
         }
         
     }

@@ -1,20 +1,22 @@
 <template>
 <div class="create-container">
 
-    <div v-if="!quizNameAdded" class="addQuizName">
-        <h1>Skapa ett nytt quiz</h1>
-        <input type="text" v-model="newQuizName" placeholder="Skriv in titel">
-        <button @click="checkUniqueQuizName">Lägg till frågor</button>
-        <p v-if="errorMessage != null"> {{ errorMessage }} </p>
-        <button v-if="quizExists" @click="chooseExistingQuiz">Lägg till frågor i befintligt quiz</button>
-    </div>
-    <button v-if="!quizNameAdded" @click="toggleQuizNames">{{toggle}}</button>
-    <div v-if="existingQuizNames != null && showExistingQuizes && !quizNameAdded">
-        <ul v-for="element in existingQuizNames.quiz" v-bind:key="element">
-            <li>
-                 {{ element.nameQuiz }}
-            </li>
-        </ul>
+    <div v-if="!quizNameAdded">
+        <div class="addQuizName">
+            <h1>Skapa ett nytt quiz</h1>
+            <input type="text" v-model="newQuizName" placeholder="Skriv in titel">
+            <button @click="checkUniqueQuizName">Lägg till frågor</button>
+            <p v-if="errorMessage != null"> {{ errorMessage }} </p>
+            <button v-if="quizExists" @click="chooseExistingQuiz">Lägg till frågor i befintligt quiz</button>
+        </div>
+        <button @click="toggleQuizNames">{{toggle}}</button>
+        <div v-if="existingQuizNames != null && showExistingQuizes">
+            <ul v-for="element in existingQuizNames.quiz" v-bind:key="element">
+                <li>
+                     {{ element.nameQuiz }}
+                </li>
+            </ul>
+        </div>
     </div>
     <div v-if="quizNameAdded">
         <AddQuizQuestions/>
