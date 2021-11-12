@@ -9,9 +9,8 @@
         </ul>
       </div>
       <div id="questions" v-for="question in questionsInQuiz" v-bind:key="question">
-      <!-- <p>Antal frågor {{question.length}}</p> -->
         <h2>Fråga {{question[index].idQuizes}} av {{question.length}}</h2>
-        <h1 id="questionh1">{{ question[index].question}}</h1>
+        <h1 id="questionh1">{{ question[index].question}}?</h1>
         <ul class="answers">
           <li><button @click="clickAnswer(question[index].a1, question[index].correctAnswer)">{{ question[index].a1 }}</button></li>
           <li><button @click="clickAnswer(question[index].a2, question[index].correctAnswer)">{{ question[index].a2 }}</button></li>
@@ -23,11 +22,8 @@
         <button v-if="questionAnswered && index < question.length-1" type="submit" @click="nextQuestion();">Next question</button>
         <button v-if="questionAnswered && index == question.length-1" type="submit" @click="finishQuiz();">
           <img class="flags" src="../assets/flagflipped.png" alt="">Finish quiz<img class="flags" src="../assets/flag.png" alt=""></button>
-        <!-- <p>Poäng {{ totalPoints }}</p> -->
         </div>
       </div>
-      <!-- <p>Visar studentens svar {{ studentAnswers }}</p> -->
-      <!-- <p>Visar korrekta svar {{ correctAnswers }}</p> -->
     </div>
     <div v-if="finishedQuiz">
     <QuizStatistics/>    

@@ -8,7 +8,7 @@
   </div>
   <div class="stats-container border">
     <div class="questions border shadow" v-for="question in $parent.nameList" v-bind:key="question">
-      <p>Fråga: {{ question }}</p>
+      <p>Fråga: {{ question }}?</p>
     </div>
     <div class="student-answers border shadow" v-for="answer in $parent.studentAnswers" v-bind:key="answer">
       <p>Ditt svar: {{answer}}</p>

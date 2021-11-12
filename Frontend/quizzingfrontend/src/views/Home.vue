@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-<!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
 <p>bajs</p>
 <p>{{$store.state.count}}</p>
 <p>{{$store.state.loggedIn}}</p>

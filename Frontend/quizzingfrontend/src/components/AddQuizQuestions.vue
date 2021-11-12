@@ -18,7 +18,7 @@
       
     <div class="preview" v-for="index in listOfIndex" :key="index">
         <ul>
-          <li> <h1>{{listOfNewQuestion[index]}}</h1> </li>
+          <li> <h1>{{listOfNewQuestion[index]}}?</h1> </li>
         </ul>
         <div class="svarsalternativ">
           <ul>
@@ -100,7 +100,6 @@ export default {
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
-  border: 2px solid grey;
   margin-bottom: 20px;
 }
 li h1{
@@ -122,8 +121,8 @@ li h1{
 }
 .svar{
   width: 217px;
-  padding-bottom: 10px;
-  padding-top: 10px;
+  padding-bottom: 50px;
+  padding-top: 50px;
   margin-bottom: 15px;
   background-color: rgb(194, 208, 245);
   font-size: 20px;
