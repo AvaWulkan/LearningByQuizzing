@@ -10,7 +10,7 @@
       </div>
       <div id="questions" v-for="question in questionsInQuiz" v-bind:key="question">
       <!-- <p>Antal frågor {{question.length}}</p> -->
-        <h2>Fråga {{question[index].idQuestions}} av {{question.length}}</h2>
+        <h2>Fråga {{question[index].idQuizes}} av {{question.length}}</h2>
         <h1 id="questionh1">{{ question[index].question}}</h1>
         <ul class="answers">
           <li><button @click="clickAnswer(question[index].a1, question[index].correctAnswer)">{{ question[index].a1 }}</button></li>
