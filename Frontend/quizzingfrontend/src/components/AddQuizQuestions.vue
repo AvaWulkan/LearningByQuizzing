@@ -1,7 +1,6 @@
 <template>
 <body>
     <div>
-
         <button @click="findOldQuestions">Visa befintliga frågor</button>
         <h1 >{{ $parent.newQuizName }}</h1>
         <input name="question" v-model="newQuestion" type="text" placeholder="Skriv fråga">
@@ -109,8 +108,7 @@ export default {
               this.index++
               this.listOfIndex.push(this.index)
             }
-        }
-        
+        }  
     }
 }
 
