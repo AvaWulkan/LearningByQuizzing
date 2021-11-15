@@ -27,18 +27,18 @@ export default {
   },
   methods: {
     login(){
-      if (this.input.username != "" && this.input.password != ""){
+      if (this.input.username !== "" && this.input.password !== ""){
         axios.get('http://localhost:3000/api/users/' + this.input.username).then(response => {
           this.user = response.data 
-          if(this.user.user != undefined) {
-            if (this.input.password == this.user.user.password){
+          if(this.user.user !== undefined) {
+            if (this.input.password === this.user.user.password){
               this.$store.commit('setLoggedIn')
               this.$store.commit('setActiveUser', this.user.user.idUsers)
-              if (this.user.user.role == "Admin"){
+              if (this.user.user.role === "Admin"){
               this.$store.commit('setLoggedInAdmin')
-              } else if (this.user.user.role == "Teacher") {
+              } else if (this.user.user.role === "Teacher") {
                 this.$store.commit('setLoggedInTeacher')
-              } else if (this.user.user.role == "Student"){
+              } else if (this.user.user.role === "Student"){
                 this.$store.commit('setLoggedInStudent')
               }
                this.$router.replace({name: "Home"})

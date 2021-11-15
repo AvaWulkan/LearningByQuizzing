@@ -7,7 +7,7 @@
     <h1>({{($parent.totalPoints/$parent.correctAnswers.length*100).toFixed(0)}}% Rätt)</h1>
   </div>
   <div class="stats-container border">
-    <div class="questions border shadow" v-for="question in $parent.nameList" v-bind:key="question">
+    <div class="questions border shadow" v-for="question in $parent.questions" v-bind:key="question">
       <p>Fråga: {{ question }}?</p>
     </div>
     <div class="student-answers border shadow" v-for="answer in $parent.studentAnswers" v-bind:key="answer">

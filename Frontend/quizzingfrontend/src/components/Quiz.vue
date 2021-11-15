@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import QuizStatistics from './QuizStatistics.vue'
+import QuizStatistics from './QuizResult.vue'
 import axios from 'axios'
 export default {
   components: {
@@ -59,7 +59,7 @@ export default {
       correctAnswers: [],
       totalPoints: 0,
       finishedQuiz: false,
-      nameList: [],
+      questions: [],
 
     }
   },
@@ -71,7 +71,7 @@ export default {
   methods: {
     populateList() {
       for (let i = 0; i <= this.index; i++) {
-        this.nameList.push(this.questionsInQuiz.question[i].question)
+        this.questions.push(this.questionsInQuiz.question[i].question)
       }
     },
     selectedQuiz(quiz) {
@@ -132,10 +132,9 @@ export default {
       this.correctAnswers = []
       this.totalPoints = 0
       this.finishedQuiz = false
-      this.nameList = []
+      this.questions = []
     },
     changeColor(option) {
-
       this.coloredButton1 = ''
       this.coloredButton2 = ''
       this.coloredButton3 = ''
@@ -152,9 +151,11 @@ export default {
         break
         default: 
         break
- 
-
       }
+    },
+    saveResults() {
+      this.totalPoints
+      this.questions
     }
   }
 }

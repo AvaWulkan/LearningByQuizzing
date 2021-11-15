@@ -219,6 +219,27 @@ app.post("/api/createquestion/:newQuizTitle/:newQuestion/:newCorrectAnswer/:newA
     });
 });
 
+app.post("/api/saveresults/:userId/:quizName/:correctAnswers/:numberOfQuestions", (req, res, next) => {
+    let errors=[]
+    let userId = [req.params.userId]
+    let quizName = [req.params.quizName]
+    let correctAnswers = [req.params.correctAnswers]
+    let numberOfQuestions = [req.params.numberOfQuestions]
+    let sql =`INSERT INTO QuizResults (Users_idUsers, quiz, correctAnswers, numberOfQuestions)
+    VALUES (` +userId+ `, "` +quizName+ `", ` +correctAnswers+ `, ` +numberOfQuestions+ `)`
+
+
+    db.run(sql, function (err, result) {
+        if (err){
+            res.status(400).json({"error": err.message})
+            return;
+        }
+        res.json({
+            msg:"success"
+        })
+    });
+});
+
 /*
 
 
