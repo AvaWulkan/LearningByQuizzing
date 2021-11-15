@@ -12,10 +12,10 @@
         <h2>Fråga {{question[index].idQuizes}} av {{question.length}}</h2>
         <h1 id="questionh1">{{ question[index].question}}?</h1>
         <ul class="answers">
-          <li><button :style="{ backgroundColor: testColor1 }" @click="clickAnswer(question[index].a1, question[index].correctAnswer); changeColor(1)">{{ question[index].a1 }}</button></li>
-          <li><button :style="{ backgroundColor: testColor2 }" @click="clickAnswer(question[index].a2, question[index].correctAnswer); changeColor(2)">{{ question[index].a2 }}</button></li>
-          <li><button :style="{ backgroundColor: testColor3 }" @click="clickAnswer(question[index].a3, question[index].correctAnswer); changeColor(3)">{{ question[index].a3 }}</button></li>
-          <li><button :style="{ backgroundColor: testColor4 }" @click="clickAnswer(question[index].correctAnswer, question[index].correctAnswer); changeColor(4)">{{ question[index].correctAnswer }}</button></li>
+          <li><button :style="{ backgroundColor: coloredButton1 }" @click="clickAnswer(question[index].a1, question[index].correctAnswer); changeColor(1)">{{ question[index].a1 }}</button></li>
+          <li><button :style="{ backgroundColor: coloredButton2 }" @click="clickAnswer(question[index].a2, question[index].correctAnswer); changeColor(2)">{{ question[index].a2 }}</button></li>
+          <li><button :style="{ backgroundColor: coloredButton3 }" @click="clickAnswer(question[index].a3, question[index].correctAnswer); changeColor(3)">{{ question[index].a3 }}</button></li>
+          <li><button :style="{ backgroundColor: coloredButton4 }" @click="clickAnswer(question[index].correctAnswer, question[index].correctAnswer); changeColor(4)">{{ question[index].correctAnswer }}</button></li>
         </ul>
         <div id="submitDiv">
         <h2 v-if="clickedAnswerMessage.length > 1">{{ clickedAnswerMessage }}</h2>
@@ -42,10 +42,10 @@ export default {
   },
   data() {
     return {
-      testColor1: '',
-      testColor2: '',
-      testColor3: '',
-      testColor4: '',
+      coloredButton1: '',
+      coloredButton2: '',
+      coloredButton3: '',
+      coloredButton4: '',
       listOfQuizes: true,
       index: 0,
       quizes: [],
@@ -136,19 +136,19 @@ export default {
     },
     changeColor(option) {
 
-      this.testColor1 = ''
-      this.testColor2 = ''
-      this.testColor3 = ''
-      this.testColor4 = ''
+      this.coloredButton1 = ''
+      this.coloredButton2 = ''
+      this.coloredButton3 = ''
+      this.coloredButton4 = ''
 
       switch(option){
-        case 1: this.testColor1 = 'rgb(142, 140, 250)'
+        case 1: this.coloredButton1 = 'rgb(142, 140, 250)'
         break
-        case 2: this.testColor2 = 'rgb(142, 140, 250)'
+        case 2: this.coloredButton2 = 'rgb(142, 140, 250)'
         break
-        case 3: this.testColor3 = 'rgb(142, 140, 250)'
+        case 3: this.coloredButton3 = 'rgb(142, 140, 250)'
         break
-        case 4: this.testColor4 = 'rgb(142, 140, 250)'
+        case 4: this.coloredButton4 = 'rgb(142, 140, 250)'
         break
         default: 
         break
