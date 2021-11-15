@@ -44,7 +44,6 @@ import axios from 'axios'
 export default {
     data(){
         return {
-            quizName: "",
             newQuestion: "",
             newCorrectAnswer: "",
             newA1: "",

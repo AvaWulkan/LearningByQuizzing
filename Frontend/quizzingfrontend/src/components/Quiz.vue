@@ -1,6 +1,7 @@
 <template>
 <body>
   <div>
+    <p>{{currentQuiz}}</p>
     <div v-if="!finishedQuiz">
       <div id="listOfQuizes" v-if="listOfQuizes">
         <h1>Quizmeny</h1>
@@ -60,6 +61,7 @@ export default {
       totalPoints: 0,
       finishedQuiz: false,
       questions: [],
+      currentQuiz: null
 
     }
   },
@@ -77,6 +79,7 @@ export default {
     selectedQuiz(quiz) {
       axios.get('http://localhost:3000/api/quiz'+ quiz +'/questions').then(response => (this.questionsInQuiz = response.data));
       this.listOfQuizes = false
+      this.currentQuiz = quiz
     },
     nextQuestion() {
       this.questionAnswered = false
@@ -112,6 +115,7 @@ export default {
         }
       }
       this.populateList()
+      this.saveResults()
     },
     randomize() {
       var ul = document.querySelector('.answers');
@@ -154,8 +158,9 @@ export default {
       }
     },
     saveResults() {
-      this.totalPoints
-      this.questions
+    
+      let stringurl = 'http://localhost:3000/api/saveresults/'+ this.$store.state.activeUser+'/'+this.currentQuiz+'/'+this.totalPoints+'/'+this.questionsInQuiz.question.length
+      axios.post(stringurl)
     }
   }
 }
