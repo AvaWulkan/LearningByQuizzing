@@ -6,7 +6,7 @@
       <router-link v-if="$store.state.loggedInStudent" :to="{ name : 'Quiz' }">Quiz | </router-link>
       <router-link v-if="$store.state.loggedInTeacher" :to="{ name : 'CreateQuiz' }">Create Quiz | </router-link>
       <router-link v-if="!$store.state.loggedIn" :to="{ name : 'Login' }">Login </router-link>
-      <router-link v-else :to="{ name : 'Login' }">Log out </router-link>
+      <router-link v-else :to="{ name : 'Login' }"><span v-on:click="logout">Logout</span></router-link>
     </div>
       <router-view></router-view>
   </div>
@@ -18,25 +18,13 @@ export default {
   data(){
     return{
       authenticated:false,
-      mockAccount:{
-        username: "Ola",
-        password: "javahov123"
-      }
+     
     }
   },
-  mounted(){
-    if(!this.authenticated){
-      this.$router.replace({
-        name: "Login"
-      })
-    }
-  },
+
   methods:{
-    setAuthenticated(status){
-      this.authenticated = status
-    },
     logout(){
-      this.authenticated = false
+      this.$store.commit('logout')  
     }
   }
 }

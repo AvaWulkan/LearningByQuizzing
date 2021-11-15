@@ -2,10 +2,10 @@
   <div class="container">
     <div class="inputboxes">
         <input type="text" name="username" v-model="input.username" placeholder="Användarnamn">
-        <input type="password" name="password" v-model="input.password" placeholder="Lösenord">
+        <input type="password" v-on:keydown.enter="login()" name="password" v-model="input.password" placeholder="Lösenord">
         <button type="button" v-on:click="login()">Login</button>
-    <p>{{$store.state.loggedIn}}</p>
-    <p>{{$store.state.loggedInAdmin}}</p>
+
+    <p>{{user}}</p>
 
     </div>
   </div>
@@ -22,34 +22,39 @@ export default {
         username: "",
         password: "",
       },
-      user: {}
+      user: null
     }
   },
   methods: {
     login(){
       if (this.input.username != "" && this.input.password != ""){
         axios.get('http://localhost:3000/api/users/' + this.input.username).then(response => {
-        this.user = response.data
-        if (this.input.password == this.user.user.password){
-          this.$store.commit('setLoggedIn')
-          if (this.user.user.role == "Admin"){
-            this.$store.commit('setLoggedInAdmin')
-          } else if (this.user.user.role == "Teacher") {
-            this.$store.commit('setLoggedInTeacher')
-          } else if (this.user.user.role == "Student"){
-            this.$store.commit('setLoggedInStudent')
-          }
-          this.$router.replace({name: "Home"})
-        } else {
-        alert("Fel användarnamn/lösenord")
-        }})
-        } else {
+          this.user = response.data 
+          if(this.user.user != undefined) {
+            if (this.input.password == this.user.user.password){
+              this.$store.commit('setLoggedIn')
+              this.$store.commit('setActiveUser', this.user.user.idUsers)
+              if (this.user.user.role == "Admin"){
+              this.$store.commit('setLoggedInAdmin')
+              } else if (this.user.user.role == "Teacher") {
+                this.$store.commit('setLoggedInTeacher')
+              } else if (this.user.user.role == "Student"){
+                this.$store.commit('setLoggedInStudent')
+              }
+               this.$router.replace({name: "Home"})
+            } else {
+              alert("Fel lösenord")
+            }
+          } else {
+            alert("Det finns ingen användare med det namnet")
+           } 
+        })
+      } else {
         alert("Du måste skriva in användarnamn och lösenord")
       }
-
-      } 
-    }
+    } 
   }
+}
 
 </script>
 

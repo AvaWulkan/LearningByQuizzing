@@ -6,6 +6,7 @@
 <button @click="setLoggedInStudent">Student</button>
 <button @click="setLoggedInTeacher">Teacher</button>
 <button @click="setLoggedInAdmin">Admin</button>
+<p>DET HÄR FUNKAR {{$store.state.activeUser}}</p>
 
   </div>
 </template>
