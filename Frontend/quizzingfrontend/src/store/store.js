@@ -3,19 +3,12 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 const state = {
-  count: 0,
   loggedIn: false,
   loggedInAdmin: false,
   loggedInTeacher: false,
   loggedInStudent: false,
 }
 const mutations = {
-  increment (state) {
-    state.count++
-  },
-  decrement (state) {
-    state.count--
-  },
   setLoggedIn (state){
     state.loggedIn = true
   },

@@ -150,6 +150,20 @@ app.get("/api/quiz/questions/:quiz-id", (req, res, next) => {
     });
 })
 
+app.get("/api/users/:username", (req, res, next) => { // get password
+    let sql = "select * from Users where username = ?"
+    let param = [req.params.username];
+    db.get(sql, param, (err, row) => {
+        if (err) {
+            res.status(400).json({"error":err.message});
+            return;
+        }
+        res.json({
+            "user":row
+        })
+    });
+});
+
 app.post("/api/createname/:newQuizTitle", (req, res, next) => {
     let errors=[]
     let sql ='INSERT INTO Quizes (nameQuiz) VALUES (?)'

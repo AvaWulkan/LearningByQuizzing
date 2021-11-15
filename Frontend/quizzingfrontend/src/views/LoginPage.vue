@@ -4,35 +4,53 @@
         <input type="text" name="username" v-model="input.username" placeholder="Användarnamn">
         <input type="password" name="password" v-model="input.password" placeholder="Lösenord">
         <button type="button" v-on:click="login()">Login</button>
+    <p>{{$store.state.loggedIn}}</p>
+    <p>{{$store.state.loggedInAdmin}}</p>
+
     </div>
   </div>
 
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: "Login",
-  data(){
+  data() {
     return {
-      input:{
+      input: {
         username: "",
         password: "",
-      }
+      },
+      user: {}
     }
   },
   methods: {
     login(){
       if (this.input.username != "" && this.input.password != ""){
-        if (this.input.username == this.$parent.mockAccount.username &&
-        this.input.password == this.$parent.mockAccount.password){
-          this.$store.commit('setLoggedInStudent')
+        axios.get('http://localhost:3000/api/users/' + this.input.username).then(response => {
+        this.user = response.data
+        if (this.input.password == this.user.user.password){
           this.$store.commit('setLoggedIn')
+          if (this.user.user.role == "Admin"){
+            this.$store.commit('setLoggedInAdmin')
+          } else if (this.user.user.role == "Teacher") {
+            this.$store.commit('setLoggedInTeacher')
+          } else if (this.user.user.role == "Student"){
+            this.$store.commit('setLoggedInStudent')
+          }
           this.$router.replace({name: "Home"})
-        }
+        } else {
+        alert("Fel användarnamn/lösenord")
+        }})
+        } else {
+        alert("Du måste skriva in användarnamn och lösenord")
       }
+
+      } 
     }
   }
-}
+
 </script>
 
 <style scoped>
