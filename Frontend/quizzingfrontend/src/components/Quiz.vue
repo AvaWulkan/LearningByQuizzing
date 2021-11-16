@@ -51,7 +51,6 @@ export default {
       quizes: [],
       questionsInQuiz: [],
       questionAnswered: false,
-      correctBool: false,
       clickedAnswerMessage: "",
       lastAnswer: "",
       studentAnswers: [],
@@ -94,11 +93,9 @@ export default {
     clickAnswer(selected, correct) {
       this.questionAnswered = true
       if (selected === correct) {
-        this.answerBool = true
         this.correctBool = true
         this.clickedAnswerMessage = "Rätt, fan vad duktig du var då!"
       } else {
-        this.answerBool = false
         this.clickedAnswerMessage = "Fucking idiot!"
       }
       this.lastAnswer = selected
