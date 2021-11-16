@@ -1,5 +1,5 @@
 <template>
-<div v-if="!$store.state.quizChosen">
+<div>
     <h1>Senast gjorda quiz</h1>
 
     <div v-for="result in quizResults" :key="result">
@@ -28,8 +28,14 @@ export default {
     methods: {
         showMostRecentResults() {
             let element = []
-            for (let i = this.quizResults.question.length-1; i > this.quizResults.question.length-4; i--) {
+            if (this.quizResults.question.length > 3){
+                for (let i = this.quizResults.question.length-1; i > this.quizResults.question.length-4; i--) {
+                    element.push(this.quizResults.question[i]);
+                }
+            } else {
+                for (let i = this.quizResults.question.length-1; i > -1; i--) {
                 element.push(this.quizResults.question[i]);
+                }
             }
             this.quizResults = element
         }

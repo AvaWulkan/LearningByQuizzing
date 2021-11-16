@@ -1,7 +1,9 @@
 <template>
 <div>
   <Quiz/>
+  <div v-if="!$store.state.quizChosen">
   <LatestResults/>
+  </div>
 </div>
 </template>
 
