@@ -1,7 +1,9 @@
 <template>
 <div>
+    <h1>Senast gjorda quiz</h1>
+
     <div v-for="result in quizResults" :key="result">
-        <h1>{{result.quiz}} {{result.correctAnswers}} {{result.numberOfQuestions}}</h1>
+        <h2>{{result.quiz}}: {{result.correctAnswers}}/{{result.numberOfQuestions}} rätt</h2>
     </div>
 </div>
 </template>
