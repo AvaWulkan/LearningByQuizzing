@@ -2,7 +2,6 @@
   <div id="app">
     <div id="nav">
       <router-link :to="{ name : 'Home' }"><span v-on:click="$store.commit('setOnlyShowThreeToFalse')">Home | </span></router-link>
-      <router-link v-if="$store.state.loggedInAdmin" :to="{ name : 'Admin' }">Admin | </router-link>
       <router-link v-if="$store.state.loggedInStudent" :to="{ name : 'Quiz' }"><span v-on:click="$store.commit('setOnlyShowThreeToTrue')">Quiz | </span></router-link>
       <router-link v-if="$store.state.loggedInTeacher" :to="{ name : 'CreateQuiz' }">Create Quiz | </router-link>
       <router-link v-if="!$store.state.loggedIn" :to="{ name : 'Login' }">Login </router-link>

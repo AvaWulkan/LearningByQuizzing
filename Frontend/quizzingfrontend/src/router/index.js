@@ -3,7 +3,6 @@ import store from '../store/store'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import LoginPage from '../views/LoginPage.vue'
-import AdminPage from '../views/AdminPage.vue'
 import QuizPage from '../views/QuizPage.vue'
 import CreateQuizPage from '../views/CreateQuizPage.vue'
 
@@ -25,18 +24,6 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: LoginPage
-  },
-  {
-    path: '/admin',
-    name: 'Admin',
-    component: AdminPage,
-    beforeEnter: (to, from, next) => {
-      if(store.state.loggedInAdmin == false) {
-          next(false);
-      } else {
-          next();
-      }
-  }
   },
   {
     path: '/quiz',
