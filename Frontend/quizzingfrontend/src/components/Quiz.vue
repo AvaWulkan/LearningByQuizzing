@@ -65,6 +65,7 @@ export default {
     }
   },
   mounted() {
+    this.$store.commit('showPreviousResults')
     fetch('http://localhost:3000/api/quiz/')
         .then(res => res.json())
         .then(data => this.quizes = data)
@@ -79,7 +80,7 @@ export default {
       axios.get('http://localhost:3000/api/quiz'+ quiz +'/questions').then(response => (this.questionsInQuiz = response.data));
       this.listOfQuizes = false
       this.currentQuiz = quiz
-      this.$store.commit('setQuizActive')
+      this.$store.commit('setQuizState')
     },
     nextQuestion() {
       this.questionAnswered = false
@@ -137,7 +138,7 @@ export default {
       this.totalPoints = 0
       this.finishedQuiz = false
       this.questions = []
-      this.$store.commit('setQuizInactive')
+      this.$store.commit('setQuizState')
     },
     changeColor(option) {
       this.coloredButton1 = ''

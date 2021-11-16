@@ -7,7 +7,8 @@ const state = {
   loggedInAdmin: false,
   loggedInTeacher: false,
   loggedInStudent: false,
-  activeUser: 0
+  activeUser: 0,
+  quizChosen: false
 }
 const mutations = {
   setLoggedIn (state){
@@ -31,7 +32,17 @@ const mutations = {
     state.loggedInTeacher = false,
     state.loggedInStudent = false,
     state.activeUser = 0
+  },
+  setQuizState(state){
+    if(state.quizChosen === false)
+    state.quizChosen = true
+    else
+    state.quizChosen = false
+  },
+  showPreviousResults(state){
+    state.quizChosen = false
   }
+
 
 }
 export default new Vuex.Store({

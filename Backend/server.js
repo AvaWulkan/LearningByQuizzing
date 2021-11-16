@@ -163,7 +163,20 @@ app.get("/api/users/:username", (req, res, next) => { // get password
         })
     });
 });
-
+/*
+app.get("/api/quizresults/", (req, res, next) => { // get quiz results
+    let sql = "select * from QuizResults"
+    db.get(sql, (err, rows) => {
+        if (err) {
+            res.status(400).json({"error":err.message});
+            return;
+        }
+        res.json({
+            "user":rows
+        })
+    });
+});
+*/
 app.post("/api/createname/:newQuizTitle", (req, res, next) => {
     let errors=[]
     let sql ='INSERT INTO Quizes (nameQuiz) VALUES (?)'

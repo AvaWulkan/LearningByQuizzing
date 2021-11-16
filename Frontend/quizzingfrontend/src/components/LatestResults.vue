@@ -4,7 +4,17 @@
 
 <script>
 export default {
-    
+    data() {
+        return {
+
+        }
+    },
+    mounted() {
+        fetch('http://localhost:3000/api/')
+    },
+    methods: {
+
+    }
 }
 </script>
 
