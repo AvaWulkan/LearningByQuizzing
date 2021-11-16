@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link :to="{ name : 'Home' }">Home | </router-link>
       <router-link v-if="$store.state.loggedInAdmin" :to="{ name : 'Admin' }">Admin | </router-link>
-      <router-link v-if="$store.state.loggedInStudent" :to="{ name : 'Quiz' }">Quiz | </router-link>
+      <router-link v-if="$store.state.loggedInStudent" :to="{ name : 'Quiz' }"><span v-on:click="$store.commit('setQuizInactive')">Quiz | </span></router-link>
       <router-link v-if="$store.state.loggedInTeacher" :to="{ name : 'CreateQuiz' }">Create Quiz | </router-link>
       <router-link v-if="!$store.state.loggedIn" :to="{ name : 'Login' }">Login </router-link>
       <router-link v-else :to="{ name : 'Login' }"><span v-on:click="logout">Logout</span></router-link>

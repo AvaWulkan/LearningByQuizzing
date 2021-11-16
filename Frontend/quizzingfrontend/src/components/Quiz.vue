@@ -1,7 +1,6 @@
 <template>
 <body>
   <div>
-    <p>{{currentQuiz}}</p>
     <div v-if="!finishedQuiz">
       <div id="listOfQuizes" v-if="listOfQuizes">
         <h1>Quizmeny</h1>
@@ -80,6 +79,7 @@ export default {
       axios.get('http://localhost:3000/api/quiz'+ quiz +'/questions').then(response => (this.questionsInQuiz = response.data));
       this.listOfQuizes = false
       this.currentQuiz = quiz
+      this.$store.commit('setQuizActive')
     },
     nextQuestion() {
       this.questionAnswered = false
@@ -137,6 +137,7 @@ export default {
       this.totalPoints = 0
       this.finishedQuiz = false
       this.questions = []
+      this.$store.commit('setQuizInactive')
     },
     changeColor(option) {
       this.coloredButton1 = ''
@@ -158,7 +159,6 @@ export default {
       }
     },
     saveResults() {
-    
       let stringurl = 'http://localhost:3000/api/saveresults/'+ this.$store.state.activeUser+'/'+this.currentQuiz+'/'+this.totalPoints+'/'+this.questionsInQuiz.question.length
       axios.post(stringurl)
     }
