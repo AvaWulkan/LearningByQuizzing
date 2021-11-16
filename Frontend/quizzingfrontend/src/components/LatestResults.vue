@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if="!$store.state.quizChosen">
     <h1>Senast gjorda quiz</h1>
 
     <div v-for="result in quizResults" :key="result">

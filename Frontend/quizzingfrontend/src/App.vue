@@ -8,7 +8,7 @@
       <router-link v-if="!$store.state.loggedIn" :to="{ name : 'Login' }">Login </router-link>
       <router-link v-else :to="{ name : 'Login' }"><span v-on:click="logout">Logout</span></router-link>
     </div>
-      <router-view></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -17,11 +17,8 @@ export default {
   name: 'App',
   data(){
     return{
-      authenticated:false,
-     
     }
   },
-
   methods:{
     logout(){
       this.$store.commit('logout')  
@@ -64,5 +61,12 @@ ul {
 button{
   font-size: 20px;
   border-radius: 10px;
+}
+.border {
+  border: 2px solid black;
+  border-radius: 16px;
+}
+.shadow {
+  box-shadow: 5px 10px rgba(160,160,160, 0.6);
 }
 </style>

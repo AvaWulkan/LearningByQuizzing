@@ -51,7 +51,6 @@ export default {
             .then(res => res.json())
             .then(data => this.existingQuizNames = data)
     },
-
     methods: {
         checkUniqueQuizName() {
             this.errorMessage = null
@@ -70,7 +69,6 @@ export default {
                 axios.post('http://localhost:3000/api/createtable/' + this.newQuizName)
             }
         },
-
         toggleQuizNames(){
             if(this.showExistingQuizes){
                 this.showExistingQuizes = false

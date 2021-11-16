@@ -55,11 +55,9 @@ export default {
     } 
   }
 }
-
 </script>
 
 <style scoped>
-
 .container {
   display: grid;
   grid-template-columns: 240px;
@@ -71,14 +69,11 @@ export default {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
-
   margin: 20px;
 }
-
 input {
   margin: 5px;
 }
-
 .buttoncontainer{
   display: flex;
   width: 180px;

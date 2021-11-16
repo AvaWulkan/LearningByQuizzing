@@ -65,13 +65,4 @@ p {
   padding: 20px;
   margin-bottom: 20px;
 }
-
-/* Utilities */
-.border {
-  border: 2px solid black;
-  border-radius: 16px;
-}
-.shadow {
-  box-shadow: 5px 10px rgba(160,160,160, 0.6);
-}
 </style>
