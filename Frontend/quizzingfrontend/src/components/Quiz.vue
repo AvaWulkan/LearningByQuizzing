@@ -117,6 +117,7 @@ export default {
       }
       this.populateList()
       this.saveResults()
+      this.changeColor(0)
     },
     randomize() {
       var ul = document.querySelector('.answers');

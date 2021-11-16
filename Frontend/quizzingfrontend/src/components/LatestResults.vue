@@ -3,7 +3,9 @@
     <h1>Senast gjorda quiz</h1>
 
     <div v-for="result in quizResults" :key="result">
-        <h2>{{result.quiz}}: {{result.correctAnswers}}/{{result.numberOfQuestions}} rätt</h2>
+        <h2>{{result.quiz}}: {{result.correctAnswers}}/{{result.numberOfQuestions}} rätt
+            ({{(result.correctAnswers/result.numberOfQuestions*100).toFixed(0)}}%)
+        </h2>
     </div>
 </div>
 </template>

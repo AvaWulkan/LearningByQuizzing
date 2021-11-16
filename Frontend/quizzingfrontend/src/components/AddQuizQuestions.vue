@@ -9,11 +9,6 @@
         <input name="a2" v-model="newA2" type="text" placeholder="Svarsalternativ 3">
         <input name="a3" v-model="newA3" type="text" placeholder="Svarsalternativ 4">
         <button @click="addQuestion()">Lägg till fråga</button>
-        <p>{{ newQuestion }}</p>
-        <p>{{ newCorrectAnswer }}</p>
-        <p>{{ newA1 }}</p>
-        <p>{{ newA2 }}</p>
-        <p>{{ newA3 }}</p>
         <p v-if="errorBool">{{ errorMsg }}</p>
     </div>
       
@@ -70,10 +65,13 @@ export default {
 
     methods: {
         addQuestion() {
+          let cleanQuestion = this.newQuestion.replaceAll('?', '')
+          this.newQuestion = cleanQuestion
+    
             this.errorMsg = null
             this.errorBool = false
             if (this.newQuestion != "" && this.newCorrectAnswer != "" && this.newA1 != "" && this.newA2 != "" && this.newA3 != ""){
-                let stringurl = 'http://localhost:3000/api/createquestion/'+this.$parent.newQuizName+'/'+ this.newQuestion+ '/' +this.newCorrectAnswer+ '/' +this.newA1+ '/'+this.newA2+ '/'+this.newA3
+                let stringurl = 'http://localhost:3000/api/createquestion/'+this.$parent.newQuizName+'/'+this.newQuestion+ '/' +this.newCorrectAnswer+ '/' +this.newA1+ '/'+this.newA2+ '/'+this.newA3
                 this.resetData()
                 axios.post(stringurl)
                 this.index++
