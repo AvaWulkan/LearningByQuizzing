@@ -9,7 +9,7 @@
 
 <script>
 import Quiz from '../components/Quiz.vue'
-import LatestResults from '../components/LatestResults.vue'
+import LatestResults from '../components/StudentResults.vue'
 
 export default{
   data() {

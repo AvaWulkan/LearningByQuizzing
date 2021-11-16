@@ -8,7 +8,8 @@ const state = {
   loggedInTeacher: false,
   loggedInStudent: false,
   activeUser: 0,
-  quizChosen: false
+  quizChosen: false,
+  onlyShowThree: false
 }
 const mutations = {
   setLoggedIn (state){
@@ -25,6 +26,11 @@ const mutations = {
   },
   setActiveUser (state, userId){
     state.activeUser = userId
+  },
+  setOnlyShowThreeToTrue (state){
+    state.onlyShowThree = true
+  },setOnlyShowThreeToFalse (state){
+    state.onlyShowThree = false
   },
   logout(state){
     state.loggedIn = false,

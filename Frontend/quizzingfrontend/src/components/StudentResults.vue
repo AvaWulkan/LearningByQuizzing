@@ -15,7 +15,7 @@ import axios from 'axios'
 export default {
     data() {
         return {
-            quizResults: []
+            quizResults: [],
         }
     },
     mounted() {
@@ -28,7 +28,7 @@ export default {
     methods: {
         showMostRecentResults() {
             let element = []
-            if (this.quizResults.question.length > 3){
+            if (this.quizResults.question.length > 3 && this.$store.state.onlyShowThree){
                 for (let i = this.quizResults.question.length-1; i > this.quizResults.question.length-4; i--) {
                     element.push(this.quizResults.question[i]);
                 }

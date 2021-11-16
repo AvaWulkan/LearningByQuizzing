@@ -10,19 +10,19 @@
 </div>
 <div v-if="$store.state.loggedInStudent">
   <h2>Välkommen skitunge!</h2>
-  <StudentStatistics/>
+  <StudentResults/>
 </div>
   </div>
 </template>
 
 <script>
 import AddUser from '../components/AddUser.vue'
-import StudentStatistics from '../components/StudentStatistics.vue'
+import StudentResults from '../components/StudentResults.vue'
 
 export default{
   components:{
     AddUser,
-    StudentStatistics
+    StudentResults
   },
   methods: {
   setLoggedInStudent(){
