@@ -4,9 +4,6 @@
         <input type="text" name="username" v-model="input.username" placeholder="Användarnamn">
         <input type="password" v-on:keydown.enter="login()" name="password" v-model="input.password" placeholder="Lösenord">
         <button type="button" v-on:click="login()">Login</button>
-
-    <p>{{user}}</p>
-
     </div>
   </div>
 

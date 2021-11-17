@@ -89,10 +89,31 @@ app.get("/api/quizresults/:userId", (req, res, next) => {
 
 //POSTS
 
+app.post("/api/createuser/:newName/:newUsername/:newPassword/:newRole", (req, res, next) => {
+    let errors=[]
+    let newName = [req.params.newName]
+    let newUsername = [req.params.newUsername]
+    let newPassword = [req.params.newPassword]
+    let newRole = [req.params.newRole]
+    let sql =`INSERT INTO Users (name, username, password, role) 
+    VALUES ("` +newName+ `", "` +newUsername+ `", "` +newPassword+ `", "` +newRole+ `")`
+
+    db.run(sql, function (err, result) {
+        if (err){
+            res.status(400).json({"error": err.message})
+            return;
+        }
+        res.json({
+            msg:"success"
+        })
+    });
+});
+
 app.post("/api/createname/:newQuizName", (req, res, next) => {
     let errors=[]
     let sql ='INSERT INTO Quizes (nameQuiz) VALUES (?)'
     let params = [req.params.newQuizName]
+
     db.run(sql, params, function (err, result) {
         if (err){
             res.status(400).json({"error": err.message})
@@ -108,6 +129,7 @@ app.post("/api/createtable/:newQuizName", (req, res, next) => {
     let errors=[]
     let params = [req.params.newQuizName]
     let sql =`CREATE TABLE ` +params+ ` (idQuizes INTEGER PRIMARY KEY NOT NULL, question VARCHAR(45), correctAnswer VARCHAR(45), a1 VARCHAR(45), a2 VARCHAR(45), a3 VARCHAR(45))`
+
     db.run(sql, function (err, result) {
         if (err){
             res.status(400).json({"error": err.message})
@@ -129,6 +151,7 @@ app.post("/api/createquestion/:newQuizName/:newQuestion/:newCorrectAnswer/:newA1
     let a3 = [req.params.newA3]     
     let sql =`INSERT INTO ` +params+ ` (question, correctAnswer, a1 , a2 , a3) 
     VALUES ("` +question+ `", "` +correctAnswer+ `", "` +a1+ `", "` +a2+ `", "` +a3+ `" )`
+
     db.run(sql, function (err, result) {
         if (err){
             res.status(400).json({"error": err.message})
@@ -148,7 +171,6 @@ app.post("/api/saveresults/:userId/:quizName/:correctAnswers/:numberOfQuestions"
     let numberOfQuestions = [req.params.numberOfQuestions]
     let sql =`INSERT INTO QuizResults (Users_idUsers, quiz, correctAnswers, numberOfQuestions)
     VALUES (` +userId+ `, "` +quizName+ `", ` +correctAnswers+ `, ` +numberOfQuestions+ `)`
-
 
     db.run(sql, function (err, result) {
         if (err){
