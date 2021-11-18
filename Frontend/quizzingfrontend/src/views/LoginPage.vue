@@ -2,8 +2,8 @@
   <div class="container">
     <div class="inputboxes">
         <input type="text" name="username" v-model="input.username" placeholder="Användarnamn">
-        <input type="password" v-on:keydown.enter="login()" name="password" v-model="input.password" placeholder="Lösenord">
-        <button type="button" v-on:click="login()">Logga in</button>
+        <input type="password" @keydown.enter="login()" name="password" v-model="input.password" placeholder="Lösenord">
+        <button type="button" @click="login()">Logga in</button>
     </div>
   </div>
 

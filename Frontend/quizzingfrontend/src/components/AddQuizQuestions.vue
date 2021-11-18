@@ -1,37 +1,37 @@
 <template>
-<body>
-    <div>
-        <button @click="findOldQuestions">Visa befintliga frågor</button>
-        <h1 >{{ $parent.newQuizName }}</h1>
-        <input name="question" v-model="newQuestion" type="text" placeholder="Skriv fråga">
-        <input name="correctAnswer" v-model="newCorrectAnswer" type="text" placeholder="Korrekt svar / Alternativ 1">
-        <input name="a1" v-model="newA1" type="text" placeholder="Svarsalternativ 2">
-        <input name="a2" v-model="newA2" type="text" placeholder="Svarsalternativ 3">
-        <input name="a3" v-model="newA3" type="text" placeholder="Svarsalternativ 4">
-        <button @click="addQuestion()">Lägg till fråga</button>
-        <p v-if="errorBool">{{ errorMsg }}</p>
-    </div>
-      
-    <div class="preview" v-for="index in listOfIndex" :key="index">
-        <ul>
-          <li> <h1>{{listOfNewQuestion[index]}}?</h1> </li>
-        </ul>
-        <div class="svarsalternativ">
+  <body>
+      <div>
+          <button @click="findOldQuestions">Visa befintliga frågor</button>
+          <h1 >{{ $parent.newQuizName }}</h1>
+          <input name="question" v-model="newQuestion" type="text" placeholder="Skriv fråga">
+          <input name="correctAnswer" v-model="newCorrectAnswer" type="text" placeholder="Korrekt svar / Alternativ 1">
+          <input name="a1" v-model="newA1" type="text" placeholder="Svarsalternativ 2">
+          <input name="a2" v-model="newA2" type="text" placeholder="Svarsalternativ 3">
+          <input name="a3" v-model="newA3" type="text" placeholder="Svarsalternativ 4">
+          <button @click="addQuestion()">Lägg till fråga</button>
+          <p v-if="errorBool">{{ errorMsg }}</p>
+      </div>
+        
+      <div class="preview" v-for="index in listOfIndex" :key="index">
           <ul>
-            <li class="svar"> {{listOfNewCorrectAnswer[index]}} </li>
+            <li> <h1>{{listOfNewQuestion[index]}}?</h1> </li>
           </ul>
-          <ul>
-            <li class="svar"> {{listOfNewA1[index]}} </li>
-          </ul>
-          <ul>
-            <li class="svar"> {{listOfNewA2[index]}} </li>
-          </ul>
-          <ul>
-            <li class="svar"> {{listOfNewA3[index]}} </li>
-          </ul>
-        </div>
-    </div>
-</body>
+          <div class="svarsalternativ">
+            <ul>
+              <li class="svar"> {{listOfNewCorrectAnswer[index]}} </li>
+            </ul>
+            <ul>
+              <li class="svar"> {{listOfNewA1[index]}} </li>
+            </ul>
+            <ul>
+              <li class="svar"> {{listOfNewA2[index]}} </li>
+            </ul>
+            <ul>
+              <li class="svar"> {{listOfNewA3[index]}} </li>
+            </ul>
+          </div>
+      </div>
+  </body>
 </template>
 
 <script>

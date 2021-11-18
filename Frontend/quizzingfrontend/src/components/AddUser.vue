@@ -35,7 +35,6 @@ export default {
             this.newUserRole = ""
         }
     }
-
 }
 </script>
 

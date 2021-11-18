@@ -1,12 +1,9 @@
 const express = require("express")
 const app = express()
 const cors = require('cors')
-
 const sqlite3 = require('sqlite3').verbose();
-
 app.use(cors())
 app.use(express.static('public'))
-
 const bodyParser = require("body-parser")
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -53,7 +50,7 @@ app.get("/api/quiz:quizName/questions", (req, res) => {
     });
 });
 
-app.get("/api/users/:username", (req, res, next) => { // get password
+app.get("/api/users/:username", (req, res) => {
     let sql = "SELECT * FROM Users WHERE username = ?"
     let param = [req.params.username];
     db.get(sql, param, (err, row) => {
@@ -67,7 +64,7 @@ app.get("/api/users/:username", (req, res, next) => { // get password
     });
 });
 
-app.get("/api/quizresults/:userId", (req, res, next) => {
+app.get("/api/quizresults/:userId", (req, res) => {
     let sql = "SELECT * FROM QuizResults WHERE Users_idUsers = ?"
     let param = [req.params.userId]
 
@@ -77,13 +74,12 @@ app.get("/api/quizresults/:userId", (req, res, next) => {
             return;
         }
         res.json({
-            /*"question":rows*/
             "results":rows
         })
     });
 });
 
-app.get("/api/allquizresults/", (req, res, next) => {
+app.get("/api/allquizresults/", (req, res) => {
     let sql = "SELECT quiz, correctAnswers, numberOfQuestions FROM QuizResults"
 
     db.all(sql, (err, rows) => {
@@ -99,7 +95,7 @@ app.get("/api/allquizresults/", (req, res, next) => {
 
 //POSTS
 
-app.post("/api/createuser/:newName/:newUsername/:newPassword/:newRole", (req, res, next) => {
+app.post("/api/createuser/:newName/:newUsername/:newPassword/:newRole", (req, res) => {
     let errors=[]
     let newName = [req.params.newName]
     let newUsername = [req.params.newUsername]
@@ -119,7 +115,7 @@ app.post("/api/createuser/:newName/:newUsername/:newPassword/:newRole", (req, re
     });
 });
 
-app.post("/api/createname/:newQuizName", (req, res, next) => {
+app.post("/api/createname/:newQuizName", (req, res) => {
     let errors=[]
     let sql ='INSERT INTO Quizes (nameQuiz) VALUES (?)'
     let params = [req.params.newQuizName]
@@ -135,7 +131,7 @@ app.post("/api/createname/:newQuizName", (req, res, next) => {
     });
 });
 
-app.post("/api/createtable/:newQuizName", (req, res, next) => {
+app.post("/api/createtable/:newQuizName", (req, res) => {
     let errors=[]
     let params = [req.params.newQuizName]
     let sql =`CREATE TABLE ` +params+ ` (idQuizes INTEGER PRIMARY KEY NOT NULL, question VARCHAR(45), correctAnswer VARCHAR(45), a1 VARCHAR(45), a2 VARCHAR(45), a3 VARCHAR(45))`
@@ -151,14 +147,14 @@ app.post("/api/createtable/:newQuizName", (req, res, next) => {
     });
 });
 
-app.post("/api/createquestion/:newQuizName/:newQuestion/:newCorrectAnswer/:newA1/:newA2/:newA3", (req, res, next) => {
+app.post("/api/createquestion/:newQuizName/:newQuestion/:newCorrectAnswer/:newA1/:newA2/:newA3", (req, res) => {
     let errors=[]
     let params = [req.params.newQuizName]
     let question = [req.params.newQuestion]
     let correctAnswer = [req.params.newCorrectAnswer]
-    let a1 = [req.params.newA1]     
-    let a2 = [req.params.newA2]     
-    let a3 = [req.params.newA3]     
+    let a1 = [req.params.newA1]
+    let a2 = [req.params.newA2]
+    let a3 = [req.params.newA3]
     let sql =`INSERT INTO ` +params+ ` (question, correctAnswer, a1 , a2 , a3) 
     VALUES ("` +question+ `", "` +correctAnswer+ `", "` +a1+ `", "` +a2+ `", "` +a3+ `" )`
 
@@ -173,7 +169,7 @@ app.post("/api/createquestion/:newQuizName/:newQuestion/:newCorrectAnswer/:newA1
     });
 });
 
-app.post("/api/saveresults/:userId/:quizName/:correctAnswers/:numberOfQuestions", (req, res, next) => {
+app.post("/api/saveresults/:userId/:quizName/:correctAnswers/:numberOfQuestions", (req, res) => {
     let errors=[]
     let userId = [req.params.userId]
     let quizName = [req.params.quizName]
