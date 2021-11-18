@@ -86,6 +86,19 @@ app.get("/api/quizresults/:userId", (req, res, next) => {
     });
 });
 
+app.get("/api/allquizresults/", (req, res, next) => {
+    let sql = "SELECT quiz, correctAnswers, numberOfQuestions FROM QuizResults"
+
+    db.all(sql, (err, rows) => {
+        if (err) {
+            res.status(400).json({"error":err.message});
+            return;
+        }
+        res.json({
+            "results":rows
+        })
+    });
+});
 
 //POSTS
 

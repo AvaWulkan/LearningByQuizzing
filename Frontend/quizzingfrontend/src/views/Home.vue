@@ -7,6 +7,7 @@
 <div v-if="$store.state.loggedInTeacher">
   <h2>Lägg till elev</h2>
   <AddUser/>
+  <Statistics/>
 </div>
 <div v-if="$store.state.loggedInStudent">
   <h2>Välkommen skitunge!</h2>
@@ -18,9 +19,11 @@
 <script>
 import AddUser from '../components/AddUser.vue'
 import StudentResults from '../components/StudentResults.vue'
+import Statistics from "../components/Statistics";
 
 export default{
   components:{
+    Statistics,
     AddUser,
     StudentResults
   },
