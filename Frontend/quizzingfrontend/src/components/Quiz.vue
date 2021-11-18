@@ -10,6 +10,7 @@
       </div>
       <div v-if="!listOfQuizes && !startQuiz">
         <button @click="start">Start Quiz!</button>
+        <button @click="oneMoreQuiz">Byt Quiz</button>
       </div>
       <div v-show="startQuiz">
         <div id="questions" v-for="question in questionsInQuiz" v-bind:key="question">
@@ -24,7 +25,7 @@
           <div id="submitDiv">
             <h2 v-if="clickedAnswerMessage.length > 1">{{ clickedAnswerMessage }}</h2>
             <button v-if="questionAnswered && index < question.length-1" type="submit" @click="nextQuestion();">Next question</button>
-            <button v-if="questionAnswered && index == question.length-1" type="submit" @click="finishQuiz();">
+            <button v-if="questionAnswered && index === question.length-1" type="submit" @click="finishQuiz();">
               <img class="flags" src="../assets/flagflipped.png" alt="">Finish quiz<img class="flags" src="../assets/flag.png" alt=""></button>
           </div>
         </div>
@@ -120,7 +121,7 @@ export default {
       this.populateList()
       this.saveResults()
       this.changeColor(0)
-      this.startQuiz = false
+
     },
     randomize() {
       var ul = document.querySelector('.answers');
@@ -133,7 +134,6 @@ export default {
       this.index = 0
       this.questionsInQuiz = []
       this.questionAnswered = false
-      this.correctBool = false
       this.clickedAnswerMessage = ""
       this.lastAnswer = ""
       this.studentAnswers = []
@@ -143,6 +143,8 @@ export default {
       this.finishedQuiz = false
       this.questions = []
       this.$store.commit('setQuizState')
+      this.currentQuiz = null
+      this.startQuiz = false
     },
     changeColor(option) {
       this.coloredButton1 = ''
@@ -214,7 +216,7 @@ h2 {
   flex-direction: column;
   flex: 0;
   columns: 2;
-  margin: 0px;
+  margin: 0;
 }
 button:hover {
   transition: all 0.1s ease-in;
