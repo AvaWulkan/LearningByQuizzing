@@ -32,7 +32,7 @@
       </div>
     </div>
     <div v-if="finishedQuiz">
-      <QuizStatistics/>
+      <QuizResult/>
       <button @click="oneMoreQuiz">Gör ett till quiz</button>
     </div>
   </div>
@@ -40,11 +40,11 @@
 </template>
 
 <script>
-import QuizStatistics from './QuizResult.vue'
+import QuizResult from './QuizResult.vue'
 import axios from 'axios'
 export default {
   components: {
-    QuizStatistics
+    QuizResult
   },
   data() {
     return {
@@ -98,12 +98,6 @@ export default {
     }, 
     clickAnswer(selected, correct) {
       this.questionAnswered = true
-      if (selected === correct) {
-        this.correctBool = true
-        this.clickedAnswerMessage = "Rätt, fan vad duktig du var då!"
-      } else {
-        this.clickedAnswerMessage = "Fucking idiot!"
-      }
       this.lastAnswer = selected
       this.correctAnswer = correct
     },
@@ -124,8 +118,8 @@ export default {
 
     },
     randomize() {
-      var ul = document.querySelector('.answers');
-      for (var i = ul.children.length; i >= 0; i--) {
+      let ul = document.querySelector('.answers');
+      for (let i = ul.children.length; i >= 0; i--) {
         ul.appendChild(ul.children[Math.random() * i | 0]);
       }
     },

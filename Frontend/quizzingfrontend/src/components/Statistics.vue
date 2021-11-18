@@ -29,7 +29,6 @@ export default {
     return {
       quizResults: [],
       quizNames: [],
-      results: new Map(),
       numTimesQuizIsMade: [],
       index: [],
       averageScore: [],
@@ -42,18 +41,15 @@ export default {
         .then(response => {
           this.quizResults = response.data
           this.quizResults = this.quizResults.results
+          axios.get('http://localhost:3000/api/quiz')
+              .then(response => {
+                this.quizNames = response.data
+                this.quizNames = this.quizNames.quiz
+                this.getStatistics()
+              })
         })
-    axios.get('http://localhost:3000/api/quiz')
-    .then(response => {
-      this.quizNames = response.data
-      this.quizNames = this.quizNames.quiz
-      this.getStatistics()
-    })
-
   },
-
   methods: {
-
     getStatistics() {
       let numOfTimes = 0
       let totalScore = 0
@@ -72,7 +68,6 @@ export default {
         }
         this.averageScore.push(totalScore)
         this.numberOfQuestions.push(numOfQ)
-       // this.results.set(this.quizNames[i], numOfTimes)
         this.numTimesQuizIsMade.push(numOfTimes)
         numOfTimes = 0
         totalScore = 0

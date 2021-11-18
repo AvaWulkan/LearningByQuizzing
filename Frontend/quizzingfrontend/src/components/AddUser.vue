@@ -4,7 +4,6 @@
       <input type="text" v-model="newUsername" placeholder="Användarnamn">
       <input type="text" v-model="newPassword" placeholder="Lösenord">
       <button @click="addNewUser">Skapa användare</button>
-      <p>{{newName}}{{newUsername}}{{newPassword}}</p>
   </div>
 </template>
 

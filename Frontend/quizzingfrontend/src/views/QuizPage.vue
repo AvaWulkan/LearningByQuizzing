@@ -2,14 +2,14 @@
 <div>
   <Quiz/>
   <div v-if="!$store.state.quizChosen">
-  <LatestResults/>
+  <StudentResults/>
   </div>
 </div>
 </template>
 
 <script>
 import Quiz from '../components/Quiz.vue'
-import LatestResults from '../components/StudentResults.vue'
+import StudentResults from '../components/StudentResults.vue'
 
 export default{
   data() {
@@ -19,7 +19,7 @@ export default{
   },
   components: {
     Quiz,
-    LatestResults
+    StudentResults
   },
 }
 </script>

@@ -20,14 +20,11 @@ let db = new sqlite3.Database('./quizzing.db', sqlite3.OPEN_READWRITE, (err) => 
     console.log('Connected to the quizzing database.');
 });
 
-// Start
-
-
 app.listen(HTTP_PORT, () => {
     console.log("Server running on port %PORT%".replace("%PORT%",HTTP_PORT))
 });
 
-app.get("/api/quiz/", (req, res, next) => {
+app.get("/api/quiz/", (req, res) => {
     let sql = "SELECT nameQuiz FROM Quizes"
     let params = []
     db.all(sql, params, (err, rows) => {
@@ -41,8 +38,7 @@ app.get("/api/quiz/", (req, res, next) => {
     });
 });
 
-
-app.get("/api/quiz:quizName/questions", (req, res, next) => {
+app.get("/api/quiz:quizName/questions", (req, res) => {
     let params = [req.params.quizName]
     let sql = "SELECT * FROM " + params
 
@@ -81,7 +77,8 @@ app.get("/api/quizresults/:userId", (req, res, next) => {
             return;
         }
         res.json({
-            "question":rows
+            /*"question":rows*/
+            "results":rows
         })
     });
 });
@@ -195,42 +192,3 @@ app.post("/api/saveresults/:userId/:quizName/:correctAnswers/:numberOfQuestions"
         })
     });
 });
-
-/*
-
-// -------------------------------------------------------------------------------------------------------------------------------
-
-app.put("/api/bok/:id", (req, res, next) => {
-    let data = {
-        bokTitel: req.body.bokTitel,
-        bokForfattare: req.body.bokForfattare,
-        bokIsbn: req.body.bokIsbn,
-        bokPris: req.body.bokPris
-    }
-    let sql ='UPDATE bok SET bokTitel = ?, bokForfattare = ?, bokIsbn = ?, bokPris = ? WHERE bokId = ?'
-    let params =[data.bokTitel, data.bokForfattare, data.bokIsbn, data.bokPris, req.params.id]
-    db.run(sql, params, function (err, result) {
-        if (err){
-            res.status(400).json({"error": err.message})
-            return;
-        }
-        res.json({
-            "message": "success",
-            "bok": data,
-            "id" : this.lastID
-        })
-    });
-})
-
-app.delete("/api/bok/:id", (req, res, next) => {
-    db.run(
-        'DELETE FROM bok WHERE bokId = ?',
-        req.params.id,
-        function (err, result) {
-            if (err){
-                res.status(400).json({"error": res.message})
-                return;
-            }
-            res.json({"message":"deleted", rows: this.changes})
-        });
-})*/

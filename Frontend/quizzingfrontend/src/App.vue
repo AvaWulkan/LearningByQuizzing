@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link :to="{ name : 'Home' }"><span v-on:click="$store.commit('setOnlyShowThreeToFalse')">Home | </span></router-link>
+      <router-link :to="{ name : 'Home' }"><span v-on:click="$store.commit('setOnlyShowThreeToFalse')">Startsida | </span></router-link>
       <router-link v-if="$store.state.loggedInStudent" :to="{ name : 'Quiz' }"><span v-on:click="$store.commit('setOnlyShowThreeToTrue')">Quiz | </span></router-link>
-      <router-link v-if="$store.state.loggedInTeacher" :to="{ name : 'CreateQuiz' }">Create Quiz | </router-link>
-      <router-link v-if="!$store.state.loggedIn" :to="{ name : 'Login' }">Login </router-link>
-      <router-link v-else :to="{ name : 'Login' }"><span v-on:click="logout">Logout</span></router-link>
+      <router-link v-if="$store.state.loggedInTeacher" :to="{ name : 'CreateQuiz' }">Skapa Quiz | </router-link>
+      <router-link v-if="!$store.state.loggedIn" :to="{ name : 'Login' }">Logga in </router-link>
+      <router-link v-else :to="{ name : 'Login' }"><span v-on:click="logout">Logga ut</span></router-link>
     </div>
     <router-view></router-view>
   </div>

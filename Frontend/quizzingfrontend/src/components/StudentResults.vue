@@ -22,19 +22,20 @@ export default {
         axios.get('http://localhost:3000/api/quizresults/'+this.$store.state.activeUser)
         .then(response => {
             this.quizResults = response.data
+            this.quizResults = this.quizResults.results
             this.showMostRecentResults()
         })
     },
     methods: {
         showMostRecentResults() {
             let element = []
-            if (this.quizResults.question.length > 3 && this.$store.state.onlyShowThree){
-                for (let i = this.quizResults.question.length-1; i > this.quizResults.question.length-4; i--) {
-                    element.push(this.quizResults.question[i]);
+            if (this.quizResults.length > 3 && this.$store.state.onlyShowThree){
+                for (let i = this.quizResults.length-1; i > this.quizResults.length-4; i--) {
+                    element.push(this.quizResults[i]);
                 }
             } else {
-                for (let i = this.quizResults.question.length-1; i > -1; i--) {
-                element.push(this.quizResults.question[i]);
+                for (let i = this.quizResults.length-1; i > -1; i--) {
+                element.push(this.quizResults[i]);
                 }
             }
             this.quizResults = element

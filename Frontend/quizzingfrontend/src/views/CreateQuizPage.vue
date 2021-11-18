@@ -56,7 +56,7 @@ export default {
             this.errorMessage = null
             for(let i = 0; i < this.existingQuizNames.quiz.length; i++) {
                 if(this.existingQuizNames.quiz[i].nameQuiz.toLowerCase() === this.newQuizName.toLowerCase()) {
-                    this.errorMessage = this.newQuizName + " finns redan, välj ett annat namn"
+                    this.errorMessage = this.newQuizName + " finns redan, välj ett annat namn, eller"
                     this.quizExists = true
                     this.existingQuizName = this.existingQuizNames.quiz[i].nameQuiz.toLowerCase()
                 } else if (this.newQuizName === null) {

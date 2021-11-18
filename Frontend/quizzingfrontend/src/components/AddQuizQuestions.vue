@@ -67,20 +67,19 @@ export default {
         addQuestion() {
           let cleanQuestion = this.newQuestion.replaceAll('?', '')
           this.newQuestion = cleanQuestion
-    
-            this.errorMsg = null
-            this.errorBool = false
-            if (this.newQuestion != "" && this.newCorrectAnswer != "" && this.newA1 != "" && this.newA2 != "" && this.newA3 != ""){
-                let stringurl = 'http://localhost:3000/api/createquestion/'+this.$parent.newQuizName+'/'+this.newQuestion+ '/' +this.newCorrectAnswer+ '/' +this.newA1+ '/'+this.newA2+ '/'+this.newA3
-                this.resetData()
-                axios.post(stringurl)
-                this.index++
-                this.listOfIndex.push(this.index)
-            } else {
-                this.errorMsg = "Du måste fylla i alla fält!"
-                this.errorBool = true
-            }
-            
+          this.errorMsg = null
+          this.errorBool = false
+
+          if (this.newQuestion != "" && this.newCorrectAnswer != "" && this.newA1 != "" && this.newA2 != "" && this.newA3 != ""){
+            let stringurl = 'http://localhost:3000/api/createquestion/'+this.$parent.newQuizName+'/'+this.newQuestion+ '/' +this.newCorrectAnswer+ '/' +this.newA1+ '/'+this.newA2+ '/'+this.newA3
+            this.resetData()
+            axios.post(stringurl)
+            this.index++
+            this.listOfIndex.push(this.index)
+          } else {
+            this.errorMsg = "Du måste fylla i alla fält!"
+            this.errorBool = true
+          }
         },
         resetData(){
             this.listOfNewQuestion.push(this.newQuestion)
@@ -94,7 +93,6 @@ export default {
             this.newA2 = "",
             this.newA3 = ""
         },
-
         findOldQuestions() {
             for (let i = 0; i <= this.oldQuestionsInQuiz.question.length; i++) {
               this.listOfNewQuestion.push(this.oldQuestionsInQuiz.question[i].question)
