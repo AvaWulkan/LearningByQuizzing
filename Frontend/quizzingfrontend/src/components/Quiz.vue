@@ -8,20 +8,25 @@
           <li v-for="quiz in quizes.quiz" v-bind:key="quiz"><button @click="selectedQuiz(quiz.nameQuiz)">{{quiz.nameQuiz}}</button></li>
         </ul>
       </div>
-      <div id="questions" v-for="question in questionsInQuiz" v-bind:key="question">
-        <h2>Fråga {{question[index].idQuizes}} av {{question.length}}</h2>
-        <h1 id="questionh1">{{ question[index].question}}?</h1>
-        <ul class="answers">
-          <li><button :style="{ backgroundColor: coloredButton1 }" @click="clickAnswer(question[index].a1, question[index].correctAnswer); changeColor(1)">{{ question[index].a1 }}</button></li>
-          <li><button :style="{ backgroundColor: coloredButton2 }" @click="clickAnswer(question[index].a2, question[index].correctAnswer); changeColor(2)">{{ question[index].a2 }}</button></li>
-          <li><button :style="{ backgroundColor: coloredButton3 }" @click="clickAnswer(question[index].a3, question[index].correctAnswer); changeColor(3)">{{ question[index].a3 }}</button></li>
-          <li><button :style="{ backgroundColor: coloredButton4 }" @click="clickAnswer(question[index].correctAnswer, question[index].correctAnswer); changeColor(4)">{{ question[index].correctAnswer }}</button></li>
-        </ul>
-        <div id="submitDiv">
-        <h2 v-if="clickedAnswerMessage.length > 1">{{ clickedAnswerMessage }}</h2>
-        <button v-if="questionAnswered && index < question.length-1" type="submit" @click="nextQuestion();">Next question</button>
-        <button v-if="questionAnswered && index == question.length-1" type="submit" @click="finishQuiz();">
-          <img class="flags" src="../assets/flagflipped.png" alt="">Finish quiz<img class="flags" src="../assets/flag.png" alt=""></button>
+      <div v-if="!listOfQuizes && !startQuiz">
+        <button @click="start">Start Quiz!</button>
+      </div>
+      <div v-show="startQuiz">
+        <div id="questions" v-for="question in questionsInQuiz" v-bind:key="question">
+          <h2>Fråga {{question[index].idQuizes}} av {{question.length}}</h2>
+          <h1 id="questionh1">{{ question[index].question}}?</h1>
+          <ul class="answers">
+            <li><button :style="{ backgroundColor: coloredButton1 }" @click="clickAnswer(question[index].a1, question[index].correctAnswer); changeColor(1)">{{ question[index].a1 }}</button></li>
+            <li><button :style="{ backgroundColor: coloredButton2 }" @click="clickAnswer(question[index].a2, question[index].correctAnswer); changeColor(2)">{{ question[index].a2 }}</button></li>
+            <li><button :style="{ backgroundColor: coloredButton3 }" @click="clickAnswer(question[index].a3, question[index].correctAnswer); changeColor(3)">{{ question[index].a3 }}</button></li>
+            <li><button :style="{ backgroundColor: coloredButton4 }" @click="clickAnswer(question[index].correctAnswer, question[index].correctAnswer); changeColor(4)">{{ question[index].correctAnswer }}</button></li>
+          </ul>
+          <div id="submitDiv">
+            <h2 v-if="clickedAnswerMessage.length > 1">{{ clickedAnswerMessage }}</h2>
+            <button v-if="questionAnswered && index < question.length-1" type="submit" @click="nextQuestion();">Next question</button>
+            <button v-if="questionAnswered && index == question.length-1" type="submit" @click="finishQuiz();">
+              <img class="flags" src="../assets/flagflipped.png" alt="">Finish quiz<img class="flags" src="../assets/flag.png" alt=""></button>
+          </div>
         </div>
       </div>
     </div>
@@ -59,8 +64,8 @@ export default {
       totalPoints: 0,
       finishedQuiz: false,
       questions: [],
-      currentQuiz: null
-
+      currentQuiz: null,
+      startQuiz: false
     }
   },
   mounted() {
@@ -115,6 +120,7 @@ export default {
       this.populateList()
       this.saveResults()
       this.changeColor(0)
+      this.startQuiz = false
     },
     randomize() {
       var ul = document.querySelector('.answers');
@@ -160,6 +166,10 @@ export default {
     saveResults() {
       let stringurl = 'http://localhost:3000/api/saveresults/'+ this.$store.state.activeUser+'/'+this.currentQuiz+'/'+this.totalPoints+'/'+this.questionsInQuiz.question.length
       axios.post(stringurl)
+    },
+    start(){
+      this.randomize()
+      this.startQuiz = true
     }
   }
 }
