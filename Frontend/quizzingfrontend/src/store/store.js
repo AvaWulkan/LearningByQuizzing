@@ -53,8 +53,8 @@ const mutations = {
   },
   changefontSizeIndex(state){
     state.fontSizeIndex++
-    if(this.fontSizeIndex === this.fontSizeArrayH1.length){
-       this.fontSizeIndex = 0
+    if(state.fontSizeIndex === state.fontSizeArrayH1.length){
+       state.fontSizeIndex = 0
     }
 }
 
