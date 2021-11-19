@@ -1,13 +1,16 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <header>
+      <img class="productlogo" width="200" src="./assets/LearningByQuizzingLogga.png" alt="">
+    </header>
+    <nav id="nav" v-if="$store.state.loggedIn">
       <router-link :to="{ name : 'Home' }"><span @click="$store.commit('setOnlyShowThreeToFalse')">Startsida | </span></router-link>
       <router-link v-if="$store.state.loggedInStudent" :to="{ name : 'Quiz' }"><span @click="$store.commit('setOnlyShowThreeToTrue')">Quiz | </span></router-link>
       <router-link v-if="$store.state.loggedInTeacher" :to="{ name : 'CreateQuiz' }">Skapa Quiz | </router-link>
       <router-link v-if="!$store.state.loggedIn" :to="{ name : 'Login' }">Logga in </router-link>
       <router-link v-else :to="{ name : 'Login' }"><span @click="logout">Logga ut</span></router-link>
       <button @click="changeFontSize()">Ändra textstorlek</button>
-    </div>
+    </nav>
     <router-view></router-view>
   </div>
 </template>
