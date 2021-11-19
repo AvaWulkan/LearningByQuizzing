@@ -12,6 +12,7 @@ const state = {
   onlyShowThree: false,
   fontSizeArrayH1: ["20px", "30px", "40px"],
   fontSizeArrayH2: ["16px", "20px", "24px"],
+  fontSizeArrayP: ["12px", "16px", "20px"],
   fontSizeIndex: 0
 }
 const mutations = {

@@ -5,7 +5,7 @@
       <div id="listOfQuizes" v-if="listOfQuizes">
         <h1>Quizmeny</h1>
         <ul id="quizList">
-          <li v-for="quiz in quizes.quiz" v-bind:key="quiz"><button @click="selectedQuiz(quiz.nameQuiz)">{{quiz.nameQuiz}}</button></li>
+          <li v-for="quiz in quizes.quiz" v-bind:key="quiz"><button @click="selectedQuiz(quiz.nameQuiz)"><h2>{{quiz.nameQuiz}}</h2></button></li>
         </ul>
       </div>
       <div v-if="!listOfQuizes && !startQuiz">
@@ -17,16 +17,16 @@
           <h2>Fråga {{question[index].idQuizes}} av {{question.length}}</h2>
           <h1 id="questionh1">{{ question[index].question}}?</h1>
           <ul class="answers">
-            <li><button :style="{ backgroundColor: coloredButton1 }" @click="clickAnswer(question[index].a1, question[index].correctAnswer); changeColor(1)">{{ question[index].a1 }}</button></li>
-            <li><button :style="{ backgroundColor: coloredButton2 }" @click="clickAnswer(question[index].a2, question[index].correctAnswer); changeColor(2)">{{ question[index].a2 }}</button></li>
-            <li><button :style="{ backgroundColor: coloredButton3 }" @click="clickAnswer(question[index].a3, question[index].correctAnswer); changeColor(3)">{{ question[index].a3 }}</button></li>
-            <li><button :style="{ backgroundColor: coloredButton4 }" @click="clickAnswer(question[index].correctAnswer, question[index].correctAnswer); changeColor(4)">{{ question[index].correctAnswer }}</button></li>
+            <li><button :style="{ backgroundColor: coloredButton1 }" @click="clickAnswer(question[index].a1, question[index].correctAnswer); changeColor(1)"><p>{{ question[index].a1 }}</p></button></li>
+            <li><button :style="{ backgroundColor: coloredButton2 }" @click="clickAnswer(question[index].a2, question[index].correctAnswer); changeColor(2)"><p>{{ question[index].a2 }}</p></button></li>
+            <li><button :style="{ backgroundColor: coloredButton3 }" @click="clickAnswer(question[index].a3, question[index].correctAnswer); changeColor(3)"><p>{{ question[index].a3 }}</p></button></li>
+            <li><button :style="{ backgroundColor: coloredButton4 }" @click="clickAnswer(question[index].correctAnswer, question[index].correctAnswer); changeColor(4)"><p>{{ question[index].correctAnswer }}</p></button></li>
           </ul>
           <div id="submitDiv">
             <h2 v-if="clickedAnswerMessage.length > 1">{{ clickedAnswerMessage }}</h2>
-            <button v-if="questionAnswered && index < question.length-1" type="submit" @click="nextQuestion();">Next question</button>
+            <button v-if="questionAnswered && index < question.length-1" type="submit" @click="nextQuestion();"><p>Nästa fråga</p></button>
             <button v-if="questionAnswered && index === question.length-1" type="submit" @click="finishQuiz();">
-              <img class="flags" src="../assets/flagflipped.png" alt="">Finish quiz<img class="flags" src="../assets/flag.png" alt=""></button>
+              <p><img class="flags" src="../assets/flagflipped.png" alt="">Slutför quiz<img class="flags" src="../assets/flag.png" alt=""></p></button>
           </div>
         </div>
       </div>
@@ -219,9 +219,11 @@ button:hover {
 }
 .answers button{
   width: 217px;
-  padding: 50px;
+  height: 200px;
   margin-bottom: 15px;
-  background-color: rgb(194, 208, 245)
+  background-color: rgb(194, 208, 245);
+  word-wrap: break-word;
+
 }
 .flags {
   padding: 0 30px 0 30px;

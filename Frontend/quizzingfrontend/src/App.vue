@@ -25,10 +25,20 @@ export default {
       this.$store.commit('logout')  
     },
     displayUserSpecifiedFontSize(){
-      let h1 = document.querySelector('h1')
-      let h2 = document.querySelector('h2')
-      h1.style.fontSize = this.$store.state.fontSizeArrayH1[this.$store.state.fontSizeIndex]
-      h2.style.fontSize = this.$store.state.fontSizeArrayH2[this.$store.state.fontSizeIndex]
+      let h1 = document.querySelectorAll('h1')
+      let h2 = document.querySelectorAll('h2')
+      let p = document.querySelectorAll('p')
+      for (let i = 0; i < h1.length; i++) {
+        h1[i].style.fontSize = this.$store.state.fontSizeArrayH1[this.$store.state.fontSizeIndex]
+      }
+      for (let i = 0; i < h2.length; i++) {
+        h2[i].style.fontSize = this.$store.state.fontSizeArrayH2[this.$store.state.fontSizeIndex]
+
+      }
+      for (let i = 0; i < p.length; i++) {
+        p[i].style.fontSize = this.$store.state.fontSizeArrayP[this.$store.state.fontSizeIndex]
+      }
+
     },
     changeFontSize(){
       this.$store.commit('changefontSizeIndex')
@@ -48,6 +58,7 @@ export default {
   margin: 0;
   padding: 0;
 }
+
 ul{
   margin: 0;
   padding: 0;
