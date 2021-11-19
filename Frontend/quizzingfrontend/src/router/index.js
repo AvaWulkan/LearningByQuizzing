@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 import LoginPage from '../views/LoginPage.vue'
 import QuizPage from '../views/QuizPage.vue'
 import CreateQuizPage from '../views/CreateQuizPage.vue'
+import SettingsPage from '../views/SettingsPage.vue'
 
 Vue.use(VueRouter)
 
@@ -48,6 +49,12 @@ const routes = [
           next();
       }
   }
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: SettingsPage,
+
   }
 ]
 

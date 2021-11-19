@@ -9,7 +9,10 @@ const state = {
   loggedInStudent: false,
   activeUser: 0,
   quizChosen: false,
-  onlyShowThree: false
+  onlyShowThree: false,
+  fontSizeArrayH1: ["20px", "30px", "40px"],
+  fontSizeArrayH2: ["16px", "20px", "24px"],
+  fontSizeIndex: 0
 }
 const mutations = {
   setLoggedIn (state){
@@ -47,7 +50,13 @@ const mutations = {
   },
   showPreviousResults(state){
     state.quizChosen = false
-  }
+  },
+  changefontSizeIndex(state){
+    state.fontSizeIndex++
+    if(this.fontSizeIndex === this.fontSizeArrayH1.length){
+       this.fontSizeIndex = 0
+    }
+}
 
 
 }

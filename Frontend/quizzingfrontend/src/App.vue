@@ -6,6 +6,7 @@
       <router-link v-if="$store.state.loggedInTeacher" :to="{ name : 'CreateQuiz' }">Skapa Quiz | </router-link>
       <router-link v-if="!$store.state.loggedIn" :to="{ name : 'Login' }">Logga in </router-link>
       <router-link v-else :to="{ name : 'Login' }"><span @click="logout">Logga ut</span></router-link>
+      <button @click="changeFontSize()">Ändra textstorlek</button>
     </div>
     <router-view></router-view>
   </div>
@@ -14,11 +15,28 @@
 <script>
 export default {
   name: 'App',
-  
+  data() {
+    return{
+
+    }
+  },
   methods:{
     logout(){
       this.$store.commit('logout')  
+    },
+    displayUserSpecifiedFontSize(){
+      let h1 = document.querySelector('h1')
+      let h2 = document.querySelector('h2')
+      h1.style.fontSize = this.$store.state.fontSizeArrayH1[this.$store.state.fontSizeIndex]
+      h2.style.fontSize = this.$store.state.fontSizeArrayH2[this.$store.state.fontSizeIndex]
+    },
+    changeFontSize(){
+      this.$store.commit('changefontSizeIndex')
+      this.displayUserSpecifiedFontSize()
     }
+
+
+
   }
 }
 </script>
