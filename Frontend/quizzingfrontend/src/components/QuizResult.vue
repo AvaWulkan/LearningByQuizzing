@@ -10,7 +10,7 @@
       <div class="questions border shadow" v-for="question in $parent.questions" v-bind:key="question">
         <p>Fråga: {{ question }}?</p>
       </div>
-      <div class="student-answers border shadow" v-for="answer in $parent.studentAnswers" v-bind:key="answer">
+      <div v-bind:style="{backgroundColor: colorArray[index]}" class="student-answers border shadow" v-for="(answer, index) in $parent.studentAnswers" v-bind:key="answer">
         <p>Ditt svar: {{answer}}</p>
       </div>
       <div class="correct-answers border shadow" v-for="answer in $parent.correctAnswers" v-bind:key="answer">
@@ -22,7 +22,26 @@
 
 <script>
 export default {
+  mounted(){
+    this.markCorrectAnswerGreen()
+  },
+  data(){
+    return{
+      colorArray: []
+    }
+  },
+methods:{
+  markCorrectAnswerGreen(){
+    for(let i = 0; i < this.$parent.correctAnswers.length; i++){
+      if (this.$parent.correctAnswers[i] === this.$parent.studentAnswers[i]){
+        this.colorArray.push('green')
+      } else {
+        this.colorArray.push('red')
+      }
+    }
+  }
 
+}
 }
 </script>
 
