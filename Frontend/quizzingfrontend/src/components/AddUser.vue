@@ -38,6 +38,18 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+input {
+
+  font-size: 16px;
+  padding: 5px ;
+  margin: 5px 5px 5px 0;
+}
+
+button {
+
+
+}
 
 </style>

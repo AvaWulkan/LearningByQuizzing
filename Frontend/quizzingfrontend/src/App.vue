@@ -90,7 +90,20 @@ button{
   font-size: 20px;
   border-radius: 10px;
 }
-
+table {
+  border-style: double;
+  border-collapse: collapse;
+}
+td {
+  text-align: center;
+  padding: 10px 30px 10px 30px;
+}
+tr {
+  border-bottom: 1px solid black;
+}
+th {
+  padding: 10px;
+}
 /* Utilities */
 .border {
   border: 2px solid black;

@@ -1,10 +1,23 @@
 <template>
     <div>
         <h1>Senast gjorda quiz</h1>    
-        <div v-for="result in quizResults" :key="result">
-            <h2>{{result.quiz}}: {{result.correctAnswers}}/{{result.numberOfQuestions}} rätt
-                ({{(result.correctAnswers/result.numberOfQuestions*100).toFixed(0)}}%)
-            </h2>
+        <div>
+          <table>
+            <thead>
+            <tr>
+              <th scope="col">Quiz</th>
+              <th scope="col">Poäng</th>
+              <th scope="col">Procent</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="result in quizResults" :key="result">
+              <td>{{result.quiz}}</td>
+              <td>{{result.correctAnswers}}/{{result.numberOfQuestions}} rätt</td>
+              <td>({{(result.correctAnswers/result.numberOfQuestions*100).toFixed(0)}}%)</td>
+            </tr>
+            </tbody>
+          </table>
         </div>
     </div>
 </template>
