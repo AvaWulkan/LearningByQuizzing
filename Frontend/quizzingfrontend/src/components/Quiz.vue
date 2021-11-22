@@ -175,6 +175,7 @@ body{
   display: flex;
   flex-direction: row;
   justify-content: center;
+  width: 100%;
 }
 h1{
   text-align: center;
@@ -198,6 +199,11 @@ h2 {
   padding-bottom: 10px;
   margin-top: 30px;
 }
+
+/* #listOfQuizes{
+  justify-content: center;
+} */
+
 #listOfQuizes button{
   width: 200px;
   padding: 10px;
