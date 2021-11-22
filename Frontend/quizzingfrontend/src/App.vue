@@ -1,14 +1,15 @@
 <template>
   <div id="app">
-    
+    <bigheader>
+    <header><img class="productlogo" width="200" src="./assets/LearningByQuizzingLogga.png" alt=""></header>
     <nav id="nav" v-if="$store.state.loggedIn">
-      <img class="productlogo" width="200" src="./assets/LearningByQuizzingLogga.png" alt="">
       <router-link :to="{ name : 'Home' }"><span @click="$store.commit('setOnlyShowThreeToFalse')">Startsida | </span></router-link>
       <router-link v-if="$store.state.loggedInStudent" :to="{ name : 'Quiz' }"><span @click="$store.commit('setOnlyShowThreeToTrue')">Quiz | </span></router-link>
       <router-link v-if="$store.state.loggedInTeacher" :to="{ name : 'CreateQuiz' }">Skapa Quiz | </router-link>
       <router-link v-if="!$store.state.loggedIn" :to="{ name : 'Login' }">Logga in </router-link>
       <router-link v-else :to="{ name : 'Login' }"><span @click="logout">Logga ut</span></router-link>
     </nav> 
+    </bigheader>
     <button @click="changeFontSize()">Ändra textstorlek</button>
 
     <router-view></router-view>
@@ -57,6 +58,19 @@ export default {
 <style>
 
 /* MOBILE FIRST */ 
+
+bigheader{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: 
+  "img a a";
+}
+
+header{
+  max-width: 200px;
+  display: block;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   box-sizing: border-box;
@@ -69,14 +83,14 @@ ul{
   padding: 0;
 }
 #nav {
-  width: 100%;
+  width: fit-content;
   text-align: center;
   display: grid;
-  grid-template-columns: 250px repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-areas: 
   "img a a a";
+  height: 40px;
 }
-
 
 #nav li {
   font-weight: normal;
