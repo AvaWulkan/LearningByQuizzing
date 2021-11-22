@@ -20,12 +20,18 @@ const mutations = {
     state.loggedIn = true
   },
   setLoggedInStudent (state){
+    state.loggedInAdmin = false
+    state.loggedInTeacher = false
     state.loggedInStudent = true
   },
   setLoggedInTeacher (state){
+    state.loggedInAdmin = false
+    state.loggedInStudent = false
     state.loggedInTeacher = true
   },
   setLoggedInAdmin (state){
+    state.loggedInTeacher = false
+    state.loggedInStudent = false
     state.loggedInAdmin = true
   },
   setActiveUser (state, userId){
@@ -33,15 +39,18 @@ const mutations = {
   },
   setOnlyShowThreeToTrue (state){
     state.onlyShowThree = true
-  },setOnlyShowThreeToFalse (state){
+  },
+  setOnlyShowThreeToFalse (state){
     state.onlyShowThree = false
   },
   logout(state){
-    state.loggedIn = false,
-    state.loggedInAdmin = false,
-    state.loggedInTeacher = false,
-    state.loggedInStudent = false,
-    state.activeUser = 0
+    state.loggedIn= false,
+    state.loggedInAdmin= false,
+    state.loggedInTeacher= false,
+    state.loggedInStudent= false,
+    state.activeUser= 0,
+    state.onlySHowThree = false,
+    state.fontSizeIndex= 0
   },
   setQuizState(state){
     if(state.quizChosen === false)

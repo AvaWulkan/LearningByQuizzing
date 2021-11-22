@@ -43,6 +43,9 @@
 import QuizResult from './QuizResult.vue'
 import axios from 'axios'
 export default {
+  beforeMount() {
+    this.$store.commit('setOnlyShowThreeToTrue')
+  },
   components: {
     QuizResult
   },

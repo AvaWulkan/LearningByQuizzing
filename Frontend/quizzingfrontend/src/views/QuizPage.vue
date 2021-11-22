@@ -45,6 +45,7 @@ export default{
 .aside {
   grid-area: aside;
   width: fit-content;
+  margin-top: 70px;
 }
 
 

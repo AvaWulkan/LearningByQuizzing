@@ -1,16 +1,20 @@
 <template>
   <div id="app">
     <bigheader>
-    <header><img class="productlogo" width="200" src="./assets/LearningByQuizzingLogga.png" alt=""></header>
+    <header><img class="productlogo" width="100" src="./assets/LearningByQuizzingLogga.png" alt=""></header>
     <nav id="nav" v-if="$store.state.loggedIn">
-      <router-link :to="{ name : 'Home' }"><span @click="$store.commit('setOnlyShowThreeToFalse')">Startsida | </span></router-link>
-      <router-link v-if="$store.state.loggedInStudent" :to="{ name : 'Quiz' }"><span @click="$store.commit('setOnlyShowThreeToTrue')">Quiz | </span></router-link>
-      <router-link v-if="$store.state.loggedInTeacher" :to="{ name : 'CreateQuiz' }">Skapa Quiz | </router-link>
-      <router-link v-if="!$store.state.loggedIn" :to="{ name : 'Login' }">Logga in </router-link>
-      <router-link v-else :to="{ name : 'Login' }"><span @click="logout">Logga ut</span></router-link>
-    </nav> 
+      <router-link :to="{ name : 'Home' }"><span>Startsida</span></router-link>
+      <router-link v-if="$store.state.loggedInStudent" :to="{ name : 'Quiz' }"><span @click="$store.commit('setOnlyShowThreeToTrue')">Quiz</span></router-link>
+      <router-link v-if="$store.state.loggedInTeacher" :to="{ name : 'CreateQuiz' }">Skapa Quiz</router-link>
+      <button class="textsize" @click="changeFontSize()">Ändra textstorlek</button>
+    </nav>
+    <div class="logout" v-if="$store.state.loggedIn">
+      <router-link :to="{ name : 'Login' }"><span @click="logout">Logga ut</span></router-link>
+    </div>
+    <div v-if="!$store.state.loggedIn">
+      <h2>Välkommen till Learning by Quizzing!</h2>
+    </div>
     </bigheader>
-    <button @click="changeFontSize()">Ändra textstorlek</button>
 
     <router-view></router-view>
   </div>
@@ -26,7 +30,7 @@ export default {
   },
   methods:{
     logout(){
-      this.$store.commit('logout')  
+      this.$store.commit('logout')
     },
     displayUserSpecifiedFontSize(){
       let h1 = document.querySelectorAll('h1')
@@ -59,11 +63,83 @@ export default {
 
 /* MOBILE FIRST */ 
 
+#app {
+  background: rgb(201, 221, 228);
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 10px 40px 10px;
+  width: 1020px;
+  min-height: 500px;
+}
+
 bigheader{
   display:grid;
-  grid-template-columns: repeat(2, 1fr);
+  width: 1000px;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
   grid-template-areas: 
-  "img a a";
+  "img a logout";
+  background: rgb(152, 193, 208);
+}
+
+a {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: rgb(194, 208, 245);
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0 10px;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+img {
+  margin-left: 10px;
+  grid-area: img;
+}
+
+a:hover,
+a:focus {
+  background-color: rgb(181, 192, 225);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+a:hover {
+  transform: translateY(-1px);
+}
+
+.textsize {
+  margin: 0 10px;
+}
+
+.logout {
+  grid-area: logout;
+  width: 100%;
+  text-align: center;
+  justify-content: flex-end;
+  display: flex;
 }
 
 header{
@@ -71,39 +147,20 @@ header{
   display: block;
 }
 
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+
 
 ul{
   margin: 0;
   padding: 0;
 }
 #nav {
-  width: fit-content;
   text-align: center;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-areas: 
-  "img a a a";
-  height: 40px;
+  grid-area: a;
+  justify-content: center;
+  display: flex;
+  width: 100%;
 }
 
-#nav li {
-  font-weight: normal;
-  display: inline-block;
-  justify-content: center;
-  text-align: center;
-  font-size: 20px;
-  padding: 20px;
-}
-#nav li:hover {
-  cursor: pointer;
-  color: darkgray;
-}
 ul {
   list-style-type: none;
 }
@@ -152,11 +209,7 @@ button:hover {
   transform: translateY(-1px);
 }
 
-button:active {
-  background-color: #c85000;
-  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
-  transform: translateY(0);
-}
+
 table {
   border-style: double;
   border-collapse: collapse;
@@ -187,6 +240,9 @@ th {
 
 /* Desktop */
 @media screen and (min-width: 1025px) {
-
+  #app {
+    width: 1000px;
+    margin: 20px auto;
+  }
 }
 </style>

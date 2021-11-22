@@ -1,6 +1,7 @@
 <template>
     <div>
-        <h1>Senast gjorda quiz</h1>    
+        <h1 v-if="!$store.state.onlyShowThree">Resultat</h1> 
+        <h1 v-else>Senaste resultat</h1>   
         <div>
           <table>
             <thead>
@@ -56,6 +57,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+h1 {
+    text-align: center;
+}
 </style>

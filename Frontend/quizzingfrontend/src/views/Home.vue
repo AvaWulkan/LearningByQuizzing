@@ -23,6 +23,9 @@ import StudentResults from '../components/StudentResults.vue'
 import Statistics from "../components/Statistics";
 
 export default{
+  beforeMount() {
+    this.$store.commit('setOnlyShowThreeToFalse')
+  },
   components:{
     AddUser,
     StudentResults,
