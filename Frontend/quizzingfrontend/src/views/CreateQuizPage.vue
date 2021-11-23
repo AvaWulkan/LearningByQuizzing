@@ -1,13 +1,13 @@
 <template>
     <div class="create-container">
-        <div v-if="!quizNameAdded">
-            <div class="addQuizName">
+        <div class="addQuizName" v-show="!quizNameAdded">
+
                 <h1>Skapa ett nytt quiz</h1>
                 <input type="text" v-model="newQuizName" placeholder="Skriv in titel">
                 <button @click="checkUniqueQuizName"><p>Lägg till frågor</p></button>
                 <p v-if="errorMessage != null"> {{ errorMessage }} </p>
                 <button v-if="quizExists" @click="chooseExistingQuiz"><p>Lägg till frågor i befintligt quiz</p></button>
-            </div>
+
             <button @click="toggleQuizNames"><p>{{toggleShowQuiz}}</p></button>
             <div v-if="existingQuizNames != null && showExistingQuizes">
                 <ul v-for="element in existingQuizNames.quiz" v-bind:key="element">
@@ -85,4 +85,20 @@ export default {
 
 <style>
 
+/* MOBILE FIRST */
+
+.addQuizName{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* Tablet */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+/* Desktop */
+@media screen and (min-width: 1025px) {
+
+}
 </style>

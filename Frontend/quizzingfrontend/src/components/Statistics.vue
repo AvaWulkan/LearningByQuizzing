@@ -79,6 +79,16 @@ export default {
 </script>
 
 <style scoped>
+/* MOBILE FIRST */
 
+/* Tablet */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+/* Desktop */
+@media screen and (min-width: 1025px) {
+
+}
 
 </style>

@@ -27,13 +27,8 @@ export default{
 </script>
 
 <style scoped>
+/* MOBILE FIRST */
 
-.quizpagewrapper{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-areas:
-  "aside quiz .";
-}
 
 .quiz {
   grid-area: quiz;
@@ -41,12 +36,28 @@ export default{
   justify-content: center;
   width: 100%;
 }
-
-.aside {
-  grid-area: aside;
-  width: fit-content;
-  margin-top: 70px;
+.aside{
+  display: none;
 }
 
+/* Tablet */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+/* Desktop */
+@media screen and (min-width: 1025px) {
+  .quizpagewrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+  "aside quiz .";
+  }
+  .aside {
+    grid-area: aside;
+    width: fit-content;
+    margin-top: 70px;
+  }
+}
 
 </style>

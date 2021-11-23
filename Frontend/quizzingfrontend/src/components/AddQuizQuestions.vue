@@ -1,14 +1,14 @@
 <template>
   <body>
-      <div>
+      <div id="addQuestions">
           <button @click="findOldQuestions"><p>Visa befintliga frågor</p></button>
           <h1 >{{ $parent.newQuizName }}</h1>
           <input name="question" v-model="newQuestion" type="text" placeholder="Skriv fråga">
           <input name="correctAnswer" v-model="newCorrectAnswer" type="text" placeholder="Korrekt svar / Alternativ 1">
           <input name="a1" v-model="newA1" type="text" placeholder="Svarsalternativ 2">
           <input name="a2" v-model="newA2" type="text" placeholder="Svarsalternativ 3">
-          <input name="a3" v-model="newA3" type="text" placeholder="Svarsalternativ 4">
-          <button @click="addQuestion()"><p>Lägg till fråga</p></button>
+          <input name="a3" v-model="newA3" type="text" placeholder="Svarsalternativ 4" @keyup.enter="addQuestion">
+          <button @click="addQuestion"><p>Lägg till fråga</p></button>
           <p v-if="errorBool">{{ errorMsg }}</p>
       </div>
         
@@ -110,6 +110,13 @@ export default {
 </script>
 
 <style scoped>
+/* MOBILE FIRST */
+#addQuestions{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .preview{
   display: flex;
   flex-direction: column;
@@ -150,5 +157,14 @@ li:hover {
   transform: scale(0.98);
   box-shadow: 5px 7px rgba(160,160,160, 0.6);
   cursor:pointer;
+}
+/* Tablet */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+/* Desktop */
+@media screen and (min-width: 1025px) {
+
 }
 </style>

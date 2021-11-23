@@ -140,7 +140,7 @@ img {
 
 .hamburgermenu {
   margin-left: -20px;
-  position:fixed;
+  position: sticky;
   margin-top: -35px;
 }
 
@@ -173,6 +173,7 @@ header{
 ul{
   margin: 0;
   padding: 0;
+  list-style-type: none;
 }
 #nav {
   text-align: center;
@@ -185,15 +186,6 @@ ul{
   justify-content: center;
   width: 95vw;
 }
-
-ul {
-  list-style-type: none;
-}
-/* button{
-  font-size: 20px;
-  border-radius: 10px;
-} */
-
 
 button {
   align-items: center;
