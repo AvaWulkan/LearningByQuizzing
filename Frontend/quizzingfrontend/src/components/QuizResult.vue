@@ -6,17 +6,22 @@
       <h1 v-else>Du fick {{ $parent.totalPoints}} / {{$parent.correctAnswers.length}} poäng</h1>
       <h1>({{($parent.totalPoints/$parent.correctAnswers.length*100).toFixed(0)}}% Rätt)</h1>
     </div>
-    <div class="stats-container border">
-      <div class="questions border shadow" v-for="question in $parent.questions" v-bind:key="question">
-        <p>Fråga: {{ question }}?</p>
-      </div>
-      <div v-bind:style="{backgroundColor: colorArray[index]}" class="student-answers border shadow" v-for="(answer, index) in $parent.studentAnswers" v-bind:key="answer">
-        <p>Ditt svar: {{answer}}</p>
-      </div>
-      <div class="correct-answers border shadow" v-for="answer in $parent.correctAnswers" v-bind:key="answer">
-        <p>Rätt svar: {{answer}}</p>
-      </div>
-    </div>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Fråga</th>
+            <th scope="col">Svar</th>
+            <th scope="col">Rätt svar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(question, index) in $parent.questions" :key="question">
+            <td>{{question}}</td>
+            <td v-bind:style="{backgroundColor: colorArray[index]}">{{$parent.studentAnswers[index]}}</td>
+            <td>{{$parent.correctAnswers[index]}}</td>
+          </tr>
+        </tbody>
+        </table>
   </div>
 </template>
 
