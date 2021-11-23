@@ -1,30 +1,29 @@
 <template>
   <div class="stats-wrapper">
     <h1>Resultat</h1>
-    <div>
-      <div class="points resultshadow">
+    <div class="points resultshadow">
       <h1 v-if="$parent.totalPoints/$parent.correctAnswers.length*100 === 100">Du fick alla rätt! Bra jobbat !</h1>
       <h1 v-else>Du fick {{ $parent.totalPoints}} / {{$parent.correctAnswers.length}} poäng</h1>
       <h1 v-if="$parent.totalPoints/$parent.correctAnswers.length*100 !== 100">({{($parent.totalPoints/$parent.correctAnswers.length*100).toFixed(0)}}% Rätt)</h1>
     </div>
-      <button @click="showResult"><p>Visa resultat</p></button>
-    </div>
-      <table v-show="showResults" class="resultstable">
-        <thead>
-          <tr>
-            <th scope="col"><h2>Fråga</h2></th>
-            <th scope="col"><h2>Ditt svar</h2></th>
-            <th scope="col"><h2>Rätt svar</h2></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(question, index) in $parent.questions" :key="question">
-            <td><p>{{question}}</p></td>
-            <td v-bind:style="{backgroundColor: colorArray[index]}"><p>{{$parent.studentAnswers[index]}}</p></td>
-            <td><p>{{$parent.correctAnswers[index]}}</p></td>
-          </tr>
-        </tbody>
-        </table>
+    <button @click="showResult"><p>Visa resultat</p></button>
+
+    <table v-show="showResults" class="resultstable">
+      <thead>
+        <tr>
+          <th scope="col"><h2>Fråga</h2></th>
+          <th scope="col"><h2>Ditt svar</h2></th>
+          <th scope="col"><h2>Rätt svar</h2></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(question, index) in $parent.questions" :key="question">
+          <td><p>{{question}}</p></td>
+          <td v-bind:style="{backgroundColor: colorArray[index]}"><p>{{$parent.studentAnswers[index]}}</p></td>
+          <td><p>{{$parent.correctAnswers[index]}}</p></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 

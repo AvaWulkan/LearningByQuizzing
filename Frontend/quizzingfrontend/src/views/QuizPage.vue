@@ -33,6 +33,7 @@ export default{
 .quiz {
   grid-area: quiz;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
 }

@@ -31,7 +31,7 @@
         </div>
       </div>
     </div>
-    <div v-if="finishedQuiz">
+    <div class="newQuizButton" v-if="finishedQuiz">
       <QuizResult/>
       <button @click="oneMoreQuiz"><p>Gör ett till quiz</p></button>
     </div>
@@ -179,6 +179,11 @@ body{
   flex-direction: row;
   justify-content: center;
   width: 100%;
+}
+.newQuizButton{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 h1{
   text-align: center;
