@@ -1,16 +1,18 @@
 <template>
   <div id="app">
     <bigheader>
-    <header><img class="productlogo" width="100" src="./assets/LearningByQuizzingLogga.png" alt=""></header>
+    <header>
+      <img class="productlogo" width="100" src="./assets/LearningByQuizzingLogga.png" alt="Logga" >
+    </header>
     <nav id="nav" v-if="$store.state.loggedIn">
-      <router-link :to="{ name : 'Home' }"><span><p>Startsida</p></span></router-link>
-      <router-link v-if="$store.state.loggedInStudent" :to="{ name : 'Quiz' }"><span @click="$store.commit('setOnlyShowThreeToTrue')"><p>Quiz</p></span></router-link>
-      <router-link v-if="$store.state.loggedInTeacher" :to="{ name : 'CreateQuiz' }"><p>Skapa Quiz</p></router-link>
-      <button class="textsize" @click="changeFontSize()"><p>Ändra textstorlek</p></button>
+      <router-link class="navbuttons" :to="{ name : 'Home' }"><span><p>Startsida</p></span></router-link>
+      <router-link class="navbuttons" v-if="$store.state.loggedInStudent" :to="{ name : 'Quiz' }"><span @click="$store.commit('setOnlyShowThreeToTrue')"><p>Quiz</p></span></router-link>
+      <router-link class="navbuttons" v-if="$store.state.loggedInTeacher" :to="{ name : 'CreateQuiz' }"><p>Skapa Quiz</p></router-link>
+      <button class="textsize navbuttons" @click="changeFontSize()"><p>Ändra textstorlek</p></button>
     </nav>
     <div class="logout" v-if="$store.state.loggedIn">
-      <router-link :to="{ name : 'Login' }"><span @click="logout"><p>Logga ut</p></span></router-link>
-      <img src="./assets/hamburgermenu.png" alt="">
+      <router-link id="logoutbutton" :to="{ name : 'Login' }"><span @click="logout"><p>Logga ut</p></span></router-link>
+      <img class="hamburgermenu" width="75" src="./assets/hamburgermenu.png" alt="Meny" @click="showMobileMenu">
     </div>
     <div v-if="!$store.state.loggedIn">
       <h2>Välkommen till Learning by Quizzing!</h2>
@@ -51,10 +53,19 @@ export default {
     changeFontSize(){
       this.$store.commit('changefontSizeIndex')
       this.displayUserSpecifiedFontSize()
+    },
+
+    showMobileMenu() {
+      var x = document.getElementById("nav")
+      var y = document.getElementById("logoutbutton")
+      if (x.style.display === "block" && y.style.display === "block") {
+        x.style.display = "none"
+        y.style.display = "none"
+      } else {
+        x.style.display = "block"
+        y.style.display = "block"
+      }
     }
-
-
-
   }
 }
 </script>
@@ -77,10 +88,11 @@ export default {
 bigheader{
   display:grid;
   width: 100%;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   grid-template-areas: 
-  "img a logout";
+  "img logout"
+  "a a";
   background: rgb(152, 193, 208);
 }
 
@@ -94,7 +106,8 @@ a {
   box-sizing: border-box;
   color: rgb(0, 0, 0);
   cursor: pointer;
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -116,6 +129,10 @@ a {
 img {
   margin-left: 10px;
   grid-area: img;
+}
+
+.hamburgermenu {
+  margin-right: 30px;
 }
 
 a:hover,
@@ -144,9 +161,6 @@ header{
   max-width: 200px;
   display: block;
 }
-
-
-
 ul{
   margin: 0;
   padding: 0;
@@ -157,6 +171,12 @@ ul{
   justify-content: center;
   display: flex;
   width: 100%;
+}
+
+.navbuttons {
+  display: flex;
+  justify-content: center;
+  width: 95vw;
 }
 
 ul {
@@ -246,15 +266,24 @@ th {
   width: 1000px;
   margin: 20px auto;
   min-height: 500px;
-}
-
-bigheader{
-  display: grid;
-  width: 1000px;
-  grid-template-columns: 1fr 2fr 1fr;
-  align-items: center;
-  grid-template-areas:
-  "img a logout";
-}
+  }
+  bigheader{
+    display: grid;
+    width: 1000px;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    grid-template-areas:
+    "img a logout";
+  }
+  #nav {
+    text-align: center;
+    grid-area: a;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+  }
+  .hamburgermenu {
+    display: none;
+  }
 }
 </style>
