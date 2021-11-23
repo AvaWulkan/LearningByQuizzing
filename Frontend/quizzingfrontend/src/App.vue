@@ -3,19 +3,18 @@
     <bigheader>
     <header><img class="productlogo" width="100" src="./assets/LearningByQuizzingLogga.png" alt=""></header>
     <nav id="nav" v-if="$store.state.loggedIn">
-      <router-link :to="{ name : 'Home' }"><span>Startsida</span></router-link>
-      <router-link v-if="$store.state.loggedInStudent" :to="{ name : 'Quiz' }"><span @click="$store.commit('setOnlyShowThreeToTrue')">Quiz</span></router-link>
-      <router-link v-if="$store.state.loggedInTeacher" :to="{ name : 'CreateQuiz' }">Skapa Quiz</router-link>
-      <button class="textsize" @click="changeFontSize()">Ändra textstorlek</button>
+      <router-link :to="{ name : 'Home' }"><span><p>Startsida</p></span></router-link>
+      <router-link v-if="$store.state.loggedInStudent" :to="{ name : 'Quiz' }"><span @click="$store.commit('setOnlyShowThreeToTrue')"><p>Quiz</p></span></router-link>
+      <router-link v-if="$store.state.loggedInTeacher" :to="{ name : 'CreateQuiz' }"><p>Skapa Quiz</p></router-link>
+      <button class="textsize" @click="changeFontSize()"><p>Ändra textstorlek</p></button>
     </nav>
     <div class="logout" v-if="$store.state.loggedIn">
-      <router-link :to="{ name : 'Login' }"><span @click="logout">Logga ut</span></router-link>
+      <router-link :to="{ name : 'Login' }"><span @click="logout"><p>Logga ut</p></span></router-link>
     </div>
     <div v-if="!$store.state.loggedIn">
       <h2>Välkommen till Learning by Quizzing!</h2>
     </div>
     </bigheader>
-
     <router-view></router-view>
   </div>
 </template>
