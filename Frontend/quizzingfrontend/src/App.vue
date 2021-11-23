@@ -10,6 +10,7 @@
     </nav>
     <div class="logout" v-if="$store.state.loggedIn">
       <router-link :to="{ name : 'Login' }"><span @click="logout"><p>Logga ut</p></span></router-link>
+      <img src="./assets/hamburgermenu.png" alt="">
     </div>
     <div v-if="!$store.state.loggedIn">
       <h2>Välkommen till Learning by Quizzing!</h2>
@@ -70,14 +71,12 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   box-sizing: border-box;
   margin: 0;
-  padding: 0 10px 40px 10px;
-  width: 1020px;
-  min-height: 500px;
+  min-height: 100vh;
 }
 
 bigheader{
   display:grid;
-  width: 1000px;
+  width: 100%;
   grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
   grid-template-areas: 
@@ -240,8 +239,22 @@ th {
 /* Desktop */
 @media screen and (min-width: 1025px) {
   #app {
-    width: 1000px;
-    margin: 20px auto;
-  }
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  padding: 0 10px 40px 10px;
+  width: 1000px;
+  margin: 20px auto;
+  min-height: 500px;
+}
+
+bigheader{
+  display: grid;
+  width: 1000px;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  grid-template-areas:
+  "img a logout";
+}
 }
 </style>
