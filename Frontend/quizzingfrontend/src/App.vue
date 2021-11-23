@@ -9,9 +9,12 @@
       <router-link class="navbuttons" v-if="$store.state.loggedInStudent" :to="{ name : 'Quiz' }"><span @click="$store.commit('setOnlyShowThreeToTrue')"><p>Quiz</p></span></router-link>
       <router-link class="navbuttons" v-if="$store.state.loggedInTeacher" :to="{ name : 'CreateQuiz' }"><p>Skapa Quiz</p></router-link>
       <button class="textsize navbuttons" @click="changeFontSize()"><p>Ändra textstorlek</p></button>
+      <div>
+      <router-link id="logoutbuttonmobile" class="navbuttons" :to="{ name : 'Login' }"><span @click="logout"><p>Logga ut</p></span></router-link>
+      </div>
     </nav>
     <div class="logout" v-if="$store.state.loggedIn">
-      <router-link id="logoutbutton" :to="{ name : 'Login' }"><span @click="logout"><p>Logga ut</p></span></router-link>
+      <router-link id="logoutbuttondesktop" :to="{ name : 'Login' }"><span @click="logout"><p>Logga ut</p></span></router-link>
       <img class="hamburgermenu" width="75" src="./assets/hamburgermenu.png" alt="Meny" @click="showMobileMenu">
     </div>
     <div v-if="!$store.state.loggedIn">
@@ -57,7 +60,7 @@ export default {
 
     showMobileMenu() {
       var x = document.getElementById("nav")
-      var y = document.getElementById("logoutbutton")
+      var y = document.getElementById("logoutbuttonmobile")
       if (x.style.display === "block" && y.style.display === "block") {
         x.style.display = "none"
         y.style.display = "none"
@@ -131,6 +134,10 @@ img {
   grid-area: img;
 }
 
+#logoutbuttondesktop {
+  display: none;
+}
+
 .hamburgermenu {
   margin-right: 30px;
 }
@@ -167,10 +174,8 @@ ul{
 }
 #nav {
   text-align: center;
-  grid-area: a;
-  justify-content: center;
-  display: flex;
-  width: 100%;
+  display: none;
+
 }
 
 .navbuttons {
@@ -267,6 +272,11 @@ th {
   margin: 20px auto;
   min-height: 500px;
   }
+
+  a {
+    display: inline-flex;
+    grid-area: a;
+  }
   bigheader{
     display: grid;
     width: 1000px;
@@ -281,6 +291,19 @@ th {
     justify-content: center;
     display: flex;
     width: 100%;
+  }
+
+  #logoutbuttonmobile {
+  display: none;
+  }
+
+  #logoutbuttondesktop {
+    display: block;
+  }
+  .navbuttons {
+   display: flex;
+   justify-content: center;
+   width: auto;
   }
   .hamburgermenu {
     display: none;
