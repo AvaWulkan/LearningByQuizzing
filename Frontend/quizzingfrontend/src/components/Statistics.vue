@@ -3,16 +3,16 @@
     <table>
       <thead>
       <tr>
-        <th scope="col">Quiz</th>
-        <th scope="col">Antal genomförda</th>
-        <th scope="col">Snittpoäng</th>
+        <th scope="col"><h2>Quiz</h2></th>
+        <th scope="col"><h2>Antal genomförda</h2></th>
+        <th scope="col"><h2>Snittpoäng</h2></th>
       </tr>
       </thead>
       <tbody>
       <tr v-for="i in index" :key="i">
-        <td>{{quizNames[i].nameQuiz}}</td>
-        <td>{{numTimesQuizIsMade[i]}}</td>
-        <td>{{averageScore[i]}}/{{numberOfQuestions[i]}} ({{(averageScore[i]/numberOfQuestions[i]*100).toFixed(0)}}%)</td>
+        <td><p>{{quizNames[i].nameQuiz}}</p></td>
+        <td><p>{{numTimesQuizIsMade[i]}}</p></td>
+        <td><p>{{averageScore[i]}}/{{numberOfQuestions[i]}} ({{(averageScore[i]/numberOfQuestions[i]*100).toFixed(0)}}%)</p></td>
       </tr>
       </tbody>
     </table>

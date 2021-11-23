@@ -3,7 +3,7 @@
     <div class="inputboxes">
         <input type="text" name="username" v-model="input.username" placeholder="Användarnamn">
         <input type="password" @keydown.enter="login()" name="password" v-model="input.password" placeholder="Lösenord">
-        <button type="button" @click="login()">Logga in</button>
+        <button type="button" @click="login()"><p>Logga in</p></button>
     </div>
   </div>
 

@@ -3,7 +3,7 @@
       <input type="text" v-model="newName" placeholder="Namn">
       <input type="text" v-model="newUsername" placeholder="Användarnamn">
       <input type="text" v-model="newPassword" placeholder="Lösenord">
-      <button @click="addNewUser">Skapa användare</button>
+      <button @click="addNewUser"><p>Skapa användare</p></button>
   </div>
 </template>
 

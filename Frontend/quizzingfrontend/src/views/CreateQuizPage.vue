@@ -4,16 +4,14 @@
             <div class="addQuizName">
                 <h1>Skapa ett nytt quiz</h1>
                 <input type="text" v-model="newQuizName" placeholder="Skriv in titel">
-                <button @click="checkUniqueQuizName">Lägg till frågor</button>
+                <button @click="checkUniqueQuizName"><p>Lägg till frågor</p></button>
                 <p v-if="errorMessage != null"> {{ errorMessage }} </p>
-                <button v-if="quizExists" @click="chooseExistingQuiz">Lägg till frågor i befintligt quiz</button>
+                <button v-if="quizExists" @click="chooseExistingQuiz"><p>Lägg till frågor i befintligt quiz</p></button>
             </div>
-            <button @click="toggleQuizNames">{{toggleShowQuiz}}</button>
+            <button @click="toggleQuizNames"><p>{{toggleShowQuiz}}</p></button>
             <div v-if="existingQuizNames != null && showExistingQuizes">
                 <ul v-for="element in existingQuizNames.quiz" v-bind:key="element">
-                    <li>
-                         {{ element.nameQuiz }}
-                    </li>
+                    <li><p>{{ element.nameQuiz }}</p></li>
                 </ul>
             </div>
         </div>

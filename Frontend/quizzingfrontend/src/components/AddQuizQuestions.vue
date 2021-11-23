@@ -1,33 +1,33 @@
 <template>
   <body>
       <div>
-          <button @click="findOldQuestions">Visa befintliga frågor</button>
+          <button @click="findOldQuestions"><p>Visa befintliga frågor</p></button>
           <h1 >{{ $parent.newQuizName }}</h1>
           <input name="question" v-model="newQuestion" type="text" placeholder="Skriv fråga">
           <input name="correctAnswer" v-model="newCorrectAnswer" type="text" placeholder="Korrekt svar / Alternativ 1">
           <input name="a1" v-model="newA1" type="text" placeholder="Svarsalternativ 2">
           <input name="a2" v-model="newA2" type="text" placeholder="Svarsalternativ 3">
           <input name="a3" v-model="newA3" type="text" placeholder="Svarsalternativ 4">
-          <button @click="addQuestion()">Lägg till fråga</button>
+          <button @click="addQuestion()"><p>Lägg till fråga</p></button>
           <p v-if="errorBool">{{ errorMsg }}</p>
       </div>
         
       <div class="preview" v-for="index in listOfIndex" :key="index">
           <ul>
-            <li> <h1>{{listOfNewQuestion[index]}}?</h1> </li>
+            <li><h1>{{listOfNewQuestion[index]}}?</h1></li>
           </ul>
           <div class="svarsalternativ">
             <ul>
-              <li class="svar"> {{listOfNewCorrectAnswer[index]}} </li>
+              <li class="svar"><h2>{{listOfNewCorrectAnswer[index]}}</h2></li>
             </ul>
             <ul>
-              <li class="svar"> {{listOfNewA1[index]}} </li>
+              <li class="svar"><h2>{{listOfNewA1[index]}}</h2></li>
             </ul>
             <ul>
-              <li class="svar"> {{listOfNewA2[index]}} </li>
+              <li class="svar"><h2>{{listOfNewA2[index]}}</h2></li>
             </ul>
             <ul>
-              <li class="svar"> {{listOfNewA3[index]}} </li>
+              <li class="svar"><h2>{{listOfNewA3[index]}}</h2></li>
             </ul>
           </div>
       </div>

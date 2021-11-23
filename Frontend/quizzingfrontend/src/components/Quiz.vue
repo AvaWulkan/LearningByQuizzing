@@ -9,8 +9,8 @@
         </ul>
       </div>
       <div v-if="!listOfQuizes && !startQuiz">
-        <button @click="start">Start Quiz!</button>
-        <button @click="oneMoreQuiz">Byt Quiz</button>
+        <button @click="start"><p>Start Quiz!</p></button>
+        <button @click="oneMoreQuiz"><p>Byt Quiz</p></button>
       </div>
       <div v-show="startQuiz">
         <div id="questions" v-for="question in questionsInQuiz" v-bind:key="question">
@@ -33,7 +33,7 @@
     </div>
     <div v-if="finishedQuiz">
       <QuizResult/>
-      <button @click="oneMoreQuiz">Gör ett till quiz</button>
+      <button @click="oneMoreQuiz"><p>Gör ett till quiz</p></button>
     </div>
   </div>
 </body>
