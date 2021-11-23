@@ -126,7 +126,7 @@ a {
   -webkit-user-select: none;
   touch-action: manipulation;
   vertical-align: baseline;
-  width: auto;
+  width: 100%;
 }
 
 img {
@@ -139,7 +139,9 @@ img {
 }
 
 .hamburgermenu {
-  margin-right: 30px;
+  margin-left: -20px;
+  position:fixed;
+  margin-top: -35px;
 }
 
 a:hover,
