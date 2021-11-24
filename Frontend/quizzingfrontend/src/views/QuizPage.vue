@@ -55,6 +55,7 @@ export default{
   "aside quiz .";
   }
   .aside {
+    display: block;
     grid-area: aside;
     width: fit-content;
     margin-top: 70px;
