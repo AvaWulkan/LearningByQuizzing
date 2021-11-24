@@ -139,7 +139,7 @@ img {
 }
 
 .hamburgermenu {
-  margin-left: -20px;
+  margin-left: -200px;
   position: sticky;
   margin-top: -35px;
 }

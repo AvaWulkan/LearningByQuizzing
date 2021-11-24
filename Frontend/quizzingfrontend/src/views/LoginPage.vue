@@ -22,6 +22,9 @@ export default {
       user: null
     }
   },
+  mounted() {
+    this.$store.commit('logout')
+  },
   methods: {
     login(){
       if (this.input.username !== "" && this.input.password !== ""){
